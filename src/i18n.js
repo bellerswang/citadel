@@ -39,7 +39,21 @@ export const translations = {
         colorRed: "Red",
         colorBlue: "Blue",
         colorGreen: "Green",
-        close: "Close"
+        close: "Close",
+
+        // How To Play
+        howToPlay: "HOW TO PLAY",
+        htpGoalTitle: "🎯 Goal",
+        htpGoalText: "Build your TOWER to 50, or destroy the enemy's TOWER to 0 to win!",
+        htpResourcesTitle: "💎 Resources & Production",
+        htpResourcesText1: "Red (Bricks) - Produced by Quarries",
+        htpResourcesText2: "Blue (Gems) - Produced by Magic",
+        htpResourcesText3: "Green (Recruits) - Produced by Dungeons",
+        htpResourcesText4: "Every turn, your resources increase by their production level.",
+        htpActionsTitle: "⚔️ Actions",
+        htpActionsText1: "Left-Click a card to Play it (costs resources).",
+        htpActionsText2: "Right-Click a card to Discard it (costs nothing).",
+        htpActionsText3: "Sometimes you must discard if you can't afford anything!"
     },
     zh: {
         // UI Elements
@@ -81,6 +95,20 @@ export const translations = {
         colorRed: "红色",
         colorBlue: "蓝色",
         colorGreen: "绿色",
-        close: "关闭"
+        close: "关闭",
+
+        // How To Play
+        howToPlay: "游戏玩法",
+        htpGoalTitle: "🎯 游戏目标",
+        htpGoalText: "将你的【高塔】建设升至 50，或者摧毁敌人的【高塔】使其降至 0 即可获胜！",
+        htpResourcesTitle: "💎 资源与产量",
+        htpResourcesText1: "红色 (砖块) - 由【采石场】生产",
+        htpResourcesText2: "蓝色 (宝石) - 由【魔法】生产",
+        htpResourcesText3: "绿色 (新兵) - 由【地下城】生产",
+        htpResourcesText4: "每个回合，你的三种资源都会根据它们的产量自动增加。",
+        htpActionsTitle: "⚔️ 游戏操作",
+        htpActionsText1: "鼠标左键 点击卡牌以打出（消耗资源）。",
+        htpActionsText2: "鼠标右键 点击卡牌以弃牌（不消耗资源）。",
+        htpActionsText3: "如果回合内因为资源不足无法打出任何牌，你必须主动弃掉一张牌结束回合。"
     }
 };

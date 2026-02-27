@@ -70,3 +70,101 @@
 .menu-toggle-btn:hover {
     background: #a06e3b;
 }
+
+/* ── How To Play Modal ── */
+.htp-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.htp-modal {
+    background: #2a1a0f;
+    border: 4px solid #8b5a2b;
+    border-radius: 12px;
+    width: 600px;
+    max-width: 90vw;
+    max-height: 85vh;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.htp-header {
+    background: #110905;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #5c3a21;
+}
+
+.htp-header h2 {
+    margin: 0;
+    font-family: 'Cinzel', serif;
+    color: #ffd700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.htp-content {
+    padding: 25px;
+    overflow-y: auto;
+    font-family: 'Inter', sans-serif;
+    color: #e0d0b0;
+}
+
+.htp-content section {
+    margin-bottom: 20px;
+}
+
+.htp-content h3 {
+    color: #fca311;
+    border-bottom: 1px dashed #5c3a21;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.htp-content p,
+.htp-content li {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 8px 0;
+}
+
+.htp-content ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+/* Red/Blue/Green dots inline */
+.htp-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.htp-header .close-btn {
+    background: transparent;
+    border: none;
+    color: #ffd700;
+    font-size: 1.2rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.htp-header .close-btn:hover {
+    color: #ff4d4d;
+}
