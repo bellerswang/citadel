@@ -24,11 +24,15 @@ export const FloatingNumbers = ({ value }) => {
 
     return (
         <>
-            {changes.map(c => (
-                <span key={c.id} className={`floating-number ${c.diff > 0 ? 'positive' : 'negative'}`}>
-                    {c.diff > 0 ? `+${c.diff}` : c.diff}
-                </span>
-            ))}
+            {changes.map(c => {
+                const mag = Math.abs(c.diff);
+                const intensity = mag >= 10 ? 'heavy' : (mag >= 4 ? 'medium' : 'light');
+                return (
+                    <span key={c.id} className={`floating-number ${c.diff > 0 ? 'positive' : 'negative'} intensity-${intensity}`}>
+                        {c.diff > 0 ? `+${c.diff}` : c.diff}
+                    </span>
+                );
+            })}
         </>
     );
 };

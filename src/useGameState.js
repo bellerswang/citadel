@@ -456,25 +456,29 @@ export const useGameState = () => {
                 setDeck(newDeck);
             }
 
-            if (!autoPlayAgain) {
-                setIsPlayerTurn(!isPlayer);
-            } else {
-                setLog(prev => [{ type: 'play_again', isPlayer }, ...prev]);
-                // If it's the enemy's play-again, the isPlayerTurn flag hasn't changed so
-                // the useEffect won't re-fire. We must manually schedule the next AI turn.
-                if (!isPlayer) {
-                    setTimeout(() => {
-                        if (isPlayerTurnRef.current || isActionPhaseRef.current || winnerRef.current) return;
-                        const hand = enemyHandRef.current;
-                        const state = enemyStateRef.current;
-                        const playable = hand.filter(c => canAfford(c, state));
-                        if (playable.length > 0) playCardRef.current(playable[0], false);
-                        else if (hand.length > 0) discardCardRef.current(hand[0], false);
-                    }, 1500);
+            // VFX Timing Delay: Wait 1200ms to let damage slashes, shakes, and
+            // screen flashes complete before allowing the next turn.
+            setTimeout(() => {
+                if (!autoPlayAgain) {
+                    setIsPlayerTurn(!isPlayer);
+                } else {
+                    setLog(prev => [{ type: 'play_again', isPlayer }, ...prev]);
+                    // If it's the enemy's play-again, schedule next AI turn
+                    if (!isPlayer) {
+                        setTimeout(() => {
+                            if (isPlayerTurnRef.current || isActionPhaseRef.current || winnerRef.current) return;
+                            const hand = enemyHandRef.current;
+                            const state = enemyStateRef.current;
+                            const playable = hand.filter(c => canAfford(c, state));
+                            if (playable.length > 0) playCardRef.current(playable[0], false);
+                            else if (hand.length > 0) discardCardRef.current(hand[0], false);
+                        }, 1200);
+                    }
                 }
-            }
 
-            setIsActionPhase(false);
+                setIsActionPhase(false);
+            }, 1200);
+
         }, 1000);
     };
 
@@ -500,8 +504,11 @@ export const useGameState = () => {
                 setDeck(newDeck);
             }
 
-            setIsPlayerTurn(!isPlayer);
-            setIsActionPhase(false);
+            // Discard doesn't trigger complex VFX, but we add a small delay anyway for flow
+            setTimeout(() => {
+                setIsPlayerTurn(!isPlayer);
+                setIsActionPhase(false);
+            }, 600);
         }, 1000);
     };
 
