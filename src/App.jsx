@@ -10,29 +10,32 @@ import './ActionLog.css';
 import './App.css';
 
 // ── Responsive full-screen scale ────────────────────────────────────────────
-// The game is designed at 1280px wide. On smaller screens we scale the entire
-// board down so nothing is cut off – exactly like a mobile game letterbox.
+// LANDSCAPE / desktop: scale the 1280×720 design to fit the window.
+// PORTRAIT mobile:     scale = 1, apply responsive CSS layout class instead.
 const DESIGN_WIDTH = 1280;
 const DESIGN_HEIGHT = 720;
 
 function useViewportScale() {
     const [scale, setScale] = useState(1);
-    const [origin, setOrigin] = useState('top left');
+    const [isPortrait, setIsPortrait] = useState(false);
 
     useEffect(() => {
         const compute = () => {
-            const scaleX = window.innerWidth / DESIGN_WIDTH;
-            const scaleY = window.innerHeight / DESIGN_HEIGHT;
-            const s = Math.min(scaleX, scaleY);          // fit-inside
-            setScale(Math.min(s, 1));                     // never upscale on large screens
-            setOrigin(s < 1 ? 'top left' : 'top left');
+            const portrait = window.innerHeight > window.innerWidth;
+            setIsPortrait(portrait);
+            if (!portrait) {
+                const s = Math.min(window.innerWidth / DESIGN_WIDTH, window.innerHeight / DESIGN_HEIGHT);
+                setScale(Math.min(s, 1));
+            } else {
+                setScale(1); // CSS responsive layout takes over
+            }
         };
         compute();
         window.addEventListener('resize', compute);
         return () => window.removeEventListener('resize', compute);
     }, []);
 
-    return { scale, origin };
+    return { scale, isPortrait };
 }
 
 const Structure = ({ type, height, label }) => {
@@ -65,7 +68,7 @@ const Structure = ({ type, height, label }) => {
 function App() {
     const [language, setLanguage] = useState('en');
     const [isCollectionOpen, setIsCollectionOpen] = useState(false);
-    const { scale } = useViewportScale();
+    const { scale, isPortrait } = useViewportScale();
     const t = translations[language];
     const {
         playerState,
@@ -98,19 +101,21 @@ function App() {
         }
     };
 
-    // position:absolute prevents the 1280px element from pushing layout
-    // before transform shrinks it — this is the key fix for mobile clipping.
+    // Center the board on screen, then scale it down.
+    // Using left/top 50% + translate(-50%,-50%) centers the origin,
+    // then scale() shrinks it from that center point.
     const boardStyle = {
         position: 'absolute',
-        top: 0,
-        left: 0,
+        top: '50%',
+        left: '50%',
         width: DESIGN_WIDTH,
         height: DESIGN_HEIGHT,
-        transform: `scale(${scale})`,
-        transformOrigin: 'top left',
+        transform: `translate(-50%, -50%) scale(${scale})`,
+        transformOrigin: 'center center',
+        overflow: 'hidden',  // enforce design height
     };
     return (
-        <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', background: '#1a0f05' }}>
+        <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', background: '#1a0f05' }}>
             <div className="game-board" style={boardStyle}>
                 <Menu
                     language={language}
