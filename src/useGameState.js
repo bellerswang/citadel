@@ -21,6 +21,7 @@ export const useGameState = () => {
     const [log, setLog] = useState([]);
     const [activeCard, setActiveCard] = useState(null);
     const [isActionPhase, setIsActionPhase] = useState(false);
+    const [turnCount, setTurnCount] = useState(1);
 
     // ─── Refs for always-fresh values inside setTimeout callbacks ─────────────
     // React state inside a closure (e.g. setTimeout) becomes stale after re-renders.
@@ -69,6 +70,7 @@ export const useGameState = () => {
         setDeck(tempDeck);
         setWinner(null);
         setLog([{ type: 'start' }]);
+        setTurnCount(1);
         setIsPlayerTurn(true);
         setIsActionPhase(false);
     };
@@ -460,6 +462,7 @@ export const useGameState = () => {
             // screen flashes complete before allowing the next turn.
             setTimeout(() => {
                 if (!autoPlayAgain) {
+                    if (!isPlayer) setTurnCount(prev => prev + 1);
                     setIsPlayerTurn(!isPlayer);
                 } else {
                     setLog(prev => [{ type: 'play_again', isPlayer }, ...prev]);
@@ -506,6 +509,7 @@ export const useGameState = () => {
 
             // Discard doesn't trigger complex VFX, but we add a small delay anyway for flow
             setTimeout(() => {
+                if (!isPlayer) setTurnCount(prev => prev + 1);
                 setIsPlayerTurn(!isPlayer);
                 setIsActionPhase(false);
             }, 600);
@@ -545,6 +549,80 @@ export const useGameState = () => {
     playCardRef.current = playCard;
     discardCardRef.current = discardCard;
 
+    const runAutoplay = (count) => {
+        // Run synchronously to stress test
+        // Caution: This is a heavy blocking operation for the browser thread
+        // For 50 games it should take ~50-100ms.
+        let winsState = { p: 0, e: 0, turns: 0 };
+        for (let i = 0; i < count; i++) {
+            let pState = { ...INITIAL_STATE };
+            let eState = { ...INITIAL_STATE };
+            let currentDeck = [...cardsData.map(c => ({ ...c, uid: Math.random() })), ...cardsData.map(c => ({ ...c, uid: Math.random() }))].sort(() => Math.random() - 0.5);
+            let pHand = currentDeck.splice(0, 6);
+            let eHand = currentDeck.splice(0, 6);
+            let isPTurn = true;
+            let turns = 0;
+
+            while (pState.tower < 50 && pState.tower > 0 && eState.tower < 50 && eState.tower > 0 && turns < 1000) {
+                turns++;
+                let activeState = isPTurn ? pState : eState;
+                let activeHand = isPTurn ? pHand : eHand;
+
+                activeState.bricks += activeState.quarries;
+                activeState.gems += activeState.magic;
+                activeState.beasts += activeState.dungeon;
+
+                const playable = activeHand.filter(c => canAfford(c, activeState));
+                let playAgain = false;
+
+                if (playable.length > 0) {
+                    const c = playable[0];
+                    if (c.color === 'Red') activeState.bricks -= c.cost;
+                    if (c.color === 'Blue') activeState.gems -= c.cost;
+                    if (c.color === 'Green') activeState.beasts -= c.cost;
+
+                    // Simple simulation applyEffect copy
+                    const eText = c.effect.toLowerCase();
+                    playAgain = eText.includes('play again');
+                    const oppState = isPTurn ? eState : pState;
+                    const damage = eText.match(/(\d+) damage/);
+                    if (damage && !eText.includes('to your tower') && !eText.includes('all')) {
+                        let d = parseInt(damage[1]);
+                        if (eText.includes('enemy tower')) oppState.tower = Math.max(0, oppState.tower - d);
+                        else {
+                            let excess = d - oppState.wall;
+                            if (excess > 0) { oppState.wall = 0; oppState.tower = Math.max(0, oppState.tower - excess); }
+                            else oppState.wall -= d;
+                        }
+                    }
+                    [...eText.matchAll(/\+(\d+) (\w+)/g)].forEach(m => {
+                        const v = parseInt(m[1]), t = m[2];
+                        if (t === 'tower') activeState.tower += v;
+                        if (t === 'wall') activeState.wall += v;
+                        if (t === 'quarry') activeState.quarries += v;
+                        if (t === 'magic') activeState.magic += v;
+                        if (t === 'dungeon') activeState.dungeon += v;
+                    });
+
+                    activeHand.splice(activeHand.indexOf(c), 1);
+                    if (currentDeck.length === 0) currentDeck = [...cardsData.map(cd => ({ ...cd, uid: Math.random() }))];
+                    activeHand.push(currentDeck.shift());
+                } else {
+                    activeHand.splice(0, 1);
+                    if (currentDeck.length === 0) currentDeck = [...cardsData.map(cd => ({ ...cd, uid: Math.random() }))];
+                    activeHand.push(currentDeck.shift());
+                }
+
+                if (!playAgain) isPTurn = !isPTurn;
+            }
+            if (pState.tower >= 50 || eState.tower <= 0) winsState.p++; else winsState.e++;
+            winsState.turns += turns;
+        }
+
+        console.log(`Autoplay Complete: Player ${winsState.p} - Enemy ${winsState.e}`);
+        alert(`Autoplay 50 Complete!\nPlayer Wins: ${winsState.p}\nEnemy Wins: ${winsState.e}\nAvg Turns: ` + (winsState.turns / 50).toFixed(1));
+    };
+
     const exportDebugLog = () => {
         const debugData = {
             timestamp: new Date().toISOString(),
@@ -566,5 +644,5 @@ export const useGameState = () => {
         document.body.removeChild(a);
     };
 
-    return { playerState, enemyState, playerHand, enemyHand, isPlayerTurn, winner, log, playCard, discardCard, resetGame, activeCard, exportDebugLog, isActionPhase };
+    return { playerState, enemyState, playerHand, enemyHand, isPlayerTurn, turnCount, winner, log, playCard, discardCard, resetGame, activeCard, exportDebugLog, isActionPhase, runAutoplay };
 };

@@ -2,7 +2,7 @@
     width: 320px;
     height: 180px;
     /* Fixed height so it doesn't bounce around */
-    overflow-y: hidden;
+    overflow-y: auto;
     display: flex;
     flex-direction: column-reverse;
     /* New messages at bottom pushing old ones up */
@@ -11,6 +11,31 @@
     padding-right: 5px;
     pointer-events: auto;
     /* Re-enable clicks just for the log */
+}
+
+.active-card-presentation {
+    pointer-events: none;
+    z-index: 1000;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.log-hover-card-overlay {
+    animation: cardPopIn 0.15s cubic-bezier(0.25, 1.2, 0.4, 1) both;
+}
+
+@keyframes cardPopIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
 /* Hide scrollbar but keep functionality */
@@ -24,15 +49,18 @@
 }
 
 .log-msg {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 10px;
-    border-radius: 8px;
+    background: rgba(42, 26, 20, 0.88);
+    border: 1px solid #5c3a21;
     border-left: 4px solid #ffd700;
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
     font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
-    color: #fff;
+    color: #e2e2e2;
     animation: logFadeIn 0.3s ease-out;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0;
 }
 
 @keyframes logFadeIn {

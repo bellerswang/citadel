@@ -1,7 +1,7 @@
 import React from 'react';
 import './Card.css';
 
-const Card = ({ card, onPlay, onDiscard, isEnemy, language, t, playerState }) => {
+const Card = ({ card, onPlay, onDiscard, isEnemy, showFace, language, t, playerState }) => {
     const handleRightClick = (e) => {
         e.preventDefault();
         if (!isEnemy && onDiscard) onDiscard(card);
@@ -13,7 +13,8 @@ const Card = ({ card, onPlay, onDiscard, isEnemy, language, t, playerState }) =>
 
     if (!card) return <div className="card-empty" />;
 
-    if (isEnemy) {
+    // Show card back for enemy hand unless showFace is explicitly requested
+    if (isEnemy && !showFace) {
         return <div className="card card-enemy-hidden">Citadel</div>;
     }
 

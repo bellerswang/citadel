@@ -15,6 +15,7 @@ const canAfford = (card, state) => {
 const applyEffect = (card, playerState, enemyState, isPlayer) => {
     let self = { ...(isPlayer ? playerState : enemyState) };
     let opp = { ...(isPlayer ? enemyState : playerState) };
+
     const selfSnap = self;
     const oppSnap = opp;
 
@@ -32,19 +33,14 @@ const applyEffect = (card, playerState, enemyState, isPlayer) => {
         else self.wall -= dmg;
     };
 
-    // tower-direct damage
     const towerDmgMatch = e.match(/(\d+) damage to (?:enemy )?tower/);
-    if (towerDmgMatch) {
-        opp.tower = Math.max(0, opp.tower - parseInt(towerDmgMatch[1]));
-    }
+    if (towerDmgMatch) opp.tower = Math.max(0, opp.tower - parseInt(towerDmgMatch[1]));
 
-    // self tower damage
     const selfTowerDmgMatch = e.match(/(\d+) damage to (?:your )?tower/);
     if (selfTowerDmgMatch && !e.includes('damage to enemy tower')) {
         self.tower = Math.max(0, self.tower - parseInt(selfTowerDmgMatch[1]));
     }
 
-    // generic wall-first damage
     if (!towerDmgMatch && !selfTowerDmgMatch) {
         const gd = e.match(/(\d+) damage/);
         if (gd) dealDmgToOpp(parseInt(gd[1]));
@@ -54,23 +50,19 @@ const applyEffect = (card, playerState, enemyState, isPlayer) => {
         allDmg.forEach(v => { if (v !== tv) dealDmgToOpp(v); });
     }
 
-    // all towers
-    if (e.includes('damage to all towers')) {
+    if (e.includes('damage to all towers') || e.includes('damage to all enemies')) {
         const v = parseInt(e.match(/(\d+) damage/)?.[1] || 0);
         if (v) { opp.tower = Math.max(0, opp.tower - v); self.tower = Math.max(0, self.tower - v); }
     }
 
-    // all walls
     if (e.includes('all walls take')) {
         const v = parseInt(e.match(/(\d+) damage/)?.[1] || 0);
         if (v) { self.wall = Math.max(0, self.wall - v); opp.wall = Math.max(0, opp.wall - v); }
     }
 
-    // you take N damage
     const youTake = e.match(/you take (\d+) damage/);
     if (youTake) dealDmgToSelf(parseInt(youTake[1]));
 
-    // +N stat gains for self
     [...e.matchAll(/\+(\d+) (\w+)/g)].forEach(m => {
         const v = parseInt(m[1]), stat = m[2];
         if (stat === 'tower') self.tower += v;
@@ -83,11 +75,16 @@ const applyEffect = (card, playerState, enemyState, isPlayer) => {
         if (stat === 'gems' || stat === 'gem') self.gems += v;
     });
 
-    // +N enemy tower
     const gainOppTower = e.match(/\+(\d+) enemy tower/);
     if (gainOppTower) opp.tower += parseInt(gainOppTower[1]);
 
-    // you gain / gain N resource
+    if (e.includes("+1 to all player's quarry") || e.includes("+1 to all player's quarrys")) {
+        self.quarries += 1; opp.quarries += 1;
+    }
+    if (e.includes("+1 to all player's dungeon")) {
+        self.dungeon += 1; opp.dungeon += 1;
+    }
+
     const youGainGem = e.match(/(?:you gain|gain) (\d+) gems/);
     if (youGainGem) self.gems += parseInt(youGainGem[1]);
     const youGainBrick = e.match(/(?:you gain|gain) (\d+) bricks/);
@@ -95,21 +92,17 @@ const applyEffect = (card, playerState, enemyState, isPlayer) => {
     const youGainRecruit = e.match(/(?:you gain|gain) (\d+) recruits/);
     if (youGainRecruit) self.beasts += parseInt(youGainRecruit[1]);
 
-    // self losses
     const selfLoseGem = e.match(/you lose (\d+) gems/); if (selfLoseGem) self.gems = Math.max(0, self.gems - parseInt(selfLoseGem[1]));
     const selfLoseBrick = e.match(/you lose (\d+) bricks/); if (selfLoseBrick) self.bricks = Math.max(0, self.bricks - parseInt(selfLoseBrick[1]));
     const selfLoseRecruit = e.match(/you lose (\d+) recruits/); if (selfLoseRecruit) self.beasts = Math.max(0, self.beasts - parseInt(selfLoseRecruit[1]));
     const loseBrick = e.match(/lose (\d+) bricks/); if (loseBrick && !selfLoseBrick) self.bricks = Math.max(0, self.bricks - parseInt(loseBrick[1]));
     const loseRecruit = e.match(/lose (\d+) recruits/); if (loseRecruit && !selfLoseRecruit) self.beasts = Math.max(0, self.beasts - parseInt(loseRecruit[1]));
 
-    // enemy losses
     const oppLoseBrick = e.match(/enemy loses (\d+) bricks/); if (oppLoseBrick) opp.bricks = Math.max(0, opp.bricks - parseInt(oppLoseBrick[1]));
     const oppLoseGem = e.match(/enemy loses (\d+) gems/); if (oppLoseGem) opp.gems = Math.max(0, opp.gems - parseInt(oppLoseGem[1]));
     const oppLoseRecruit = e.match(/enemy loses (\d+) recruits/); if (oppLoseRecruit) opp.beasts = Math.max(0, opp.beasts - parseInt(oppLoseRecruit[1]));
     if (e.match(/-1 enemy dungeon/)) opp.dungeon = Math.max(1, opp.dungeon - 1);
-    if (e.match(/-1 enemy quarry/)) opp.quarries = Math.max(1, opp.quarries - 1);
 
-    // all players lose
     if (e.includes('all players lose')) {
         const lm = e.match(/all players lose (\d+) (\w+)/);
         if (lm) {
@@ -118,28 +111,33 @@ const applyEffect = (card, playerState, enemyState, isPlayer) => {
             if (stat === 'gems') { self.gems = Math.max(0, self.gems - v); opp.gems = Math.max(0, opp.gems - v); }
             if (stat === 'recruits') { self.beasts = Math.max(0, self.beasts - v); opp.beasts = Math.max(0, opp.beasts - v); }
         }
+        if (e.includes('bricks, gems')) {
+            const impMatch = e.match(/lose (\d+) bricks/);
+            if (impMatch) {
+                const v = parseInt(impMatch[1]);
+                self.bricks = Math.max(0, self.bricks - v); self.gems = Math.max(0, self.gems - v); self.beasts = Math.max(0, self.beasts - v);
+                opp.bricks = Math.max(0, opp.bricks - v); opp.gems = Math.max(0, opp.gems - v); opp.beasts = Math.max(0, opp.beasts - v);
+            }
+        }
     }
 
-    // quarries adjustments
+    if (e.match(/-1 quarry(?!\s*[\.,]?\s*\+)/) && !e.includes('enemy quarry') && !e.includes("all player")) {
+        self.quarries = Math.max(1, self.quarries - 1);
+    }
     if (e.includes("-1 to all player's quarry") || e.includes("-1 to all player's quarrys")) {
         self.quarries = Math.max(1, self.quarries - 1);
         opp.quarries = Math.max(1, opp.quarries - 1);
     }
-    if (e.includes("+1 to all player's quarry") || e.includes("+1 to all player's quarrys")) {
-        self.quarries += 1; opp.quarries += 1;
-    }
-    if (e.match(/-1 quarry/) && !e.includes('enemy quarry') && !e.includes('all player')) {
-        self.quarries = Math.max(1, self.quarries - 1);
+    if (e.includes('-1 enemy quarry')) {
+        opp.quarries = Math.max(1, opp.quarries - 1);
     }
 
-    // magic adjustments
     if (e.match(/-1 magic/) && !e.includes('all player')) self.magic = Math.max(1, self.magic - 1);
-    if (e.includes('all player') && e.includes('magic -1')) {
+    if (e.includes("all player's magic -1") || (e.includes('all player') && e.includes('magic -1'))) {
         self.magic = Math.max(1, self.magic - 1);
         opp.magic = Math.max(1, opp.magic - 1);
     }
 
-    // Conditionals
     if (e.includes('if quarry < enemy quarry') && e.includes('+2 quarry')) {
         self.quarries += self.quarries < oppSnap.quarries ? 2 : 1;
     }
@@ -161,6 +159,9 @@ const applyEffect = (card, playerState, enemyState, isPlayer) => {
     if (e.includes('if magic > enemy magic')) {
         dealDmgToOpp(self.magic > oppSnap.magic ? 12 : 8);
     }
+    if (e.includes('if wall > enemy wall') && !e.includes('damage to tower')) {
+        dealDmgToOpp(self.wall > oppSnap.wall ? 3 : 2); // Spearman
+    }
     if (e.includes('if wall > enemy wall') && e.includes('damage to tower')) {
         if (self.wall > oppSnap.wall) opp.tower = Math.max(0, opp.tower - 6);
         else dealDmgToOpp(6);
@@ -180,10 +181,6 @@ const applyEffect = (card, playerState, enemyState, isPlayer) => {
         const gl = Math.min(10, opp.gems), bl = Math.min(5, opp.bricks);
         opp.gems = Math.max(0, opp.gems - 10); opp.bricks = Math.max(0, opp.bricks - 5);
         self.gems += Math.ceil(gl / 2); self.bricks += Math.ceil(bl / 2);
-    }
-    if (e.includes("all player's magic -1") || (e.includes('all player') && e.includes('magic -1'))) {
-        self.magic = Math.max(1, self.magic - 1);
-        opp.magic = Math.max(1, opp.magic - 1);
     }
 
     if (isPlayer) return { newPlayerState: self, newEnemyState: opp, playAgain };
