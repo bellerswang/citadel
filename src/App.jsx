@@ -202,36 +202,25 @@ function App() {
 
                 {/* ④ HAND ROW */}
                 <div className="mockup-hand-row">
-                    <div className="player-hand-fanned">
-                        {playerHand.map((c, index) => {
-                            // Calculate fan spread (-2.5 to 2.5) for a 6 card hand
-                            // to create a slight arc typical in card games
-                            const offset = index - (playerHand.length - 1) / 2;
-                            const rotation = offset * 2; // subtle arc
-                            const drop = Math.abs(offset) * 4; // subtle curve down
-                            const transformStyle = {
-                                transform: `rotate(${rotation}deg) translateY(${drop}px)`,
-                                zIndex: index
-                            };
-                            return (
-                                <div key={c.uid}
-                                    className={`fanned-card-wrapper ${!canAfford(c, playerState) ? 'unaffordable' : ''}`}
-                                    style={transformStyle}
-                                >
-                                    <div className="fanned-inner">
-                                        <Card
-                                            card={c}
-                                            isEnemy={false}
-                                            language={language}
-                                            t={t}
-                                            playerState={playerState}
-                                            onPlay={(card) => playCard(card, true)}
-                                            onDiscard={(card) => discardCard(card, true)}
-                                        />
-                                    </div>
+                    <div className="player-hand-flat">
+                        {playerHand.map((c, index) => (
+                            <div key={c.uid}
+                                className={`hand-card-wrapper ${!canAfford(c, playerState) ? 'unaffordable' : ''}`}
+                                style={{ zIndex: index }}
+                            >
+                                <div className="hand-card-inner">
+                                    <Card
+                                        card={c}
+                                        isEnemy={false}
+                                        language={language}
+                                        t={t}
+                                        playerState={playerState}
+                                        onPlay={(card) => playCard(card, true)}
+                                        onDiscard={(card) => discardCard(card, true)}
+                                    />
                                 </div>
-                            );
-                        })}
+                            </div>
+                        ))}
                     </div>
                 </div>
 

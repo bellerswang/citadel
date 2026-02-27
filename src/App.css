@@ -394,57 +394,49 @@ body {
 
 /* ── ④ HAND ROW ────────────────────────────────────────────────────────────── */
 .mockup-hand-row {
-    height: 180px;
+    height: 200px;
     background: #0a0603;
     /* Darker bottom */
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     padding-bottom: 0px;
-    /* Flush against bottom edge */
     overflow: visible;
     /* Allow cards to pop up out of the row on hover */
 }
 
-.player-hand-fanned {
+.player-hand-flat {
     display: flex;
     justify-content: center;
-    perspective: 1000px;
-    margin-bottom: -15px;
-    /* Sink cards slightly below screen */
+    align-items: center;
+    gap: 12px;
 }
 
-.fanned-card-wrapper {
+.hand-card-wrapper {
     position: relative;
-    width: 90px;
-    /* Tighter overlap, roughly 2/3 of card width */
+    width: 130px;
+    height: 185px;
     transition: transform 0.2s, z-index 0s;
 }
 
-.fanned-inner {
-    /* Translate the left-push compensation inward */
-    position: absolute;
-    bottom: 0;
-    left: -20px;
-    /* pull cards tight */
+.hand-card-inner {
+    position: relative;
 }
 
 /* Hovering pops the card up massively and brings it to front */
-.fanned-card-wrapper:hover {
+.hand-card-wrapper:hover {
     z-index: 1000 !important;
 }
 
-.fanned-card-wrapper:hover .fanned-inner {
+.hand-card-wrapper:hover .hand-card-inner {
     transform: translateY(-90px) scale(1.5);
     transition: transform 0.15s cubic-bezier(0.25, 1.2, 0.4, 1);
 }
 
-/* Adjust standard Card inside the fan */
-.fanned-inner .card {
-    /* Use exactly mockup style card shape */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), -8px 0 15px rgba(0, 0, 0, 0.5);
-    /* Shadow falls to the left/bottom to sell the overlap */
+/* Adjust standard Card inside the hand */
+.hand-card-inner .card {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .menu-container {
