@@ -553,7 +553,7 @@ export const useGameState = () => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `arcomage_bug_report_${Date.now()}.json`;
+        a.download = `citadel_bug_report_${Date.now()}.json`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);

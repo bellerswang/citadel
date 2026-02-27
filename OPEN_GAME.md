@@ -1,1 +1,1 @@
-[Open Arcomage Game](http://localhost:5173/)
+[Open Citadel Game](http://localhost:5173/)

@@ -1,25 +1,25 @@
 """
-Arcomage Card Power Analyzer
+Citadel Card Power Analyzer
 =============================
-战力/价值模型分析器。自动读取 src/cards.json，
-用正则解析效果文本，为每张卡打出"净价值分"。
+战力/价值模型分析器。自动读�?src/cards.json�?
+用正则解析效果文本，为每张卡打出"净价值分"�?
 
 模型公式:
   Net Value = sum(Outputs) - ActionCost - ResourceCost
 
-积分权重 (可在 WEIGHTS 字典中调整):
-  - 每1费资源消耗       : -1.0 pt
-  - 打出任意1张卡行动消耗: -2.0 pt (统一基准)
+积分权重 (可在 WEIGHTS 字典中调�?:
+  - �?费资源消�?      : -1.0 pt
+  - 打出任意1张卡行动消�? -2.0 pt (统一基准)
   - +1 Wall             : +0.75 pt
   - +1 Tower            : +0.85 pt
-  - 1 Damage            : +0.65 pt (可能被墙拦截，贬值)
-  - Direct Tower Damage : +0.9  pt (穿墙攻塔，溢价)
+  - 1 Damage            : +0.65 pt (可能被墙拦截，贬�?
+  - Direct Tower Damage : +0.9  pt (穿墙攻塔，溢�?
   - +1 Production(Q/M/D): +3.0  pt
   - -1 Enemy Production : +3.5  pt (破坏 > 建设)
   - +1 单次资源获得     : +0.9  pt
   - -1 己方单次资源     : -0.9  pt
-  - -1 敌方单次资源     : +0.5  pt (敌方失去资源折半价值)
-  - Play Again          : +2.0  pt (抵消行动消耗)
+  - -1 敌方单次资源     : +0.5  pt (敌方失去资源折半价�?
+  - Play Again          : +2.0  pt (抵消行动消�?
   - Draw/Discard        : +0.5  pt (手牌优势)
   - 高费溢价 (每费)     : +0.08 pt (节省行动力的规模溢价)
 """
@@ -36,28 +36,28 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 # ─── 权重配置 ──────────────────────────────────────────────────────────────────
 WEIGHTS = {
-    "action_cost":         -2.0,   # 打出任意卡牌本身消耗
-    "resource_cost":       -1.0,   # 每1点资源消耗
+    "action_cost":         -2.0,   # 打出任意卡牌本身消�?
+    "resource_cost":       -1.0,   # �?点资源消�?
     "wall":                +0.75,  # +1 Wall
     "tower":               +0.85,  # +1 Tower
-    "damage":              +0.65,  # 1点普通伤害(先打墙)
+    "damage":              +0.65,  # 1点普通伤�?先打�?
     "tower_damage":        +0.90,  # 1点直接塔伤害(穿墙)
     "production_own":      +3.0,   # +1 己方产能 (quarry/magic/dungeon)
-    "production_enemy":    -3.5,   # -1 己方产能 (被对手削弱)
+    "production_enemy":    -3.5,   # -1 己方产能 (被对手削�?
     "production_enemy_de": +3.5,   # -1 敌方产能 (我方削弱对手)
     "resource_gain":       +0.9,   # +1 单次资源获得
     "resource_lose":       -0.9,   # -1 己方单次资源失去
-    "resource_enemy_lose": +0.5,   # 敌方失去1点资源 (不确定性折半)
+    "resource_enemy_lose": +0.5,   # 敌方失去1点资�?(不确定性折�?
     "play_again":          +2.0,   # 再来一回合
-    "draw_discard":        +0.5,   # 抽/弃牌
-    "high_cost_premium":   +0.08,  # 高费卡规模溢价/每费 (>6费时生效)
+    "draw_discard":        +0.5,   # �?弃牌
+    "high_cost_premium":   +0.08,  # 高费卡规模溢�?每费 (>6费时生效)
 }
 
 # ─── 效果解析引擎 ───────────────────────────────────────────────────────────────
 class EffectParser:
     """
-    用正则表达式从英文效果文本中提取数值信号。
-    返回一个{维度: 数值}的字典。
+    用正则表达式从英文效果文本中提取数值信号�?
+    返回一个{维度: 数值}的字典�?
     """
 
     def parse(self, effect: str) -> dict:
@@ -106,7 +106,7 @@ class EffectParser:
             signals['draw_discard'] = 1
 
         # ── 己方负面 ──────────────────────────────────────────────────────────
-        # you lose N / lose N (己方失去资源) - 注意: 要排除 "all players lose" 和 "enemy loses" 情况
+        # you lose N / lose N (己方失去资源) - 注意: 要排�?"all players lose" �?"enemy loses" 情况
         for m in re.finditer(
             r'(?:you lose|you lose) (\d+)\s*(bricks?|gems?|recruits?)', e
         ):
@@ -120,7 +120,7 @@ class EffectParser:
 
         # lose N production (己方产能削减)
         for m in re.finditer(r'-(\d+)\s*quarry(?! of | enemy)', e):
-            # 只匹配己方 quarry 减少，排除 "enemy quarry"
+            # 只匹配己�?quarry 减少，排�?"enemy quarry"
             # 检查是否是己方
             context_start = max(0, m.start() - 10)
             context = e[context_start:m.end()]
@@ -133,7 +133,7 @@ class EffectParser:
             if 'enemy' not in context and 'all' not in context:
                 signals['production_enemy'] = signals.get('production_enemy', 0) - int(m.group(1))
 
-        # -N Wall (己方墙减少，如 Crystallize)
+        # -N Wall (己方墙减少，�?Crystallize)
         for m in re.finditer(r'-(\d+)\s*wall', e):
             context_start = max(0, m.start() - 10)
             context = e[context_start:m.end()]
@@ -153,15 +153,15 @@ class EffectParser:
         for m in re.finditer(r'(\d+)\s*damage to all enemy towers?', e):
             signals['tower_damage'] = signals.get('tower_damage', 0) + int(m.group(1))
 
-        # N damage (无 to tower/to enemy, 是普通穿墙damage)
+        # N damage (�?to tower/to enemy, 是普通穿墙damage)
         # 排除已匹配的情况
         bare_damage = re.findall(r'(\d+)\s*damage(?!\s+to)', e)
-        # 需要确认不是 "to your tower" / "you take N damage" (己方受伤)
+        # 需要确认不�?"to your tower" / "you take N damage" (己方受伤)
         for m in re.finditer(r'(\d+)\s*damage(?!\s+to)', e):
-            # 检查前文
+            # 检查前�?
             pre = e[max(0, m.start()-20):m.start()]
             if 'your tower take' in pre or 'tower take' in pre:
-                # 己方塔受伤
+                # 己方塔受�?
                 signals['tower_damage_self'] = signals.get('tower_damage_self', 0) - int(m.group(1))
             elif 'you take' in pre or 'you take' in e[max(0,m.start()-10):m.start()]:
                 signals['tower_damage_self'] = signals.get('tower_damage_self', 0) - int(m.group(1))
@@ -172,7 +172,7 @@ class EffectParser:
         for m in re.finditer(r'(?:you take|tower take[s]?)\s*(\d+)\s*damage', e):
             signals['tower_damage_self'] = signals.get('tower_damage_self', 0) - int(m.group(1))
 
-        # ── 对敌方资源/产能削减 ──────────────────────────────────────────────
+        # ── 对敌方资�?产能削减 ──────────────────────────────────────────────
         # enemy loses N bricks/gems/recruits
         for m in re.finditer(r'enemy (?:loses?|lose) (\d+)\s*(bricks?|gems?|recruits?)', e):
             signals['resource_enemy_lose'] = signals.get('resource_enemy_lose', 0) + int(m.group(1))
@@ -190,23 +190,23 @@ class EffectParser:
             val = int(m.group(1) or m.group(3))
             signals['production_enemy_de'] = signals.get('production_enemy_de', 0) + val
 
-        # ── 全玩家效果 ─────────────────────────────────────────────────────────
+        # ── 全玩家效�?─────────────────────────────────────────────────────────
         # all players lose N bricks/gems/recruits
         for m in re.finditer(r'all players? (?:lose|loses) (\d+)\s*(bricks?|gems?|recruits?)', e):
-            # 自己也受影响，净收益:对敌价值(0.5) - 己方亏损(0.9)
+            # 自己也受影响，净收益:对敌价�?0.5) - 己方亏损(0.9)
             val = int(m.group(1))
             signals['resource_lose'] = signals.get('resource_lose', 0) - val
             signals['resource_enemy_lose'] = signals.get('resource_enemy_lose', 0) + val
 
-        # all player's quarry -1 (如 Earthquake)
+        # all player's quarry -1 (�?Earthquake)
         if re.search(r'all player.{0,5}quarry.{0,5}-1|-1 to all player.{0,5}quarr', e):
             signals['production_enemy'] = signals.get('production_enemy', 0) - 1
             signals['production_enemy_de'] = signals.get('production_enemy_de', 0) + 1
 
-        # all player's dungeon +1 (如 Full Moon) - 己方获益，但给了对手
+        # all player's dungeon +1 (�?Full Moon) - 己方获益，但给了对手
         if re.search(r'\+1 to all player.{0,10}dungeon', e):
             signals['production_own'] = signals.get('production_own', 0) + 1
-            signals['production_enemy_de'] = signals.get('production_enemy_de', 0) - 1  # 给了对手，抵消
+            signals['production_enemy_de'] = signals.get('production_enemy_de', 0) - 1  # 给了对手，抵�?
 
         # +1 magic/dungeon/quarry to all
         if re.search(r'\+1 to all player.{0,10}quarry', e):
@@ -220,20 +220,20 @@ class EffectParser:
 
         # ── 条件效果修正 ──────────────────────────────────────────────────────
         # 条件大小伤害：if ... N damage ... else M damage
-        # 由于上面的裸 damage 正则已将两分支都累加进去，这里修正为平均值
+        # 由于上面的裸 damage 正则已将两分支都累加进去，这里修正为平均�?
         m = re.search(r'if.+?(\d+)\s*damage.+?else\s*(\d+)\s*damage', e)
         if m:
             v1, v2 = int(m.group(1)), int(m.group(2))
             avg = (v1 + v2) / 2
-            # 上面已经把 v1 和 v2 都加进 damage，需要减去多余的重算
-            # 实际上裸 damage 匹配已经累加了两个值，但 "else M damage" 中 M 不会被
-            # bare_damage 匹配（因为 else 后的 damage 仍被 r'(\d+)\s*damage(?!\s+to)' 匹配）
-            # 清空 damage 并重设为平均值
+            # 上面已经�?v1 �?v2 都加�?damage，需要减去多余的重算
+            # 实际上裸 damage 匹配已经累加了两个值，�?"else M damage" �?M 不会�?
+            # bare_damage 匹配（因�?else 后的 damage 仍被 r'(\d+)\s*damage(?!\s+to)' 匹配�?
+            # 清空 damage 并重设为平均�?
             signals['damage'] = avg
-            # 同理清空可能误计的 tower_damage_self 和 tower_damage
+            # 同理清空可能误计�?tower_damage_self �?tower_damage
             # (条件伤害不涉及己方受伤，保持不变)
 
-        # if quarry < enemy quarry, quarry = enemy quarry -> 期望约+1.5产能
+        # if quarry < enemy quarry, quarry = enemy quarry -> 期望�?1.5产能
         if 'quarry = enemy quarry' in e:
             signals['production_own'] = signals.get('production_own', 0) + 1.5
 
@@ -251,7 +251,7 @@ class CardScorer:
         effect = card.get('effect', '')
         signals = self.parser.parse(effect)
 
-        # --- 计算各部分得分 ---
+        # --- 计算各部分得�?---
         base_input = self.w['action_cost'] + cost * self.w['resource_cost']
 
         output = 0
@@ -264,13 +264,13 @@ class CardScorer:
                     breakdown[key] = round(pts, 2)
                 output += pts
 
-        # 高费溢价 (费用 > 6 的卡，每1费额外 +0.08)
+        # 高费溢价 (费用 > 6 的卡，每1费额�?+0.08)
         if cost > 6:
             premium = (cost - 6) * self.w['high_cost_premium']
             breakdown['high_cost_premium'] = round(premium, 2)
             output += premium
 
-        # 己方塔受伤
+        # 己方塔受�?
         if 'tower_damage_self' in signals:
             pts = signals['tower_damage_self'] * self.w['tower_damage']
             breakdown['tower_damage_self (tower取负)'] = round(pts, 2)
@@ -292,7 +292,7 @@ class CardScorer:
         }
 
 
-# ─── 输出格式化 ───────────────────────────────────────────────────────────────
+# ─── 输出格式�?───────────────────────────────────────────────────────────────
 COLOR_MARK = {'Red': '[R]', 'Blue': '[B]', 'Green': '[G]'}
 
 def print_table(results: list, title: str, top_n: int = None):
@@ -324,9 +324,9 @@ def print_detail(result: dict):
     print(f"  = Net Value: {result['net_value']:+.2f} pt  [{label}]")
 
 
-# ─── 主函数 ───────────────────────────────────────────────────────────────────
+# ─── 主函�?───────────────────────────────────────────────────────────────────
 def main():
-    # 找到 cards.json 路径 (工具脚本在 tools/ 下，cards.json 在 src/ 下)
+    # 找到 cards.json 路径 (工具脚本�?tools/ 下，cards.json �?src/ �?
     script_dir = Path(__file__).parent
     cards_path = script_dir.parent / 'src' / 'cards.json'
 
@@ -342,18 +342,18 @@ def main():
     scorer = CardScorer()
     results = [scorer.score(c) for c in cards]
 
-    # 按净价值从高到低排序
+    # 按净价值从高到低排�?
     results.sort(key=lambda x: x['net_value'], reverse=True)
 
     # ── 全榜输出 ──
     print_table(results, "[ALL] Full Card Power Ranking (by Net Value desc)")
 
-    # ── 分色榜 ──
+    # ── 分色�?──
     for color in ['Red', 'Blue', 'Green']:
         color_results = [r for r in results if r['color'] == color]
         print_table(color_results, f"{COLOR_MARK[color]} {color} Deck Power Ranking", top_n=15)
 
-    # ── 超模卡 (净分 > 0) ──
+    # ── 超模�?(净�?> 0) ──
     overtuned = [r for r in results if r['net_value'] > 0]
     if overtuned:
         print(f"\n{'='*70}")
@@ -362,7 +362,7 @@ def main():
         for r in overtuned:
             print_detail(r)
 
-    # ── 战略卡 (净分 < -5) ──
+    # ── 战略�?(净�?< -5) ──
     strategic = [r for r in results if r['net_value'] < -5]
     strategic.sort(key=lambda x: x['net_value'])
     print(f"\n{'='*70}")
@@ -373,7 +373,7 @@ def main():
         mk = COLOR_MARK.get(r['color'], '')
         print(f"    {mk} {r['name']:<24} ({r['name_zh']})  net: {r['net_value']:+.2f}  -> {r['effect']}")
 
-    # ── 费效比(净分/费用) ──
+    # ── 费效�?净�?费用) ──
     print(f"\n{'='*70}")
     print(f"  [EFFICIENCY] Net Value / Cost  (0-cost cards excluded)")
     print(f"{'='*70}")

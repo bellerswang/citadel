@@ -1,6 +1,6 @@
-# Arcomage Art Style Guide
+# Citadel Art Style Guide
 
-This document defines the visual aesthetic and technical design constraints for all UI elements, assets, and animations in the Arcomage web application.
+This document defines the visual aesthetic and technical design constraints for all UI elements, assets, and animations in the Citadel web application.
 
 ## Overall Aesthetic: Stylized Cel-shaded Fantasy (Modern Indie)
 The primary visual style is vibrant, accessible, clean, and slightly cartoonish. It merges the readability of modern mobile games (e.g., Hearthstone) with high-contrast, stylized fantasy illustrations.
