@@ -30,9 +30,13 @@ function useViewportScale() {
                     window.innerWidth / DESIGN_WIDTH,
                     window.innerHeight / DESIGN_HEIGHT
                 );
-                setScale(s);
+                // Desktop monitors (DPR=1, large screen) → don't upscale past 100%
+                // Tablets / HiDPI (DPR≥2) → allow slight upscale to fill screen edges
+                const dpr = window.devicePixelRatio || 1;
+                const maxScale = dpr >= 2 ? 1.15 : 1.0;
+                setScale(Math.min(s, maxScale));
             } else {
-                setScale(1); // CSS responsive layout takes over
+                setScale(1); // CSS responsive layout takes over in portrait
             }
         };
         compute();
