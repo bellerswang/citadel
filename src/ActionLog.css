@@ -1,12 +1,16 @@
 .action-log {
-    width: 300px;
-    max-height: 200px;
-    overflow-y: auto;
+    width: 320px;
+    height: 180px;
+    /* Fixed height so it doesn't bounce around */
+    overflow-y: hidden;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    /* New messages at bottom pushing old ones up */
     gap: 8px;
     margin-bottom: 20px;
     padding-right: 5px;
+    pointer-events: auto;
+    /* Re-enable clicks just for the log */
 }
 
 /* Hide scrollbar but keep functionality */
