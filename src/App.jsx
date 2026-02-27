@@ -158,6 +158,7 @@ const TopBarSide = ({ isEnemy, name }) => (
 function App() {
     const [language, setLanguage] = useState('zh');
     const [isCollectionOpen, setIsCollectionOpen] = useState(false);
+    const [hoveredLogCard, setHoveredLogCard] = useState(null);
     const scale = useViewportScale();
     const t = translations[language];
     const {
@@ -170,11 +171,22 @@ function App() {
         if (!logObj || typeof logObj === 'string') return logObj;
         const actor = logObj.isPlayer ? t.player : t.enemy;
         const cName = logObj.card ? (language === 'zh' ? logObj.card.name_zh : logObj.card.name) : '';
+
+        const cardDisplay = logObj.card ? (
+            <span
+                className={`log-card-icon icon-color-${logObj.card.color.toLowerCase()}`}
+                onMouseEnter={() => setHoveredLogCard({ card: logObj.card, isPlayer: logObj.isPlayer })}
+                onMouseLeave={() => setHoveredLogCard(null)}
+            >
+                {cName}
+            </span>
+        ) : null;
+
         switch (logObj.type) {
             case 'start': return language === 'zh' ? '游戏开始！' : 'Game Started!';
-            case 'not_enough': return language === 'zh' ? `资源不足，无法打出 ${cName}!` : `Not enough resources for ${cName}!`;
-            case 'played': return `${actor} ${language === 'zh' ? '打出' : 'played'} ${cName}.`;
-            case 'discarded': return `${actor} ${language === 'zh' ? '弃牌' : 'discarded'} ${cName}.`;
+            case 'not_enough': return language === 'zh' ? <>资源不足，无法打出 {cardDisplay}!</> : <>Not enough resources for {cardDisplay}!</>;
+            case 'played': return <>{actor} {language === 'zh' ? '打出' : 'played'} {cardDisplay}.</>;
+            case 'discarded': return <>{actor} {language === 'zh' ? '弃牌' : 'discarded'} {cardDisplay}.</>;
             case 'play_again': return `${actor} ${language === 'zh' ? '获得额外回合!' : 'gets to play again!'}`;
             default: return '';
         }
@@ -237,7 +249,12 @@ function App() {
                                 </div>
                             ))}
                         </div>
-                        {activeCard && (
+                        {hoveredLogCard && (
+                            <div className="active-card-presentation">
+                                <Card card={hoveredLogCard.card} isEnemy={!hoveredLogCard.isPlayer} language={language} t={t} />
+                            </div>
+                        )}
+                        {activeCard && !hoveredLogCard && (
                             <div className="active-card-presentation">
                                 <Card card={activeCard} isEnemy={false} language={language} t={t} />
                             </div>

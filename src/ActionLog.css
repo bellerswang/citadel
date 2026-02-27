@@ -46,3 +46,36 @@
         transform: translateX(0);
     }
 }
+
+.log-card-icon {
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 0 4px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    transition: transform 0.1s ease-out;
+}
+
+.log-card-icon:hover {
+    transform: scale(1.1);
+}
+
+.log-card-icon.icon-color-red {
+    background: linear-gradient(135deg, #aa3333, #661111);
+    color: #ffcccc;
+}
+
+.log-card-icon.icon-color-blue {
+    background: linear-gradient(135deg, #3366aa, #113366);
+    color: #ccddff;
+}
+
+.log-card-icon.icon-color-green {
+    background: linear-gradient(135deg, #33aa55, #116633);
+    color: #ccffcc;
+}
