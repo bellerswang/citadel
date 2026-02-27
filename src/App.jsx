@@ -69,10 +69,13 @@ const CastleColumn = ({ state, isEnemy, t }) => {
     const towerElement = (
         <div className="structure-container" key="tower">
             <span className="structure-label">{t.tower}</span>
-            <div className={`fill-bar-container large-bar tower-container ${towerClass}`}>
+            <div className={`structure-vfx-wrapper ${towerClass}`} style={{ position: 'relative' }}>
                 <div className="slash-overlay" />
-                <div className="fill-bar tower-fill" style={{ height: `${towerPct}%` }}><div className="bar-cap" /></div>
-                <span className="structure-value" style={{ position: 'relative' }}>{state.tower}<FloatingNumbers value={state.tower} /></span>
+                <FloatingNumbers value={state.tower} />
+                <div className="fill-bar-container large-bar tower-container">
+                    <div className="fill-bar tower-fill" style={{ height: `${towerPct}%` }}><div className="bar-cap" /></div>
+                    <span className="structure-value">{state.tower}</span>
+                </div>
             </div>
         </div>
     );
@@ -80,10 +83,13 @@ const CastleColumn = ({ state, isEnemy, t }) => {
     const wallElement = (
         <div className="structure-container" key="wall">
             <span className="structure-label">{t.wall}</span>
-            <div className={`fill-bar-container large-bar wall-container ${wallClass}`}>
+            <div className={`structure-vfx-wrapper ${wallClass}`} style={{ position: 'relative' }}>
                 <div className="slash-overlay" />
-                <div className="fill-bar wall-fill" style={{ height: `${wallPct}%` }}><div className="bar-cap" /></div>
-                <span className="structure-value" style={{ position: 'relative' }}>{state.wall}<FloatingNumbers value={state.wall} /></span>
+                <FloatingNumbers value={state.wall} />
+                <div className="fill-bar-container large-bar wall-container">
+                    <div className="fill-bar wall-fill" style={{ height: `${wallPct}%` }}><div className="bar-cap" /></div>
+                    <span className="structure-value">{state.wall}</span>
+                </div>
             </div>
         </div>
     );

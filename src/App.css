@@ -403,3 +403,288 @@ body {
     right: 15px;
     z-index: 200;
 }
+
+/* ── Visual Effects (VFX) ─────────────────────────────────────────────────── */
+@keyframes vfxShakeLight {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-2px);
+    }
+
+    75% {
+        transform: translateX(2px);
+    }
+}
+
+@keyframes vfxShakeMedium {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px) rotate(-1deg);
+    }
+
+    75% {
+        transform: translateX(5px) rotate(1deg);
+    }
+}
+
+@keyframes vfxShakeHeavy {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-10px) translateY(-5px) rotate(-3deg);
+    }
+
+    75% {
+        transform: translateX(10px) translateY(5px) rotate(3deg);
+    }
+}
+
+.vfx-loss-light {
+    animation: vfxShakeLight 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.vfx-loss-medium {
+    animation: vfxShakeMedium 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+}
+
+.vfx-loss-heavy {
+    animation: vfxShakeHeavy 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 0, 0, 0.9));
+}
+
+.vfx-gain-light {
+    animation: vfxShakeLight 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    filter: drop-shadow(0 0 5px rgba(0, 255, 100, 0.3));
+}
+
+.vfx-gain-medium {
+    animation: vfxShakeMedium 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 100, 0.6));
+}
+
+.vfx-gain-heavy {
+    animation: vfxShakeMedium 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    filter: brightness(1.2) drop-shadow(0 0 20px rgba(100, 255, 150, 0.9));
+}
+
+.slash-overlay {
+    position: absolute;
+    inset: -20px;
+    z-index: 20;
+    pointer-events: none;
+    opacity: 0;
+}
+
+@keyframes slashEffectMedium {
+    0% {
+        clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        clip-path: polygon(100% 0, 100% 5%, 0 100%, 0 95%);
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    100% {
+        clip-path: polygon(100% 95%, 100% 100%, 100% 100%, 100% 95%);
+        opacity: 0;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes slashEffectHeavy {
+    0% {
+        clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        clip-path: polygon(0 0, 0 10%, 100% 100%, 100% 90%);
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    100% {
+        clip-path: polygon(0 90%, 0 100%, 0 100%, 0 90%);
+        opacity: 0;
+        transform: scale(1.1);
+    }
+}
+
+.vfx-loss-medium .slash-overlay {
+    animation: slashEffectMedium 0.3s ease-out forwards;
+    background: linear-gradient(135deg, white, yellow);
+}
+
+.vfx-loss-heavy .slash-overlay {
+    animation: slashEffectHeavy 0.4s ease-out forwards;
+    background: linear-gradient(225deg, white, orange, red);
+    filter: blur(2px) drop-shadow(0 0 10px red);
+}
+
+@keyframes resPopUp {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.4);
+    }
+}
+
+.vfx-res-gain {
+    animation: resPopUp 0.3s ease-out;
+    z-index: 100;
+    position: relative;
+}
+
+.vfx-res-loss {
+    animation: resPopUp 0.3s ease-out;
+    z-index: 100;
+    position: relative;
+}
+
+.vfx-text-gain-light {
+    color: #55ff55 !important;
+}
+
+.vfx-text-gain-medium {
+    color: #55ff55 !important;
+    text-shadow: 0 0 5px #55ff55;
+    font-weight: 900;
+}
+
+.vfx-text-gain-heavy {
+    color: #aaffaa !important;
+    text-shadow: 0 0 10px #55ff55;
+    font-weight: 900;
+}
+
+.vfx-text-loss-light {
+    color: #ff5555 !important;
+}
+
+.vfx-text-loss-medium {
+    color: #ff5555 !important;
+    text-shadow: 0 0 5px #ff5555;
+    font-weight: 900;
+}
+
+.vfx-text-loss-heavy {
+    color: #ffaaaa !important;
+    text-shadow: 0 0 10px #ff5555;
+    font-weight: 900;
+}
+
+/* ── Floating Numbers ─────────────────────────────────────────────────────── */
+.floating-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8rem;
+    font-weight: 900;
+    pointer-events: none;
+    z-index: 100;
+    font-family: 'Cinzel', serif;
+}
+
+.floating-number.positive {
+    color: #55ff55;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 1), 0 0 10px #00ff00;
+}
+
+.floating-number.negative {
+    color: #ff5555;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 1), 0 0 10px #ff0000;
+}
+
+.floating-number.intensity-light {
+    animation: floatUpLight 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.floating-number.intensity-medium {
+    font-size: 2.8rem;
+    animation: floatUpMed 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    z-index: 105;
+}
+
+.floating-number.intensity-heavy {
+    font-size: 4rem;
+    animation: floatUpHeavy 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    z-index: 110;
+    filter: drop-shadow(0 0 10px currentColor);
+}
+
+@keyframes floatUpLight {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+
+    10% {
+        transform: translate(-50%, -100%) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -200%) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes floatUpMed {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+
+    15% {
+        transform: translate(-50%, -120%) scale(1.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -280%) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes floatUpHeavy {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+
+    10% {
+        transform: translate(-50%, -100%) scale(2);
+        opacity: 1;
+        font-weight: 900;
+    }
+
+    100% {
+        transform: translate(-50%, -350%) scale(1);
+        opacity: 0;
+    }
+}
