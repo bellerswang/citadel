@@ -8,7 +8,7 @@ import { translations } from './i18n';
 import './ActionLog.css';
 import './App.css';
 
-// ── Responsive scale: fit-inside the viewport, no cropping ──────────────────
+// ── Responsive scale ────────────────────────────────────────────────────────
 const DESIGN_WIDTH = 1280;
 const DESIGN_HEIGHT = 720;
 
@@ -29,48 +29,59 @@ function useViewportScale() {
     return scale;
 }
 
-// ── Structure visual (tower / wall bar) ─────────────────────────────────────
-const Structure = ({ type, height, label }) => {
-    const pct = Math.min((height / 50) * 100, 100);
+// ── Castle Structure Visual (Tower + Wall side-by-side) ─────────────────────
+// Mockup shows two small towers stacked vertically per side.
+const CastleColumn = ({ state, isEnemy }) => {
+    const towerPct = Math.min((state.tower / 50) * 100, 100);
+    const wallPct = Math.min((state.wall / 50) * 100, 100);
+
     return (
-        <div className={`structure-visual ${type}`}>
-            <div className="structure-header">
-                <span className="structure-label">{label}</span>
-                <div className={`structure-badge ${type}-badge`} style={{ position: 'relative' }}>
-                    <span className="badge-value">{height}</span>
-                    <FloatingNumbers value={height} />
-                </div>
+        <div className={`castle-column ${isEnemy ? 'enemy-side' : 'player-side'}`}>
+            <div className={`stone-row ${isEnemy ? 'row-left' : 'row-right'}`}>
+                {isEnemy ? (
+                    <>
+                        <div className="stone-tower-placeholder"></div>
+                        <div className="fill-bar-container"><div className="fill-bar tower-fill" style={{ height: `${towerPct}%` }}><div className="bar-cap" /></div></div>
+                    </>
+                ) : (
+                    <>
+                        <div className="fill-bar-container"><div className="fill-bar tower-fill" style={{ height: `${towerPct}%` }}><div className="bar-cap" /></div></div>
+                        <div className="stone-tower-placeholder"></div>
+                    </>
+                )}
             </div>
-            <div className="structure-frame">
-                <div className="bars-container">
-                    <div className={`structure-bar ${type}-bar`} style={{ height: `${pct}%` }}>
-                        <div className="bar-cap" />
-                    </div>
-                </div>
+
+            <div className={`stone-row ${isEnemy ? 'row-left' : 'row-right'}`}>
+                {isEnemy ? (
+                    <>
+                        <div className="stone-tower-placeholder"></div>
+                        <div className="fill-bar-container"><div className="fill-bar wall-fill" style={{ height: `${wallPct}%` }}><div className="bar-cap" /></div></div>
+                    </>
+                ) : (
+                    <>
+                        <div className="fill-bar-container"><div className="fill-bar wall-fill" style={{ height: `${wallPct}%` }}><div className="bar-cap" /></div></div>
+                        <div className="stone-tower-placeholder"></div>
+                    </>
+                )}
             </div>
         </div>
     );
 };
 
-// ── Horizontal compact resource bar ─────────────────────────────────────────
+// ── Horizontal Resource Bar ──────────────────────────────────────────────────
 const HorizResItem = ({ producer, amount, producerLabel, amountLabel, color }) => (
-    <div className={`horiz-res-item horiz-res-${color}`}>
+    <div className="horiz-res-item">
+        <span className="res-bracket">[</span>
         <div className={`horiz-dot dot-${color}`} />
-        <div className="horiz-res-nums">
-            <span className="horiz-producer" title={producerLabel}>{producer}</span>
-            <span className="horiz-arrow">›</span>
-            <span className="horiz-amount" title={amountLabel}>{amount}</span>
-        </div>
-        <div className="horiz-res-labels">
-            <span>{producerLabel}</span>
-            <span>{amountLabel}</span>
-        </div>
+        <span className="res-separator">|</span>
+        <span className="res-text">{producerLabel}: {producer} <span className="res-arrow">→</span> {amountLabel}: {amount}</span>
+        <span className="res-bracket">]</span>
     </div>
 );
 
 const HorizResourceBar = ({ state, isEnemy, t }) => (
     <div className={`horiz-resource-bar ${isEnemy ? 'enemy-bar' : 'player-bar'}`}>
-        <span className="bar-side-label">{isEnemy ? t.enemy : t.player}</span>
+        <span className="bar-side-label">{isEnemy ? 'ENEMY' : '[PLAYER]'}</span>
         <div className="horiz-res-items">
             <HorizResItem color="red" producer={state.quarries} amount={state.bricks} producerLabel={t.quarries} amountLabel={t.bricks} />
             <HorizResItem color="blue" producer={state.magic} amount={state.gems} producerLabel={t.magic} amountLabel={t.gems} />
@@ -79,59 +90,25 @@ const HorizResourceBar = ({ state, isEnemy, t }) => (
     </div>
 );
 
-// ── Top bar: avatars + vitals + title + turn status ──────────────────────────
-const TopBar = ({ playerState, enemyState, winner, isPlayerTurn, language, t, resetGame }) => (
-    <div className="top-bar">
-        {/* Enemy side */}
-        <div className="player-header enemy-header">
-            <div className="avatar-portrait enemy-avatar">🔥</div>
-            <div className="header-info">
-                <span className="header-name">{t.enemy}</span>
-                <div className="header-vitals">
-                    <span className="vital">
-                        🏰 <b style={{ position: 'relative' }}>{enemyState.tower}<FloatingNumbers value={enemyState.tower} /></b>
-                    </span>
-                    <span className="vital">
-                        🛡 <b style={{ position: 'relative' }}>{enemyState.wall}<FloatingNumbers value={enemyState.wall} /></b>
-                    </span>
-                </div>
+// ── Top Bar Components ───────────────────────────────────────────────────────
+const TopBarSide = ({ isEnemy, name, tower, wall }) => (
+    <div className={`top-bar-side ${isEnemy ? 'side-left' : 'side-right'}`}>
+        {isEnemy && <span className={`side-name enemy-name`}>{name}</span>}
+        {isEnemy && <div className="avatar-placeholder enemy-avatar" />}
+
+        <div className={`top-vitals ${isEnemy ? 'vitals-left' : 'vitals-right'}`}>
+            <div className="vital-item">
+                <span className="vital-icon icon-crown"></span>
+                <span className="vital-value" style={{ position: 'relative' }}>{tower}<FloatingNumbers value={tower} /></span>
+            </div>
+            <div className="vital-item">
+                <span className="vital-icon icon-shield"></span>
+                <span className="vital-value" style={{ position: 'relative' }}>{wall}<FloatingNumbers value={wall} /></span>
             </div>
         </div>
 
-        {/* Center */}
-        <div className="game-status-center">
-            <h1 className="citadel-title">{t.gameName}</h1>
-            {winner ? (
-                <div className="winner-block">
-                    <span className="winner-text">
-                        {winner === 'DRAW'
-                            ? (language === 'zh' ? '平局！' : 'DRAW!')
-                            : winner === 'PLAYER' ? t.playerWins : t.enemyWins}
-                    </span>
-                    <button className="btn-reset" onClick={resetGame}>{t.playAgain}</button>
-                </div>
-            ) : (
-                <div className={`turn-badge ${isPlayerTurn ? 'your-turn' : 'enemy-turn'}`}>
-                    {isPlayerTurn ? t.yourTurn : t.enemyTurn}
-                </div>
-            )}
-        </div>
-
-        {/* Player side */}
-        <div className="player-header you-header">
-            <div className="header-info header-info-right">
-                <span className="header-name">{t.player}</span>
-                <div className="header-vitals">
-                    <span className="vital">
-                        🏰 <b style={{ position: 'relative' }}>{playerState.tower}<FloatingNumbers value={playerState.tower} /></b>
-                    </span>
-                    <span className="vital">
-                        🛡 <b style={{ position: 'relative' }}>{playerState.wall}<FloatingNumbers value={playerState.wall} /></b>
-                    </span>
-                </div>
-            </div>
-            <div className="avatar-portrait player-avatar">⚔️</div>
-        </div>
+        {!isEnemy && <div className="avatar-placeholder player-avatar" />}
+        {!isEnemy && <span className={`side-name player-name`}>{name}</span>}
     </div>
 );
 
@@ -174,37 +151,37 @@ function App() {
         <div style={{
             position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: '#1a0f05', overflow: 'hidden',
+            background: '#0d0d0d', overflow: 'hidden',
         }}>
             <div className="game-board" style={boardStyle}>
-
-                {/* CardCollection modal */}
                 {isCollectionOpen && (
                     <CardCollection onClose={() => setIsCollectionOpen(false)} language={language} t={t} />
                 )}
 
                 {/* ① TOP BAR */}
-                <TopBar
-                    playerState={playerState}
-                    enemyState={enemyState}
-                    winner={winner}
-                    isPlayerTurn={isPlayerTurn}
-                    language={language}
-                    t={t}
-                    resetGame={resetGame}
-                />
+                <div className="top-bar">
+                    <TopBarSide isEnemy={true} name="ENEMY" tower={enemyState.tower} wall={enemyState.wall} />
+
+                    <div className="top-bar-center">
+                        <h1 className="citadel-title-main">{t.gameName}</h1>
+                        {winner ? (
+                            <div className="winner-msg" onClick={resetGame}>
+                                {winner === 'DRAW' ? 'DRAW!' : (winner === 'PLAYER' ? t.playerWins : t.enemyWins)} - {t.playAgain}
+                            </div>
+                        ) : null}
+                    </div>
+
+                    <TopBarSide isEnemy={false} name="PLAYER" tower={playerState.tower} wall={playerState.wall} />
+                </div>
 
                 {/* ② BATTLEFIELD */}
                 <div className="battlefield">
-                    <div className="tower-area player-tower-area">
-                        <Structure type="tower" height={playerState.tower} label={t.tower} />
-                        <Structure type="wall" height={playerState.wall} label={t.wall} />
-                    </div>
+                    <CastleColumn state={enemyState} isEnemy={true} />
 
                     <div className="center-action-area">
                         <div className="action-log">
                             {log.map((msg, i) => (
-                                <div key={i} className="log-msg" style={{ opacity: 1 - i * 0.15 }}>
+                                <div key={i} className="log-msg mockup-log" style={{ opacity: 1 - i * 0.15 }}>
                                     {formatLog(msg)}
                                 </div>
                             ))}
@@ -216,41 +193,48 @@ function App() {
                         )}
                     </div>
 
-                    <div className="tower-area enemy-tower-area">
-                        <Structure type="wall" height={enemyState.wall} label={t.wall} />
-                        <Structure type="tower" height={enemyState.tower} label={t.tower} />
-                    </div>
+                    <CastleColumn state={playerState} isEnemy={false} />
                 </div>
 
-                {/* ③ ENEMY RESOURCE BAR */}
+                {/* ③ RESOURCE BARS */}
                 <HorizResourceBar state={enemyState} isEnemy={true} t={t} />
-
-                {/* ④ PLAYER RESOURCE BAR */}
                 <HorizResourceBar state={playerState} isEnemy={false} t={t} />
 
-                {/* ⑤ HAND ROW */}
-                <div className="hand-row">
-                    <div className="discard-hint">
-                        💡 {language === 'zh' ? '右键点击卡牌丢弃（跳过回合）' : 'Right-click a card to discard (skip turn)'}
-                    </div>
-                    <div className="player-hand">
-                        {playerHand.map((c) => (
-                            <div key={c.uid} className={`card-wrapper ${!canAfford(c, playerState) ? 'unaffordable' : ''}`}>
-                                <Card
-                                    card={c}
-                                    isEnemy={false}
-                                    language={language}
-                                    t={t}
-                                    playerState={playerState}
-                                    onPlay={(card) => playCard(card, true)}
-                                    onDiscard={(card) => discardCard(card, true)}
-                                />
-                            </div>
-                        ))}
+                {/* ④ HAND ROW */}
+                <div className="mockup-hand-row">
+                    <div className="player-hand-fanned">
+                        {playerHand.map((c, index) => {
+                            // Calculate fan spread (-2.5 to 2.5) for a 6 card hand
+                            // to create a slight arc typical in card games
+                            const offset = index - (playerHand.length - 1) / 2;
+                            const rotation = offset * 2; // subtle arc
+                            const drop = Math.abs(offset) * 4; // subtle curve down
+                            const transformStyle = {
+                                transform: `rotate(${rotation}deg) translateY(${drop}px)`,
+                                zIndex: index
+                            };
+                            return (
+                                <div key={c.uid}
+                                    className={`fanned-card-wrapper ${!canAfford(c, playerState) ? 'unaffordable' : ''}`}
+                                    style={transformStyle}
+                                >
+                                    <div className="fanned-inner">
+                                        <Card
+                                            card={c}
+                                            isEnemy={false}
+                                            language={language}
+                                            t={t}
+                                            playerState={playerState}
+                                            onPlay={(card) => playCard(card, true)}
+                                            onDiscard={(card) => discardCard(card, true)}
+                                        />
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
 
-                {/* Menu floats bottom-right */}
                 <Menu
                     language={language}
                     setLanguage={setLanguage}
