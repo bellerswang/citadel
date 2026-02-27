@@ -153,11 +153,20 @@ function App() {
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             background: '#0d0d0d', overflow: 'hidden',
         }}>
-            <div className="game-board" style={boardStyle}>
-                {isCollectionOpen && (
-                    <CardCollection onClose={() => setIsCollectionOpen(false)} language={language} t={t} />
-                )}
+            {isCollectionOpen && (
+                <CardCollection onClose={() => setIsCollectionOpen(false)} language={language} t={t} />
+            )}
 
+            <Menu
+                language={language}
+                setLanguage={setLanguage}
+                t={t}
+                onOpenCollection={() => setIsCollectionOpen(true)}
+                onExportDebug={exportDebugLog}
+                onNewGame={resetGame}
+            />
+
+            <div className="game-board" style={boardStyle}>
                 {/* ① TOP BAR */}
                 <div className="top-bar">
                     <TopBarSide isEnemy={true} name="ENEMY" tower={enemyState.tower} wall={enemyState.wall} />
@@ -223,15 +232,6 @@ function App() {
                         ))}
                     </div>
                 </div>
-
-                <Menu
-                    language={language}
-                    setLanguage={setLanguage}
-                    t={t}
-                    onOpenCollection={() => setIsCollectionOpen(true)}
-                    onExportDebug={exportDebugLog}
-                    onNewGame={resetGame}
-                />
             </div>
         </div>
     );
