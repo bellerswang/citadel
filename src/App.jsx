@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FloatingNumbers } from './components/FloatingNumbers';
 import Card from './components/Card';
 import Menu from './components/Menu';
