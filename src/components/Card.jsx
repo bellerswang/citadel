@@ -43,16 +43,6 @@ const Card = ({ card, onPlay, onDiscard, isEnemy, language, t, playerState }) =>
                     style={{ backgroundImage: `url(${cardImageUrl}), linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4))` }}
                 >
                     <div className="card-cost">{card.cost}</div>
-                    {currentAmount !== null && (
-                        <div className={`card-resource-tooltip ${canPlay ? 'can-afford' : 'cannot-afford'}`}>
-                            <span className="resource-tooltip-label">{resourceLabel}</span>
-                            <span className="resource-tooltip-values">
-                                <span className="resource-tooltip-owned">{currentAmount}</span>
-                                <span className="resource-tooltip-sep">/</span>
-                                <span className="resource-tooltip-cost">{card.cost}</span>
-                            </span>
-                        </div>
-                    )}
                 </div>
                 <div className="card-text-area">
                     <div className="card-name">{displayName}</div>
@@ -62,6 +52,17 @@ const Card = ({ card, onPlay, onDiscard, isEnemy, language, t, playerState }) =>
                         ))}
                     </div>
                 </div>
+                {/* Footer resource strip */}
+                {currentAmount !== null && (
+                    <div className={`card-resource-strip color-${card.color.toLowerCase()} ${canPlay ? 'can-afford' : 'cannot-afford'}`}>
+                        <span className="resource-strip-label">{resourceLabel}</span>
+                        <span className="resource-strip-values">
+                            <span className="resource-strip-owned">{currentAmount}</span>
+                            <span className="resource-strip-sep">/</span>
+                            <span className="resource-strip-cost">{card.cost}</span>
+                        </span>
+                    </div>
+                )}
             </div>
         </div>
     );
