@@ -403,8 +403,8 @@ body {
     align-items: flex-end;
     padding-bottom: 0px;
     /* Flush against bottom edge */
-    overflow: hidden;
-    /* Ensure card bottoms clipping if they go too low */
+    overflow: visible;
+    /* Allow cards to pop up out of the row on hover */
 }
 
 .player-hand-fanned {
