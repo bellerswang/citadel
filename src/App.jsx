@@ -23,18 +23,13 @@ function useViewportScale() {
         const compute = () => {
             const portrait = window.innerHeight > window.innerWidth;
             setIsPortrait(portrait);
-            if (!portrait) {
-                // Always fit-inside the viewport, cap at 1.0 so desktop never upscales.
-                // Simpler and more predictable than DPR detection across all devices.
-                const s = Math.min(
-                    window.innerWidth / DESIGN_WIDTH,
-                    window.innerHeight / DESIGN_HEIGHT,
-                    1.0   // never upscale on desktop
-                );
-                setScale(s);
-            } else {
-                setScale(1); // CSS responsive layout takes over in portrait
-            }
+            // Always fill the screen using fit-inside aspect ratio.
+            // No cap: desktop gets upscaled to fill 1920px, tablets fill their screen.
+            const s = Math.min(
+                window.innerWidth / DESIGN_WIDTH,
+                window.innerHeight / DESIGN_HEIGHT
+            );
+            setScale(s);
         };
         compute();
         window.addEventListener('resize', compute);
