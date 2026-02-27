@@ -77,6 +77,14 @@ body {
     border: 2px solid #5c3a21;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8), 0 2px 5px rgba(0, 0, 0, 0.5);
     flex-shrink: 0;
+    transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.2s;
+    position: relative;
+    cursor: pointer;
+}
+
+.avatar-placeholder:hover {
+    transform: scale(3) translateY(10px);
+    z-index: 1000;
 }
 
 .enemy-avatar {
@@ -84,64 +92,20 @@ body {
     background: radial-gradient(circle, #3d1515, #110905);
 }
 
+.enemy-avatar:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 1), 0 0 20px rgba(242, 92, 84, 0.6);
+}
+
 .player-avatar {
     border-color: #ffca3a;
     background: radial-gradient(circle, #3a2e10, #110905);
 }
 
-.top-vitals {
-    display: flex;
-    gap: 10px;
+.player-avatar:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 1), 0 0 20px rgba(255, 202, 58, 0.6);
 }
 
-.vital-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 48px;
-    position: relative;
-}
-
-/* Base icon shape forming the background plate for the number */
-.vital-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: block;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-    z-index: 1;
-}
-
-.icon-crown {
-    background: radial-gradient(circle at 30% 30%, #ff4d4d, #990000);
-    clip-path: polygon(10% 20%, 30% 50%, 50% 10%, 70% 50%, 90% 20%, 90% 90%, 10% 90%);
-    width: 42px;
-    height: 38px;
-    border-radius: 2px;
-}
-
-.icon-shield {
-    background: radial-gradient(circle at 30% 30%, #a6b8c7, #4a5568);
-    clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
-    width: 36px;
-    height: 44px;
-    border-radius: 2px;
-}
-
-.vital-value {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 900;
-    color: white;
-    text-shadow: 0 2px 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 0.8);
-    /* Strong shadow for readability */
-    z-index: 2;
-    /* Put text over the icon background */
-    margin-top: 4px;
-    /* Align slightly down to fit inside shield centers */
-}
+/* Top Vitals removed */
 
 .top-bar-center {
     display: flex;

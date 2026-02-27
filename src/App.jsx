@@ -57,11 +57,11 @@ const CastleColumn = ({ state, isEnemy, t }) => {
     );
 
     // Wall conceptually "in front" of the Tower relative to the battlefield center.
-    // For Enemy (Left side), Wall is on the right of the Tower.
-    // For Player (Right side), Wall is on the left of the Tower.
+    // For Player (now Left side), Wall is on the right of the Tower. -> [towerElement, wallElement]
+    // For Enemy (now Right side), Wall is on the left of the Tower. -> [wallElement, towerElement]
     return (
         <div className={`castle-column ${isEnemy ? 'enemy-side' : 'player-side'}`}>
-            {isEnemy ? [towerElement, wallElement] : [wallElement, towerElement]}
+            {isEnemy ? [wallElement, towerElement] : [towerElement, wallElement]}
         </div>
     );
 };
@@ -89,24 +89,19 @@ const HorizResourceBar = ({ state, isEnemy, t }) => (
 );
 
 // ── Top Bar Components ───────────────────────────────────────────────────────
-const TopBarSide = ({ isEnemy, name, tower, wall }) => (
-    <div className={`top-bar-side ${isEnemy ? 'side-left' : 'side-right'}`}>
-        {isEnemy && <span className={`side-name enemy-name`}>{name}</span>}
-        {isEnemy && <div className="avatar-placeholder enemy-avatar" />}
-
-        <div className={`top-vitals ${isEnemy ? 'vitals-left' : 'vitals-right'}`}>
-            <div className="vital-item">
-                <span className="vital-icon icon-crown"></span>
-                <span className="vital-value" style={{ position: 'relative' }}>{tower}<FloatingNumbers value={tower} /></span>
-            </div>
-            <div className="vital-item">
-                <span className="vital-icon icon-shield"></span>
-                <span className="vital-value" style={{ position: 'relative' }}>{wall}<FloatingNumbers value={wall} /></span>
-            </div>
-        </div>
-
-        {!isEnemy && <div className="avatar-placeholder player-avatar" />}
-        {!isEnemy && <span className={`side-name player-name`}>{name}</span>}
+const TopBarSide = ({ isEnemy, name }) => (
+    <div className={`top-bar-side ${!isEnemy ? 'side-left' : 'side-right'}`}>
+        {!isEnemy ? (
+            <>
+                <div className="avatar-placeholder player-avatar" />
+                <span className={`side-name player-name`}>{name}</span>
+            </>
+        ) : (
+            <>
+                <span className={`side-name enemy-name`}>{name}</span>
+                <div className="avatar-placeholder enemy-avatar" />
+            </>
+        )}
     </div>
 );
 
@@ -167,7 +162,7 @@ function App() {
             <div className="game-board" style={boardStyle}>
                 {/* ① TOP BAR */}
                 <div className="top-bar">
-                    <TopBarSide isEnemy={true} name="ENEMY" tower={enemyState.tower} wall={enemyState.wall} />
+                    <TopBarSide isEnemy={false} name="PLAYER" />
 
                     <div className="top-bar-center">
                         <h1 className="citadel-title-main">{t.gameName}</h1>
@@ -178,12 +173,12 @@ function App() {
                         ) : null}
                     </div>
 
-                    <TopBarSide isEnemy={false} name="PLAYER" tower={playerState.tower} wall={playerState.wall} />
+                    <TopBarSide isEnemy={true} name="ENEMY" />
                 </div>
 
                 {/* ② BATTLEFIELD */}
                 <div className="battlefield">
-                    <CastleColumn state={enemyState} isEnemy={true} t={t} />
+                    <CastleColumn state={playerState} isEnemy={false} t={t} />
 
                     <div className="center-action-area">
                         <div className="action-log">
@@ -200,12 +195,12 @@ function App() {
                         )}
                     </div>
 
-                    <CastleColumn state={playerState} isEnemy={false} t={t} />
+                    <CastleColumn state={enemyState} isEnemy={true} t={t} />
                 </div>
 
                 {/* ③ RESOURCE BARS */}
-                <HorizResourceBar state={enemyState} isEnemy={true} t={t} />
                 <HorizResourceBar state={playerState} isEnemy={false} t={t} />
+                <HorizResourceBar state={enemyState} isEnemy={true} t={t} />
 
                 {/* ④ HAND ROW */}
                 <div className="mockup-hand-row">
