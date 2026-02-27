@@ -172,67 +172,61 @@ body {
 
 .castle-column {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    align-items: flex-end;
     gap: 30px;
     height: 100%;
 }
 
-.stone-row {
+.structure-container {
     display: flex;
-    align-items: flex-end;
-    gap: 15px;
-}
-
-.row-left {
-    flex-direction: row;
-}
-
-.row-right {
-    flex-direction: row;
-    /* order is handled by JSX swapping */
-}
-
-/* Mockup shows small stacked towers */
-.stone-tower-placeholder {
-    width: 60px;
-    height: 130px;
-    background: #1a0f05;
-    border: 3px solid #3d2616;
-    border-radius: 8px 8px 2px 2px;
-    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 0, 0, 0.9);
-    position: relative;
-}
-
-.stone-tower-placeholder::before {
-    content: '';
-    position: absolute;
-    top: -12px;
-    left: -3px;
-    right: -3px;
-    height: 12px;
-    background: #1a0f05;
-    border: 3px solid #3d2616;
-    border-bottom: none;
-    clip-path: polygon(0 100%, 0 0, 25% 0, 25% 50%, 50% 50%, 50% 0, 75% 0, 75% 50%, 100% 50%, 100% 0, 100% 100%);
-}
-
-.bars-group {
-    display: flex;
-    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
     height: 100%;
-    align-items: flex-end;
+    justify-content: flex-end;
 }
 
-.fill-bar-container {
-    width: 20px;
-    height: 110px;
+.structure-label {
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #e0d0b0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    letter-spacing: 2px;
+}
+
+.fill-bar-container.large-bar {
+    width: 60px;
+    height: 250px;
     background: #0a0603;
-    border: 2px solid #3d2616;
-    border-radius: 10px;
+    border: 3px solid #738090;
+    border-radius: 8px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(0, 0, 0, 1);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 0, 0, 0.9);
+}
+
+.tower-container.large-bar {
+    border-color: #5d6a78;
+}
+
+.wall-container.large-bar {
+    border-color: #4a3c31;
+}
+
+.structure-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 1.6rem;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1);
+    z-index: 5;
 }
 
 .fill-bar {

@@ -30,40 +30,38 @@ function useViewportScale() {
 }
 
 // ── Castle Structure Visual (Tower + Wall side-by-side) ─────────────────────
-// Mockup shows two small towers stacked vertically per side.
-const CastleColumn = ({ state, isEnemy }) => {
+// Redesign to side-by-side: Wall in front of Tower (closer to center).
+const CastleColumn = ({ state, isEnemy, t }) => {
+    // Math.min for visual percentage (cap at 100%)
     const towerPct = Math.min((state.tower / 50) * 100, 100);
     const wallPct = Math.min((state.wall / 50) * 100, 100);
 
+    const towerElement = (
+        <div className="structure-container" key="tower">
+            <span className="structure-label">{t.tower}</span>
+            <div className="fill-bar-container large-bar tower-container">
+                <div className="fill-bar tower-fill" style={{ height: `${towerPct}%` }}><div className="bar-cap" /></div>
+                <span className="structure-value">{state.tower}</span>
+            </div>
+        </div>
+    );
+
+    const wallElement = (
+        <div className="structure-container" key="wall">
+            <span className="structure-label">{t.wall}</span>
+            <div className="fill-bar-container large-bar wall-container">
+                <div className="fill-bar wall-fill" style={{ height: `${wallPct}%` }}><div className="bar-cap" /></div>
+                <span className="structure-value">{state.wall}</span>
+            </div>
+        </div>
+    );
+
+    // Wall conceptually "in front" of the Tower relative to the battlefield center.
+    // For Enemy (Left side), Wall is on the right of the Tower.
+    // For Player (Right side), Wall is on the left of the Tower.
     return (
         <div className={`castle-column ${isEnemy ? 'enemy-side' : 'player-side'}`}>
-            <div className={`stone-row ${isEnemy ? 'row-left' : 'row-right'}`}>
-                {isEnemy ? (
-                    <>
-                        <div className="stone-tower-placeholder"></div>
-                        <div className="fill-bar-container"><div className="fill-bar tower-fill" style={{ height: `${towerPct}%` }}><div className="bar-cap" /></div></div>
-                    </>
-                ) : (
-                    <>
-                        <div className="fill-bar-container"><div className="fill-bar tower-fill" style={{ height: `${towerPct}%` }}><div className="bar-cap" /></div></div>
-                        <div className="stone-tower-placeholder"></div>
-                    </>
-                )}
-            </div>
-
-            <div className={`stone-row ${isEnemy ? 'row-left' : 'row-right'}`}>
-                {isEnemy ? (
-                    <>
-                        <div className="stone-tower-placeholder"></div>
-                        <div className="fill-bar-container"><div className="fill-bar wall-fill" style={{ height: `${wallPct}%` }}><div className="bar-cap" /></div></div>
-                    </>
-                ) : (
-                    <>
-                        <div className="fill-bar-container"><div className="fill-bar wall-fill" style={{ height: `${wallPct}%` }}><div className="bar-cap" /></div></div>
-                        <div className="stone-tower-placeholder"></div>
-                    </>
-                )}
-            </div>
+            {isEnemy ? [towerElement, wallElement] : [wallElement, towerElement]}
         </div>
     );
 };
@@ -185,7 +183,7 @@ function App() {
 
                 {/* ② BATTLEFIELD */}
                 <div className="battlefield">
-                    <CastleColumn state={enemyState} isEnemy={true} />
+                    <CastleColumn state={enemyState} isEnemy={true} t={t} />
 
                     <div className="center-action-area">
                         <div className="action-log">
@@ -202,7 +200,7 @@ function App() {
                         )}
                     </div>
 
-                    <CastleColumn state={playerState} isEnemy={false} />
+                    <CastleColumn state={playerState} isEnemy={false} t={t} />
                 </div>
 
                 {/* ③ RESOURCE BARS */}
