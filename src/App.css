@@ -436,7 +436,7 @@ body {
 }
 
 .fanned-card-wrapper:hover .fanned-inner {
-    transform: translateY(-130px) scale(1.8);
+    transform: translateY(-90px) scale(1.5);
     transition: transform 0.15s cubic-bezier(0.25, 1.2, 0.4, 1);
 }
 
