@@ -114,7 +114,7 @@ const TopBarSide = ({ isEnemy, name, tower, wall }) => (
 
 // ── Main App ─────────────────────────────────────────────────────────────────
 function App() {
-    const [language, setLanguage] = useState('en');
+    const [language, setLanguage] = useState('zh');
     const [isCollectionOpen, setIsCollectionOpen] = useState(false);
     const scale = useViewportScale();
     const t = translations[language];
