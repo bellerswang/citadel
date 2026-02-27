@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import ResourcePanel from './components/ResourcePanel';
+import React, { useState, useEffect } from 'react';
 import { FloatingNumbers } from './components/FloatingNumbers';
 import Card from './components/Card';
 import Menu from './components/Menu';
@@ -9,22 +8,14 @@ import { translations } from './i18n';
 import './ActionLog.css';
 import './App.css';
 
-// ── Responsive full-screen scale ────────────────────────────────────────────
-// LANDSCAPE / desktop: scale the 1280×720 design to fit the window.
-// PORTRAIT mobile:     scale = 1, apply responsive CSS layout class instead.
+// ── Responsive scale: fit-inside the viewport, no cropping ──────────────────
 const DESIGN_WIDTH = 1280;
 const DESIGN_HEIGHT = 720;
 
 function useViewportScale() {
     const [scale, setScale] = useState(1);
-    const [isPortrait, setIsPortrait] = useState(false);
-
     useEffect(() => {
         const compute = () => {
-            const portrait = window.innerHeight > window.innerWidth;
-            setIsPortrait(portrait);
-            // Always fill the screen using fit-inside aspect ratio.
-            // No cap: desktop gets upscaled to fill 1920px, tablets fill their screen.
             const s = Math.min(
                 window.innerWidth / DESIGN_WIDTH,
                 window.innerHeight / DESIGN_HEIGHT
@@ -35,14 +26,12 @@ function useViewportScale() {
         window.addEventListener('resize', compute);
         return () => window.removeEventListener('resize', compute);
     }, []);
-
-    return { scale, isPortrait };
+    return scale;
 }
 
+// ── Structure visual (tower / wall bar) ─────────────────────────────────────
 const Structure = ({ type, height, label }) => {
-    const maxHeight = 50;
-    const percentage = Math.min((height / maxHeight) * 100, 100);
-
+    const pct = Math.min((height / 50) * 100, 100);
     return (
         <div className={`structure-visual ${type}`}>
             <div className="structure-header">
@@ -54,11 +43,8 @@ const Structure = ({ type, height, label }) => {
             </div>
             <div className="structure-frame">
                 <div className="bars-container">
-                    <div
-                        className={`structure-bar ${type}-bar`}
-                        style={{ height: `${percentage}%` }}
-                    >
-                        <div className="bar-cap"></div>
+                    <div className={`structure-bar ${type}-bar`} style={{ height: `${pct}%` }}>
+                        <div className="bar-cap" />
                     </div>
                 </div>
             </div>
@@ -66,46 +52,115 @@ const Structure = ({ type, height, label }) => {
     );
 };
 
+// ── Horizontal compact resource bar ─────────────────────────────────────────
+const HorizResItem = ({ producer, amount, producerLabel, amountLabel, color }) => (
+    <div className={`horiz-res-item horiz-res-${color}`}>
+        <div className={`horiz-dot dot-${color}`} />
+        <div className="horiz-res-nums">
+            <span className="horiz-producer" title={producerLabel}>{producer}</span>
+            <span className="horiz-arrow">›</span>
+            <span className="horiz-amount" title={amountLabel}>{amount}</span>
+        </div>
+        <div className="horiz-res-labels">
+            <span>{producerLabel}</span>
+            <span>{amountLabel}</span>
+        </div>
+    </div>
+);
+
+const HorizResourceBar = ({ state, isEnemy, t }) => (
+    <div className={`horiz-resource-bar ${isEnemy ? 'enemy-bar' : 'player-bar'}`}>
+        <span className="bar-side-label">{isEnemy ? t.enemy : t.player}</span>
+        <div className="horiz-res-items">
+            <HorizResItem color="red" producer={state.quarries} amount={state.bricks} producerLabel={t.quarries} amountLabel={t.bricks} />
+            <HorizResItem color="blue" producer={state.magic} amount={state.gems} producerLabel={t.magic} amountLabel={t.gems} />
+            <HorizResItem color="green" producer={state.dungeon} amount={state.beasts} producerLabel={t.dungeon} amountLabel={t.recruits} />
+        </div>
+    </div>
+);
+
+// ── Top bar: avatars + vitals + title + turn status ──────────────────────────
+const TopBar = ({ playerState, enemyState, winner, isPlayerTurn, language, t, resetGame }) => (
+    <div className="top-bar">
+        {/* Enemy side */}
+        <div className="player-header enemy-header">
+            <div className="avatar-portrait enemy-avatar">🔥</div>
+            <div className="header-info">
+                <span className="header-name">{t.enemy}</span>
+                <div className="header-vitals">
+                    <span className="vital">
+                        🏰 <b style={{ position: 'relative' }}>{enemyState.tower}<FloatingNumbers value={enemyState.tower} /></b>
+                    </span>
+                    <span className="vital">
+                        🛡 <b style={{ position: 'relative' }}>{enemyState.wall}<FloatingNumbers value={enemyState.wall} /></b>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        {/* Center */}
+        <div className="game-status-center">
+            <h1 className="citadel-title">{t.gameName}</h1>
+            {winner ? (
+                <div className="winner-block">
+                    <span className="winner-text">
+                        {winner === 'DRAW'
+                            ? (language === 'zh' ? '平局！' : 'DRAW!')
+                            : winner === 'PLAYER' ? t.playerWins : t.enemyWins}
+                    </span>
+                    <button className="btn-reset" onClick={resetGame}>{t.playAgain}</button>
+                </div>
+            ) : (
+                <div className={`turn-badge ${isPlayerTurn ? 'your-turn' : 'enemy-turn'}`}>
+                    {isPlayerTurn ? t.yourTurn : t.enemyTurn}
+                </div>
+            )}
+        </div>
+
+        {/* Player side */}
+        <div className="player-header you-header">
+            <div className="header-info header-info-right">
+                <span className="header-name">{t.player}</span>
+                <div className="header-vitals">
+                    <span className="vital">
+                        🏰 <b style={{ position: 'relative' }}>{playerState.tower}<FloatingNumbers value={playerState.tower} /></b>
+                    </span>
+                    <span className="vital">
+                        🛡 <b style={{ position: 'relative' }}>{playerState.wall}<FloatingNumbers value={playerState.wall} /></b>
+                    </span>
+                </div>
+            </div>
+            <div className="avatar-portrait player-avatar">⚔️</div>
+        </div>
+    </div>
+);
+
+// ── Main App ─────────────────────────────────────────────────────────────────
 function App() {
     const [language, setLanguage] = useState('en');
     const [isCollectionOpen, setIsCollectionOpen] = useState(false);
-    const { scale, isPortrait } = useViewportScale();
+    const scale = useViewportScale();
     const t = translations[language];
     const {
-        playerState,
-        enemyState,
-        playerHand,
-        enemyHand,
-        isPlayerTurn,
-        winner,
-        log,
-        playCard,
-        discardCard,
-        resetGame,
-        activeCard,
-        isActionPhase,
-        exportDebugLog
+        playerState, enemyState, playerHand, enemyHand,
+        isPlayerTurn, winner, log, playCard, discardCard,
+        resetGame, activeCard, exportDebugLog
     } = useGameState();
 
     const formatLog = (logObj) => {
         if (!logObj || typeof logObj === 'string') return logObj;
         const actor = logObj.isPlayer ? t.player : t.enemy;
         const cName = logObj.card ? (language === 'zh' ? logObj.card.name_zh : logObj.card.name) : '';
-
         switch (logObj.type) {
-            case 'start': return language === 'zh' ? "游戏开始！" : "Game Started!";
+            case 'start': return language === 'zh' ? '游戏开始！' : 'Game Started!';
             case 'not_enough': return language === 'zh' ? `资源不足，无法打出 ${cName}!` : `Not enough resources for ${cName}!`;
             case 'played': return `${actor} ${language === 'zh' ? '打出' : 'played'} ${cName}.`;
             case 'discarded': return `${actor} ${language === 'zh' ? '弃牌' : 'discarded'} ${cName}.`;
             case 'play_again': return `${actor} ${language === 'zh' ? '获得额外回合!' : 'gets to play again!'}`;
-            default: return "";
+            default: return '';
         }
     };
 
-    // Flexbox centering is the most reliable cross-browser approach.
-    // The outer container centers its only child (the game board).
-    // transform: scale() scales the board visually from its center.
-    // flex-shrink: 0 prevents flexbox from compressing the 1280px element.
     const boardStyle = {
         width: DESIGN_WIDTH,
         height: DESIGN_HEIGHT,
@@ -114,45 +169,32 @@ function App() {
         flexShrink: 0,
         overflow: 'hidden',
     };
+
     return (
         <div style={{
-            position: 'fixed',
-            top: 0, left: 0, right: 0, bottom: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: '#1a0f05',
-            overflow: 'hidden',
+            position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            background: '#1a0f05', overflow: 'hidden',
         }}>
             <div className="game-board" style={boardStyle}>
-                <Menu
-                    language={language}
-                    setLanguage={setLanguage}
-                    t={t}
-                    onOpenCollection={() => setIsCollectionOpen(true)}
-                    onExportDebug={exportDebugLog}
-                    onNewGame={resetGame}
-                />
+
+                {/* CardCollection modal */}
                 {isCollectionOpen && (
-                    <CardCollection
-                        onClose={() => setIsCollectionOpen(false)}
-                        language={language}
-                        t={t}
-                    />
+                    <CardCollection onClose={() => setIsCollectionOpen(false)} language={language} t={t} />
                 )}
 
-                <div className="dashboard-container">
-                    <ResourcePanel state={playerState} isEnemy={false} t={t} />
+                {/* ① TOP BAR */}
+                <TopBar
+                    playerState={playerState}
+                    enemyState={enemyState}
+                    winner={winner}
+                    isPlayerTurn={isPlayerTurn}
+                    language={language}
+                    t={t}
+                    resetGame={resetGame}
+                />
 
-                    <div className="game-status">
-                        <h1 className="citadel-title">{t.gameName}</h1>
-                        {winner ? <h1>{winner === 'DRAW' ? (language === 'zh' ? '平局！' : 'DRAW!') : (winner === 'PLAYER' ? t.playerWins : t.enemyWins)}</h1> : <h2>{isPlayerTurn ? t.yourTurn : t.enemyTurn}</h2>}
-                        {winner && <button className="btn-reset" onClick={resetGame}>{t.playAgain}</button>}
-                    </div>
-
-                    <ResourcePanel state={enemyState} isEnemy={true} t={t} />
-                </div>
-
+                {/* ② BATTLEFIELD */}
                 <div className="battlefield">
                     <div className="tower-area player-tower-area">
                         <Structure type="tower" height={playerState.tower} label={t.tower} />
@@ -162,10 +204,11 @@ function App() {
                     <div className="center-action-area">
                         <div className="action-log">
                             {log.map((msg, i) => (
-                                <div key={i} className="log-msg" style={{ opacity: 1 - (i * 0.15) }}>{formatLog(msg)}</div>
+                                <div key={i} className="log-msg" style={{ opacity: 1 - i * 0.15 }}>
+                                    {formatLog(msg)}
+                                </div>
                             ))}
                         </div>
-                        {/* Active card presentation */}
                         {activeCard && (
                             <div className="active-card-presentation">
                                 <Card card={activeCard} isEnemy={false} language={language} t={t} />
@@ -179,9 +222,16 @@ function App() {
                     </div>
                 </div>
 
-                <div className="bottom-section">
+                {/* ③ ENEMY RESOURCE BAR */}
+                <HorizResourceBar state={enemyState} isEnemy={true} t={t} />
+
+                {/* ④ PLAYER RESOURCE BAR */}
+                <HorizResourceBar state={playerState} isEnemy={false} t={t} />
+
+                {/* ⑤ HAND ROW */}
+                <div className="hand-row">
                     <div className="discard-hint">
-                        {language === 'zh' ? '💡 提示：右键点击卡牌可以将其丢弃 (跳过回合)' : '💡 Hint: Right-Click a card to discard it (skip turn)'}
+                        💡 {language === 'zh' ? '右键点击卡牌丢弃（跳过回合）' : 'Right-click a card to discard (skip turn)'}
                     </div>
                     <div className="player-hand">
                         {playerHand.map((c) => (
@@ -199,6 +249,16 @@ function App() {
                         ))}
                     </div>
                 </div>
+
+                {/* Menu floats bottom-right */}
+                <Menu
+                    language={language}
+                    setLanguage={setLanguage}
+                    t={t}
+                    onOpenCollection={() => setIsCollectionOpen(true)}
+                    onExportDebug={exportDebugLog}
+                    onNewGame={resetGame}
+                />
             </div>
         </div>
     );

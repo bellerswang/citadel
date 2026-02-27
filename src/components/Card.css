@@ -1,14 +1,12 @@
 .card {
-    width: 150px;
-    height: 220px;
-    border-radius: 12px;
+    width: 130px;
+    height: 185px;
+    border-radius: 10px;
     position: relative;
     cursor: pointer;
     background: #5c3a21;
-    /* Thick wooden backing */
-    padding: 6px;
-    /* Thick wooden border around everything */
-    box-shadow: 0 8px 0 #3a2210, 0 12px 15px rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    box-shadow: 0 6px 0 #3a2210, 0 10px 14px rgba(0, 0, 0, 0.5);
     transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
     transform-origin: bottom center;
     user-select: none;
@@ -16,8 +14,8 @@
 }
 
 .card:hover {
-    transform: translateY(-10px) scale(1.5);
-    box-shadow: 0 12px 0 #3a2210, 0 30px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.5);
+    transform: translateY(-8px) scale(1.45);
+    box-shadow: 0 10px 0 #3a2210, 0 28px 38px rgba(0, 0, 0, 0.8), 0 0 28px rgba(255, 215, 0, 0.5);
     z-index: 100;
 }
 
@@ -78,8 +76,8 @@
 }
 
 .card-empty {
-    width: 150px;
-    height: 220px;
+    width: 130px;
+    height: 185px;
 }
 
 .card-cost {
