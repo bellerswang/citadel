@@ -24,8 +24,13 @@ function useViewportScale() {
             const portrait = window.innerHeight > window.innerWidth;
             setIsPortrait(portrait);
             if (!portrait) {
-                const s = Math.min(window.innerWidth / DESIGN_WIDTH, window.innerHeight / DESIGN_HEIGHT);
-                setScale(Math.min(s, 1));
+                // Fit-inside: fill the screen while keeping 16:9 aspect ratio.
+                // No upper limit — allows upscaling on iPad/large screens.
+                const s = Math.min(
+                    window.innerWidth / DESIGN_WIDTH,
+                    window.innerHeight / DESIGN_HEIGHT
+                );
+                setScale(s);
             } else {
                 setScale(1); // CSS responsive layout takes over
             }
