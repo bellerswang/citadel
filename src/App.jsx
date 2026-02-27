@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ResourcePanel from './components/ResourcePanel';
 import { FloatingNumbers } from './components/FloatingNumbers';
 import Card from './components/Card';
@@ -8,6 +8,32 @@ import { useGameState, canAfford } from './useGameState';
 import { translations } from './i18n';
 import './ActionLog.css';
 import './App.css';
+
+// ── Responsive full-screen scale ────────────────────────────────────────────
+// The game is designed at 1280px wide. On smaller screens we scale the entire
+// board down so nothing is cut off – exactly like a mobile game letterbox.
+const DESIGN_WIDTH = 1280;
+const DESIGN_HEIGHT = 720;
+
+function useViewportScale() {
+    const [scale, setScale] = useState(1);
+    const [origin, setOrigin] = useState('top left');
+
+    useEffect(() => {
+        const compute = () => {
+            const scaleX = window.innerWidth / DESIGN_WIDTH;
+            const scaleY = window.innerHeight / DESIGN_HEIGHT;
+            const s = Math.min(scaleX, scaleY);          // fit-inside
+            setScale(Math.min(s, 1));                     // never upscale on large screens
+            setOrigin(s < 1 ? 'top left' : 'top left');
+        };
+        compute();
+        window.addEventListener('resize', compute);
+        return () => window.removeEventListener('resize', compute);
+    }, []);
+
+    return { scale, origin };
+}
 
 const Structure = ({ type, height, label }) => {
     const maxHeight = 50;
@@ -39,6 +65,7 @@ const Structure = ({ type, height, label }) => {
 function App() {
     const [language, setLanguage] = useState('en');
     const [isCollectionOpen, setIsCollectionOpen] = useState(false);
+    const { scale } = useViewportScale();
     const t = translations[language];
     const {
         playerState,
@@ -71,79 +98,93 @@ function App() {
         }
     };
 
+    // position:absolute prevents the 1280px element from pushing layout
+    // before transform shrinks it — this is the key fix for mobile clipping.
+    const boardStyle = {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: DESIGN_WIDTH,
+        height: DESIGN_HEIGHT,
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left',
+    };
     return (
-        <div className="game-board">
-            <Menu
-                language={language}
-                setLanguage={setLanguage}
-                t={t}
-                onOpenCollection={() => setIsCollectionOpen(true)}
-                onExportDebug={exportDebugLog}
-            />
-            {isCollectionOpen && (
-                <CardCollection
-                    onClose={() => setIsCollectionOpen(false)}
+        <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', background: '#1a0f05' }}>
+            <div className="game-board" style={boardStyle}>
+                <Menu
                     language={language}
+                    setLanguage={setLanguage}
                     t={t}
+                    onOpenCollection={() => setIsCollectionOpen(true)}
+                    onExportDebug={exportDebugLog}
+                    onNewGame={resetGame}
                 />
-            )}
+                {isCollectionOpen && (
+                    <CardCollection
+                        onClose={() => setIsCollectionOpen(false)}
+                        language={language}
+                        t={t}
+                    />
+                )}
 
-            <div className="dashboard-container">
-                <ResourcePanel state={playerState} isEnemy={false} t={t} />
+                <div className="dashboard-container">
+                    <ResourcePanel state={playerState} isEnemy={false} t={t} />
 
-                <div className="game-status">
-                    <h1 className="citadel-title">{t.gameName}</h1>
-                    {winner ? <h1>{winner === 'DRAW' ? (language === 'zh' ? '平局！' : 'DRAW!') : (winner === 'PLAYER' ? t.playerWins : t.enemyWins)}</h1> : <h2>{isPlayerTurn ? t.yourTurn : t.enemyTurn}</h2>}
-                    {winner && <button className="btn-reset" onClick={resetGame}>{t.playAgain}</button>}
+                    <div className="game-status">
+                        <h1 className="citadel-title">{t.gameName}</h1>
+                        {winner ? <h1>{winner === 'DRAW' ? (language === 'zh' ? '平局！' : 'DRAW!') : (winner === 'PLAYER' ? t.playerWins : t.enemyWins)}</h1> : <h2>{isPlayerTurn ? t.yourTurn : t.enemyTurn}</h2>}
+                        {winner && <button className="btn-reset" onClick={resetGame}>{t.playAgain}</button>}
+                    </div>
+
+                    <ResourcePanel state={enemyState} isEnemy={true} t={t} />
                 </div>
 
-                <ResourcePanel state={enemyState} isEnemy={true} t={t} />
-            </div>
+                <div className="battlefield">
+                    <div className="tower-area player-tower-area">
+                        <Structure type="tower" height={playerState.tower} label={t.tower} />
+                        <Structure type="wall" height={playerState.wall} label={t.wall} />
+                    </div>
 
-            <div className="battlefield">
-                <div className="tower-area player-tower-area">
-                    <Structure type="tower" height={playerState.tower} label={t.tower} />
-                    <Structure type="wall" height={playerState.wall} label={t.wall} />
+                    <div className="center-action-area">
+                        <div className="action-log">
+                            {log.map((msg, i) => (
+                                <div key={i} className="log-msg" style={{ opacity: 1 - (i * 0.15) }}>{formatLog(msg)}</div>
+                            ))}
+                        </div>
+                        {/* Active card presentation */}
+                        {activeCard && (
+                            <div className="active-card-presentation">
+                                <Card card={activeCard} isEnemy={false} language={language} t={t} />
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="tower-area enemy-tower-area">
+                        <Structure type="wall" height={enemyState.wall} label={t.wall} />
+                        <Structure type="tower" height={enemyState.tower} label={t.tower} />
+                    </div>
                 </div>
 
-                <div className="center-action-area">
-                    <div className="action-log">
-                        {log.map((msg, i) => (
-                            <div key={i} className="log-msg" style={{ opacity: 1 - (i * 0.15) }}>{formatLog(msg)}</div>
+                <div className="bottom-section">
+                    <div className="discard-hint">
+                        {language === 'zh' ? '💡 提示：右键点击卡牌可以将其丢弃 (跳过回合)' : '💡 Hint: Right-Click a card to discard it (skip turn)'}
+                    </div>
+                    <div className="player-hand">
+                        {playerHand.map((c) => (
+                            <div key={c.uid} className={`card-wrapper ${!canAfford(c, playerState) ? 'unaffordable' : ''}`}>
+                                <Card
+                                    card={c}
+                                    isEnemy={false}
+                                    language={language}
+                                    t={t}
+                                    playerState={playerState}
+                                    onPlay={(card) => playCard(card, true)}
+                                    onDiscard={(card) => discardCard(card, true)}
+                                />
+                            </div>
                         ))}
                     </div>
-                    {/* Active card presentation */}
-                    {activeCard && (
-                        <div className="active-card-presentation">
-                            <Card card={activeCard} isEnemy={false} language={language} t={t} />
-                        </div>
-                    )}
-                </div>
-
-                <div className="tower-area enemy-tower-area">
-                    <Structure type="wall" height={enemyState.wall} label={t.wall} />
-                    <Structure type="tower" height={enemyState.tower} label={t.tower} />
-                </div>
-            </div>
-
-            <div className="bottom-section">
-                <div className="discard-hint">
-                    {language === 'zh' ? '💡 提示：右键点击卡牌可以将其丢弃 (跳过回合)' : '💡 Hint: Right-Click a card to discard it (skip turn)'}
-                </div>
-                <div className="player-hand">
-                    {playerHand.map((c) => (
-                        <div key={c.uid} className={`card-wrapper ${!canAfford(c, playerState) ? 'unaffordable' : ''}`}>
-                            <Card
-                                card={c}
-                                isEnemy={false}
-                                language={language}
-                                t={t}
-                                playerState={playerState}
-                                onPlay={(card) => playCard(card, true)}
-                                onDiscard={(card) => discardCard(card, true)}
-                            />
-                        </div>
-                    ))}
                 </div>
             </div>
         </div>

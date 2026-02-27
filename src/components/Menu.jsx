@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
 import './Menu.css';
 
-const Menu = ({ language, setLanguage, t, onOpenCollection, onExportDebug }) => {
+const Menu = ({ language, setLanguage, t, onOpenCollection, onExportDebug, onNewGame }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div className={`menu-container ${isOpen ? 'open' : ''}`}>
             {isOpen && (
                 <div className="menu-items">
+                    <button
+                        className="menu-btn menu-btn-new-game"
+                        onClick={() => {
+                            setIsOpen(false);
+                            onNewGame();
+                        }}
+                    >
+                        🔄 {language === 'zh' ? '新游戏' : 'New Game'}
+                    </button>
                     <button
                         className="menu-btn"
                         onClick={() => {

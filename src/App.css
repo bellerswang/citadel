@@ -4,21 +4,20 @@ body {
     margin: 0;
     padding: 0;
     background: #1a0f05;
-    background-image: url('./assets/tavern_bg.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     color: white;
-    overflow: hidden;
-    height: 100vh;
 }
 
 .game-board {
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     padding: 20px;
     background: rgba(0, 0, 0, 0.4);
+    background-image: url('./assets/tavern_bg.png');
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .settings-toggle {
