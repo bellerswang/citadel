@@ -1,0 +1,1651 @@
+[
+  {
+    "rank": 1,
+    "id": "card_019",
+    "name": "Strip Mine",
+    "name_zh": "露天开采",
+    "color": "Red",
+    "cost": 0,
+    "effect": "-1 Quarry. +10 Wall. You gain 5 gems",
+    "net_value": 18.0,
+    "input_pts": -2.0,
+    "output_pts": 20.0,
+    "breakdown": {
+      "wall": 7.5,
+      "resource_gain": 9.0,
+      "production_enemy": 3.5
+    }
+  },
+  {
+    "rank": 2,
+    "id": "card_001",
+    "name": "Brick Shortage",
+    "name_zh": "砖块短缺",
+    "color": "Red",
+    "cost": 0,
+    "effect": "All players lose 8 bricks",
+    "net_value": 9.2,
+    "input_pts": -2.0,
+    "output_pts": 11.2,
+    "breakdown": {
+      "resource_lose": 7.2,
+      "resource_enemy_lose": 4.0
+    }
+  },
+  {
+    "rank": 3,
+    "id": "card_069",
+    "name": "MadCowDisease",
+    "name_zh": "疯牛病",
+    "color": "Green",
+    "cost": 0,
+    "effect": "all players lose 6 recruits",
+    "net_value": 6.4,
+    "input_pts": -2.0,
+    "output_pts": 8.4,
+    "breakdown": {
+      "resource_lose": 5.4,
+      "resource_enemy_lose": 3.0
+    }
+  },
+  {
+    "rank": 4,
+    "id": "card_007",
+    "name": "Work Overtime",
+    "name_zh": "加班",
+    "color": "Red",
+    "cost": 2,
+    "effect": "+5 Wall. You lose 6 gems",
+    "net_value": 5.15,
+    "input_pts": -4.0,
+    "output_pts": 9.15,
+    "breakdown": {
+      "wall": 3.75,
+      "resource_lose": 5.4
+    }
+  },
+  {
+    "rank": 5,
+    "id": "card_015",
+    "name": "Earthquake",
+    "name_zh": "地震",
+    "color": "Red",
+    "cost": 0,
+    "effect": "-1 to all player's quarrys",
+    "net_value": 5.0,
+    "input_pts": -2.0,
+    "output_pts": 7.0,
+    "breakdown": {
+      "production_enemy": 3.5,
+      "production_enemy_de": 3.5
+    }
+  },
+  {
+    "rank": 6,
+    "id": "card_065",
+    "name": "Rainbow",
+    "name_zh": "彩虹",
+    "color": "Blue",
+    "cost": 0,
+    "effect": "+1 tower to all players. you gain 3 gems",
+    "net_value": 4.25,
+    "input_pts": -2.0,
+    "output_pts": 6.25,
+    "breakdown": {
+      "tower": 0.85,
+      "resource_gain": 5.4
+    }
+  },
+  {
+    "rank": 7,
+    "id": "card_086",
+    "name": "Imp",
+    "name_zh": "小恶魔",
+    "color": "Green",
+    "cost": 5,
+    "effect": "6 damage. all players lose 5 bricks, gems, and recruits",
+    "net_value": 3.9,
+    "input_pts": -7.0,
+    "output_pts": 10.9,
+    "breakdown": {
+      "damage": 3.9,
+      "resource_lose": 4.5,
+      "resource_enemy_lose": 2.5
+    }
+  },
+  {
+    "rank": 8,
+    "id": "card_002",
+    "name": "Lucky Cache",
+    "name_zh": "幸运宝藏",
+    "color": "Red",
+    "cost": 0,
+    "effect": "+2 Bricks. +2 Gems. Play again",
+    "net_value": 3.6,
+    "input_pts": -2.0,
+    "output_pts": 5.6,
+    "breakdown": {
+      "resource_gain": 3.6,
+      "play_again": 2.0
+    }
+  },
+  {
+    "rank": 9,
+    "id": "card_033",
+    "name": "Battlements",
+    "name_zh": "垛口",
+    "color": "Red",
+    "cost": 4,
+    "effect": "+7 Wall. 6 damage to enemy",
+    "net_value": 3.15,
+    "input_pts": -6.0,
+    "output_pts": 9.15,
+    "breakdown": {
+      "wall": 5.25,
+      "damage": 3.9
+    }
+  },
+  {
+    "rank": 10,
+    "id": "card_005",
+    "name": "Mother Lode",
+    "name_zh": "主矿脉",
+    "color": "Red",
+    "cost": 4,
+    "effect": "if quarry < enemy quarry, +2 quarry. else, +1 quarry",
+    "net_value": 3.0,
+    "input_pts": -6.0,
+    "output_pts": 9.0,
+    "breakdown": {
+      "production_own": 9.0
+    }
+  },
+  {
+    "rank": 11,
+    "id": "card_082",
+    "name": "Full Moon",
+    "name_zh": "满月",
+    "color": "Green",
+    "cost": 0,
+    "effect": "+1 to all player's dungeon you gain 3 recruits",
+    "net_value": 2.9,
+    "input_pts": -2.0,
+    "output_pts": 4.9,
+    "breakdown": {
+      "resource_gain": 5.4,
+      "production_own": 3.0,
+      "production_enemy_de": -3.5
+    }
+  },
+  {
+    "rank": 12,
+    "id": "card_068",
+    "name": "Phase Jewel",
+    "name_zh": "相位宝石",
+    "color": "Blue",
+    "cost": 18,
+    "effect": "+13 tower +6 recruits +6 bricks",
+    "net_value": 2.81,
+    "input_pts": -20.0,
+    "output_pts": 22.81,
+    "breakdown": {
+      "tower": 11.05,
+      "resource_gain": 10.8,
+      "high_cost_premium": 0.96
+    }
+  },
+  {
+    "rank": 13,
+    "id": "card_011",
+    "name": "Innovations",
+    "name_zh": "创新",
+    "color": "Red",
+    "cost": 2,
+    "effect": "+1 to all player's quarrys, you gain 4 gems",
+    "net_value": 2.7,
+    "input_pts": -4.0,
+    "output_pts": 6.7,
+    "breakdown": {
+      "resource_gain": 7.2,
+      "production_own": 3.0,
+      "production_enemy_de": -3.5
+    }
+  },
+  {
+    "rank": 14,
+    "id": "card_029",
+    "name": "Forced Labor",
+    "name_zh": "强迫劳动",
+    "color": "Red",
+    "cost": 7,
+    "effect": "+9 Wall. Lose 5 recruits",
+    "net_value": 2.33,
+    "input_pts": -9.0,
+    "output_pts": 11.33,
+    "breakdown": {
+      "wall": 6.75,
+      "resource_lose": 4.5,
+      "high_cost_premium": 0.08
+    }
+  },
+  {
+    "rank": 15,
+    "id": "card_071",
+    "name": "Moody Goblins",
+    "name_zh": "喜怒无常的地精",
+    "color": "Green",
+    "cost": 1,
+    "effect": "4 damage. you lose 3 gems",
+    "net_value": 2.3,
+    "input_pts": -3.0,
+    "output_pts": 5.3,
+    "breakdown": {
+      "resource_lose": 2.7,
+      "damage": 2.6
+    }
+  },
+  {
+    "rank": 16,
+    "id": "card_051",
+    "name": "Shatterer",
+    "name_zh": "粉碎者",
+    "color": "Blue",
+    "cost": 8,
+    "effect": "-1 magic. 9 damage to enemy tower",
+    "net_value": 1.76,
+    "input_pts": -10.0,
+    "output_pts": 11.76,
+    "breakdown": {
+      "production_enemy": 3.5,
+      "tower_damage": 8.1,
+      "high_cost_premium": 0.16
+    }
+  },
+  {
+    "rank": 17,
+    "id": "card_012",
+    "name": "Foundations",
+    "name_zh": "地基",
+    "color": "Red",
+    "cost": 3,
+    "effect": "if wall = 0, +6 wall, else +3 wall",
+    "net_value": 1.75,
+    "input_pts": -5.0,
+    "output_pts": 6.75,
+    "breakdown": {
+      "wall": 6.75
+    }
+  },
+  {
+    "rank": 18,
+    "id": "card_032",
+    "name": "Barracks",
+    "name_zh": "兵营",
+    "color": "Red",
+    "cost": 10,
+    "effect": "+6 recruits, +6 wall if dungeon < enemy dungeon, +1 dungeon",
+    "net_value": 1.22,
+    "input_pts": -12.0,
+    "output_pts": 13.22,
+    "breakdown": {
+      "wall": 4.5,
+      "production_own": 3.0,
+      "resource_gain": 5.4,
+      "high_cost_premium": 0.32
+    }
+  },
+  {
+    "rank": 19,
+    "id": "card_046",
+    "name": "Power Burn",
+    "name_zh": "力量燃烧",
+    "color": "Blue",
+    "cost": 3,
+    "effect": "5 damage to your tower +2 magic",
+    "net_value": 1.0,
+    "input_pts": -5.0,
+    "output_pts": 6.0,
+    "breakdown": {
+      "production_own": 6.0
+    }
+  },
+  {
+    "rank": 20,
+    "id": "card_066",
+    "name": "Apprentice",
+    "name_zh": "学徒",
+    "color": "Blue",
+    "cost": 5,
+    "effect": "+4 tower, you lose 3 recruits, 2 damage to enemy tower",
+    "net_value": 0.9,
+    "input_pts": -7.0,
+    "output_pts": 7.9,
+    "breakdown": {
+      "tower": 3.4,
+      "resource_lose": 2.7,
+      "tower_damage": 1.8
+    }
+  },
+  {
+    "rank": 21,
+    "id": "card_022",
+    "name": "Crystal Rocks",
+    "name_zh": "水晶岩",
+    "color": "Red",
+    "cost": 9,
+    "effect": "+7 Wall. Gain 7 gems",
+    "net_value": 0.79,
+    "input_pts": -11.0,
+    "output_pts": 11.79,
+    "breakdown": {
+      "wall": 5.25,
+      "resource_gain": 6.3,
+      "high_cost_premium": 0.24
+    }
+  },
+  {
+    "rank": 22,
+    "id": "card_064",
+    "name": "Bag of Baubles",
+    "name_zh": "饰品袋",
+    "color": "Blue",
+    "cost": 0,
+    "effect": "if tower < enemy tower +2 tower, else +1 tower",
+    "net_value": 0.55,
+    "input_pts": -2.0,
+    "output_pts": 2.55,
+    "breakdown": {
+      "tower": 2.55
+    }
+  },
+  {
+    "rank": 23,
+    "id": "card_060",
+    "name": "Sanctuary",
+    "name_zh": "避难所",
+    "color": "Blue",
+    "cost": 15,
+    "effect": "+10 tower +5 wall gain 5 recruits",
+    "net_value": 0.47,
+    "input_pts": -17.0,
+    "output_pts": 17.47,
+    "breakdown": {
+      "wall": 3.75,
+      "tower": 8.5,
+      "resource_gain": 4.5,
+      "high_cost_premium": 0.72
+    }
+  },
+  {
+    "rank": 24,
+    "id": "card_030",
+    "name": "Rock Garden",
+    "name_zh": "岩石花园",
+    "color": "Red",
+    "cost": 1,
+    "effect": "+1 Wall. +1 Tower. +2 recruits",
+    "net_value": 0.4,
+    "input_pts": -3.0,
+    "output_pts": 3.4,
+    "breakdown": {
+      "wall": 0.75,
+      "tower": 0.85,
+      "resource_gain": 1.8
+    }
+  },
+  {
+    "rank": 25,
+    "id": "card_070",
+    "name": "Faerie",
+    "name_zh": "仙女",
+    "color": "Green",
+    "cost": 1,
+    "effect": "2 damage. Play again",
+    "net_value": 0.3,
+    "input_pts": -3.0,
+    "output_pts": 3.3,
+    "breakdown": {
+      "play_again": 2.0,
+      "damage": 1.3
+    }
+  },
+  {
+    "rank": 26,
+    "id": "card_035",
+    "name": "Quartz",
+    "name_zh": "石英",
+    "color": "Blue",
+    "cost": 1,
+    "effect": "+1 Tower. Play again",
+    "net_value": -0.15,
+    "input_pts": -3.0,
+    "output_pts": 2.85,
+    "breakdown": {
+      "tower": 0.85,
+      "play_again": 2.0
+    }
+  },
+  {
+    "rank": 27,
+    "id": "card_067",
+    "name": "Lightning Shard",
+    "name_zh": "闪电碎片",
+    "color": "Blue",
+    "cost": 11,
+    "effect": "if tower > enemy wall, 8 damage to enemy tower, else 8 damage",
+    "net_value": -0.2,
+    "input_pts": -13.0,
+    "output_pts": 12.8,
+    "breakdown": {
+      "tower_damage": 7.2,
+      "damage": 5.2,
+      "high_cost_premium": 0.4
+    }
+  },
+  {
+    "rank": 28,
+    "id": "card_003",
+    "name": "Friendly Terrain",
+    "name_zh": "友方地形",
+    "color": "Red",
+    "cost": 1,
+    "effect": "+1 Wall. Play again",
+    "net_value": -0.25,
+    "input_pts": -3.0,
+    "output_pts": 2.75,
+    "breakdown": {
+      "wall": 0.75,
+      "play_again": 2.0
+    }
+  },
+  {
+    "rank": 29,
+    "id": "card_056",
+    "name": "Quarry's Help",
+    "name_zh": "采石场之助",
+    "color": "Blue",
+    "cost": 14,
+    "effect": "+7 tower lose 10 bricks",
+    "net_value": -0.41,
+    "input_pts": -16.0,
+    "output_pts": 15.59,
+    "breakdown": {
+      "tower": 5.95,
+      "resource_lose": 9.0,
+      "high_cost_premium": 0.64
+    }
+  },
+  {
+    "rank": 30,
+    "id": "card_044",
+    "name": "Ruby",
+    "name_zh": "红宝石",
+    "color": "Blue",
+    "cost": 3,
+    "effect": "+5 Tower",
+    "net_value": -0.75,
+    "input_pts": -5.0,
+    "output_pts": 4.25,
+    "breakdown": {
+      "tower": 4.25
+    }
+  },
+  {
+    "rank": 31,
+    "id": "card_098",
+    "name": "Spearman",
+    "name_zh": "长矛兵",
+    "color": "Green",
+    "cost": 2,
+    "effect": "if wall > enemy wall do 3 damage else do 2 damage",
+    "net_value": -0.75,
+    "input_pts": -4.0,
+    "output_pts": 3.25,
+    "breakdown": {
+      "damage": 3.25
+    }
+  },
+  {
+    "rank": 32,
+    "id": "card_036",
+    "name": "Smoky Quartz",
+    "name_zh": "烟晶",
+    "color": "Blue",
+    "cost": 2,
+    "effect": "1 damage to enemy tower. Play again",
+    "net_value": -1.1,
+    "input_pts": -4.0,
+    "output_pts": 2.9,
+    "breakdown": {
+      "play_again": 2.0,
+      "tower_damage": 0.9
+    }
+  },
+  {
+    "rank": 33,
+    "id": "card_047",
+    "name": "Harmonic Vibe",
+    "name_zh": "谐振波动",
+    "color": "Blue",
+    "cost": 7,
+    "effect": "+1 magic +3 tower +3 wall",
+    "net_value": -1.12,
+    "input_pts": -9.0,
+    "output_pts": 7.88,
+    "breakdown": {
+      "wall": 2.25,
+      "tower": 2.55,
+      "production_own": 3.0,
+      "high_cost_premium": 0.08
+    }
+  },
+  {
+    "rank": 34,
+    "id": "card_099",
+    "name": "Gnome",
+    "name_zh": "侏儒",
+    "color": "Green",
+    "cost": 2,
+    "effect": "3 damage +1 gem",
+    "net_value": -1.15,
+    "input_pts": -4.0,
+    "output_pts": 2.85,
+    "breakdown": {
+      "resource_gain": 0.9,
+      "damage": 1.95
+    }
+  },
+  {
+    "rank": 35,
+    "id": "card_049",
+    "name": "Emerald",
+    "name_zh": "绿宝石",
+    "color": "Blue",
+    "cost": 6,
+    "effect": "+8 Tower",
+    "net_value": -1.2,
+    "input_pts": -8.0,
+    "output_pts": 6.8,
+    "breakdown": {
+      "tower": 6.8
+    }
+  },
+  {
+    "rank": 36,
+    "id": "card_043",
+    "name": "Gemstone Flaw",
+    "name_zh": "宝石瑕疵",
+    "color": "Blue",
+    "cost": 2,
+    "effect": "3 damage to enemy tower",
+    "net_value": -1.3,
+    "input_pts": -4.0,
+    "output_pts": 2.7,
+    "breakdown": {
+      "tower_damage": 2.7
+    }
+  },
+  {
+    "rank": 37,
+    "id": "card_037",
+    "name": "Amethyst",
+    "name_zh": "紫水晶",
+    "color": "Blue",
+    "cost": 2,
+    "effect": "+3 Tower",
+    "net_value": -1.45,
+    "input_pts": -4.0,
+    "output_pts": 2.55,
+    "breakdown": {
+      "tower": 2.55
+    }
+  },
+  {
+    "rank": 38,
+    "id": "card_039",
+    "name": "Prism",
+    "name_zh": "棱镜",
+    "color": "Blue",
+    "cost": 2,
+    "effect": "draw 1 card discard 1 card play again",
+    "net_value": -1.5,
+    "input_pts": -4.0,
+    "output_pts": 2.5,
+    "breakdown": {
+      "play_again": 2.0,
+      "draw_discard": 0.5
+    }
+  },
+  {
+    "rank": 39,
+    "id": "card_045",
+    "name": "Gem Spear",
+    "name_zh": "宝石长矛",
+    "color": "Blue",
+    "cost": 4,
+    "effect": "5 damage to enemy tower",
+    "net_value": -1.5,
+    "input_pts": -6.0,
+    "output_pts": 4.5,
+    "breakdown": {
+      "tower_damage": 4.5
+    }
+  },
+  {
+    "rank": 40,
+    "id": "card_073",
+    "name": "Elven Scout",
+    "name_zh": "精灵斥候",
+    "color": "Green",
+    "cost": 2,
+    "effect": "draw 1 card discard 1 card play again",
+    "net_value": -1.5,
+    "input_pts": -4.0,
+    "output_pts": 2.5,
+    "breakdown": {
+      "play_again": 2.0,
+      "draw_discard": 0.5
+    }
+  },
+  {
+    "rank": 41,
+    "id": "card_052",
+    "name": "Crumblestone",
+    "name_zh": "碎石",
+    "color": "Blue",
+    "cost": 7,
+    "effect": "+5 tower enemy loses 6 bricks",
+    "net_value": -1.67,
+    "input_pts": -9.0,
+    "output_pts": 7.33,
+    "breakdown": {
+      "tower": 4.25,
+      "resource_enemy_lose": 3.0,
+      "high_cost_premium": 0.08
+    }
+  },
+  {
+    "rank": 42,
+    "id": "card_009",
+    "name": "Basic Wall",
+    "name_zh": "基础墙",
+    "color": "Red",
+    "cost": 2,
+    "effect": "+3 Wall",
+    "net_value": -1.75,
+    "input_pts": -4.0,
+    "output_pts": 2.25,
+    "breakdown": {
+      "wall": 2.25
+    }
+  },
+  {
+    "rank": 43,
+    "id": "card_077",
+    "name": "Orc",
+    "name_zh": "兽人",
+    "color": "Green",
+    "cost": 3,
+    "effect": "5 damage",
+    "net_value": -1.75,
+    "input_pts": -5.0,
+    "output_pts": 3.25,
+    "breakdown": {
+      "damage": 3.25
+    }
+  },
+  {
+    "rank": 44,
+    "id": "card_004",
+    "name": "Miners",
+    "name_zh": "矿工",
+    "color": "Red",
+    "cost": 3,
+    "effect": "+1 Quarry",
+    "net_value": -2.0,
+    "input_pts": -5.0,
+    "output_pts": 3.0,
+    "breakdown": {
+      "production_own": 3.0
+    }
+  },
+  {
+    "rank": 45,
+    "id": "card_010",
+    "name": "Sturdy Wall",
+    "name_zh": "坚固墙",
+    "color": "Red",
+    "cost": 3,
+    "effect": "+4 Wall",
+    "net_value": -2.0,
+    "input_pts": -5.0,
+    "output_pts": 3.0,
+    "breakdown": {
+      "wall": 3.0
+    }
+  },
+  {
+    "rank": 46,
+    "id": "card_018",
+    "name": "New Equipment",
+    "name_zh": "新设备",
+    "color": "Red",
+    "cost": 6,
+    "effect": "+2 Quarry",
+    "net_value": -2.0,
+    "input_pts": -8.0,
+    "output_pts": 6.0,
+    "breakdown": {
+      "production_own": 6.0
+    }
+  },
+  {
+    "rank": 47,
+    "id": "card_038",
+    "name": "Spell Weavers",
+    "name_zh": "编织咒语",
+    "color": "Blue",
+    "cost": 3,
+    "effect": "+1 Magic",
+    "net_value": -2.0,
+    "input_pts": -5.0,
+    "output_pts": 3.0,
+    "breakdown": {
+      "production_own": 3.0
+    }
+  },
+  {
+    "rank": 48,
+    "id": "card_072",
+    "name": "Minotaur",
+    "name_zh": "牛头怪",
+    "color": "Green",
+    "cost": 3,
+    "effect": "+1 Dungeon",
+    "net_value": -2.0,
+    "input_pts": -5.0,
+    "output_pts": 3.0,
+    "breakdown": {
+      "production_own": 3.0
+    }
+  },
+  {
+    "rank": 49,
+    "id": "card_078",
+    "name": "Dwarves",
+    "name_zh": "矮人",
+    "color": "Green",
+    "cost": 5,
+    "effect": "4 damage +3 wall",
+    "net_value": -2.15,
+    "input_pts": -7.0,
+    "output_pts": 4.85,
+    "breakdown": {
+      "wall": 2.25,
+      "damage": 2.6
+    }
+  },
+  {
+    "rank": 50,
+    "id": "card_053",
+    "name": "Sapphire",
+    "name_zh": "蓝宝石",
+    "color": "Blue",
+    "cost": 10,
+    "effect": "+11 Tower",
+    "net_value": -2.33,
+    "input_pts": -12.0,
+    "output_pts": 9.67,
+    "breakdown": {
+      "tower": 9.35,
+      "high_cost_premium": 0.32
+    }
+  },
+  {
+    "rank": 51,
+    "id": "card_091",
+    "name": "Elven Archers",
+    "name_zh": "精灵弓箭手",
+    "color": "Green",
+    "cost": 10,
+    "effect": "if wall > enemy wall do 6 damage else do 6 damage to tower",
+    "net_value": -2.38,
+    "input_pts": -12.0,
+    "output_pts": 9.62,
+    "breakdown": {
+      "tower_damage": 5.4,
+      "damage": 3.9,
+      "high_cost_premium": 0.32
+    }
+  },
+  {
+    "rank": 52,
+    "id": "card_042",
+    "name": "Crystal Matrix",
+    "name_zh": "水晶矩阵",
+    "color": "Blue",
+    "cost": 6,
+    "effect": "+1 magic +3 tower +1 enemy tower",
+    "net_value": -2.45,
+    "input_pts": -8.0,
+    "output_pts": 5.55,
+    "breakdown": {
+      "tower": 2.55,
+      "production_own": 3.0
+    }
+  },
+  {
+    "rank": 53,
+    "id": "card_054",
+    "name": "Discord",
+    "name_zh": "不和",
+    "color": "Blue",
+    "cost": 5,
+    "effect": "7 damage to all towers, all player's magic -1",
+    "net_value": -2.45,
+    "input_pts": -7.0,
+    "output_pts": 4.55,
+    "breakdown": {
+      "tower_damage": 6.3,
+      "damage": 4.55,
+      "tower_damage_self (tower取负)": -6.3
+    }
+  },
+  {
+    "rank": 54,
+    "id": "card_008",
+    "name": "CoppingtheTech",
+    "name_zh": "窃取技术",
+    "color": "Red",
+    "cost": 5,
+    "effect": "if quarry < enemy quarry, quarry = enemy quarry",
+    "net_value": -2.5,
+    "input_pts": -7.0,
+    "output_pts": 4.5,
+    "breakdown": {
+      "production_own": 4.5
+    }
+  },
+  {
+    "rank": 55,
+    "id": "card_016",
+    "name": "Big Wall",
+    "name_zh": "大墙",
+    "color": "Red",
+    "cost": 5,
+    "effect": "+6 Wall",
+    "net_value": -2.5,
+    "input_pts": -7.0,
+    "output_pts": 4.5,
+    "breakdown": {
+      "wall": 4.5
+    }
+  },
+  {
+    "rank": 56,
+    "id": "card_017",
+    "name": "Collapse!",
+    "name_zh": "坍塌！",
+    "color": "Red",
+    "cost": 4,
+    "effect": "-1 enemy quarry",
+    "net_value": -2.5,
+    "input_pts": -6.0,
+    "output_pts": 3.5,
+    "breakdown": {
+      "production_enemy_de": 3.5
+    }
+  },
+  {
+    "rank": 57,
+    "id": "card_041",
+    "name": "Solar Flare",
+    "name_zh": "太阳耀斑",
+    "color": "Blue",
+    "cost": 4,
+    "effect": "+2 tower 2 damage to enemy tower",
+    "net_value": -2.5,
+    "input_pts": -6.0,
+    "output_pts": 3.5,
+    "breakdown": {
+      "tower": 1.7,
+      "tower_damage": 1.8
+    }
+  },
+  {
+    "rank": 58,
+    "id": "card_085",
+    "name": "Rabid Sheep",
+    "name_zh": "狂犬病绵羊",
+    "color": "Green",
+    "cost": 6,
+    "effect": "6 damage enemy loses 3 recruits",
+    "net_value": -2.6,
+    "input_pts": -8.0,
+    "output_pts": 5.4,
+    "breakdown": {
+      "damage": 3.9,
+      "resource_enemy_lose": 1.5
+    }
+  },
+  {
+    "rank": 59,
+    "id": "card_028",
+    "name": "Dragon's Heart",
+    "name_zh": "龙之心",
+    "color": "Red",
+    "cost": 24,
+    "effect": "+20 Wall. +8 Tower",
+    "net_value": -2.76,
+    "input_pts": -26.0,
+    "output_pts": 23.24,
+    "breakdown": {
+      "wall": 15.0,
+      "tower": 6.8,
+      "high_cost_premium": 1.44
+    }
+  },
+  {
+    "rank": 60,
+    "id": "card_006",
+    "name": "Dwarven Miners",
+    "name_zh": "矮人矿工",
+    "color": "Red",
+    "cost": 7,
+    "effect": "+4 Wall. +1 Quarry",
+    "net_value": -2.92,
+    "input_pts": -9.0,
+    "output_pts": 6.08,
+    "breakdown": {
+      "wall": 3.0,
+      "production_own": 3.0,
+      "high_cost_premium": 0.08
+    }
+  },
+  {
+    "rank": 61,
+    "id": "card_080",
+    "name": "Troll Trainer",
+    "name_zh": "巨魔训练师",
+    "color": "Green",
+    "cost": 7,
+    "effect": "+2 Dungeon",
+    "net_value": -2.92,
+    "input_pts": -9.0,
+    "output_pts": 6.08,
+    "breakdown": {
+      "production_own": 6.0,
+      "high_cost_premium": 0.08
+    }
+  },
+  {
+    "rank": 62,
+    "id": "card_083",
+    "name": "Slasher",
+    "name_zh": "杀戮者",
+    "color": "Green",
+    "cost": 5,
+    "effect": "6 damage",
+    "net_value": -3.1,
+    "input_pts": -7.0,
+    "output_pts": 3.9,
+    "breakdown": {
+      "damage": 3.9
+    }
+  },
+  {
+    "rank": 63,
+    "id": "card_101",
+    "name": "Warlord",
+    "name_zh": "督军",
+    "color": "Green",
+    "cost": 13,
+    "effect": "13 damage lose 3 gems",
+    "net_value": -3.29,
+    "input_pts": -15.0,
+    "output_pts": 11.71,
+    "breakdown": {
+      "resource_lose": 2.7,
+      "damage": 8.45,
+      "high_cost_premium": 0.56
+    }
+  },
+  {
+    "rank": 64,
+    "id": "card_084",
+    "name": "Ogre",
+    "name_zh": "食人魔",
+    "color": "Green",
+    "cost": 6,
+    "effect": "7 damage",
+    "net_value": -3.45,
+    "input_pts": -8.0,
+    "output_pts": 4.55,
+    "breakdown": {
+      "damage": 4.55
+    }
+  },
+  {
+    "rank": 65,
+    "id": "card_050",
+    "name": "Pearl of Wisdom",
+    "name_zh": "智慧珍珠",
+    "color": "Blue",
+    "cost": 9,
+    "effect": "+5 tower +1 magic",
+    "net_value": -3.51,
+    "input_pts": -11.0,
+    "output_pts": 7.49,
+    "breakdown": {
+      "tower": 4.25,
+      "production_own": 3.0,
+      "high_cost_premium": 0.24
+    }
+  },
+  {
+    "rank": 66,
+    "id": "card_013",
+    "name": "Tremors",
+    "name_zh": "震荡",
+    "color": "Red",
+    "cost": 7,
+    "effect": "all walls take 5 damage. play again",
+    "net_value": -3.67,
+    "input_pts": -9.0,
+    "output_pts": 5.33,
+    "breakdown": {
+      "play_again": 2.0,
+      "damage": 3.25,
+      "high_cost_premium": 0.08
+    }
+  },
+  {
+    "rank": 67,
+    "id": "card_020",
+    "name": "Reinforced Wall",
+    "name_zh": "加固墙",
+    "color": "Red",
+    "cost": 8,
+    "effect": "+8 Wall",
+    "net_value": -3.84,
+    "input_pts": -10.0,
+    "output_pts": 6.16,
+    "breakdown": {
+      "wall": 6.0,
+      "high_cost_premium": 0.16
+    }
+  },
+  {
+    "rank": 68,
+    "id": "card_081",
+    "name": "Tower Gremlin",
+    "name_zh": "塔楼小精灵",
+    "color": "Green",
+    "cost": 8,
+    "effect": "2 damage +4 wall +2 tower",
+    "net_value": -3.84,
+    "input_pts": -10.0,
+    "output_pts": 6.16,
+    "breakdown": {
+      "wall": 3.0,
+      "tower": 1.7,
+      "damage": 1.3,
+      "high_cost_premium": 0.16
+    }
+  },
+  {
+    "rank": 69,
+    "id": "card_093",
+    "name": "Rock Stompers",
+    "name_zh": "碎石践踏者",
+    "color": "Green",
+    "cost": 11,
+    "effect": "8 damage -1 enemy quarry",
+    "net_value": -3.9,
+    "input_pts": -13.0,
+    "output_pts": 9.1,
+    "breakdown": {
+      "damage": 5.2,
+      "production_enemy_de": 3.5,
+      "high_cost_premium": 0.4
+    }
+  },
+  {
+    "rank": 70,
+    "id": "card_097",
+    "name": "Dragon",
+    "name_zh": "巨龙",
+    "color": "Green",
+    "cost": 25,
+    "effect": "20 damage enemy loses 10 gems -1 enemy dungeon",
+    "net_value": -3.98,
+    "input_pts": -27.0,
+    "output_pts": 23.02,
+    "breakdown": {
+      "damage": 13.0,
+      "resource_enemy_lose": 5.0,
+      "production_enemy_de": 3.5,
+      "high_cost_premium": 1.52
+    }
+  },
+  {
+    "rank": 71,
+    "id": "card_021",
+    "name": "Porticulus",
+    "name_zh": "铁闸门",
+    "color": "Red",
+    "cost": 9,
+    "effect": "+5 Wall. +1 Dungeon",
+    "net_value": -4.01,
+    "input_pts": -11.0,
+    "output_pts": 6.99,
+    "breakdown": {
+      "wall": 3.75,
+      "production_own": 3.0,
+      "high_cost_premium": 0.24
+    }
+  },
+  {
+    "rank": 72,
+    "id": "card_061",
+    "name": "Lava Jewel",
+    "name_zh": "熔岩宝石",
+    "color": "Blue",
+    "cost": 17,
+    "effect": "+12 tower 6 damage to enemy",
+    "net_value": -4.02,
+    "input_pts": -19.0,
+    "output_pts": 14.98,
+    "breakdown": {
+      "tower": 10.2,
+      "damage": 3.9,
+      "high_cost_premium": 0.88
+    }
+  },
+  {
+    "rank": 73,
+    "id": "card_076",
+    "name": "Shadow Faerie",
+    "name_zh": "暗影仙女",
+    "color": "Green",
+    "cost": 6,
+    "effect": "2 damage to enemy tower. Play again",
+    "net_value": -4.2,
+    "input_pts": -8.0,
+    "output_pts": 3.8,
+    "breakdown": {
+      "play_again": 2.0,
+      "tower_damage": 1.8
+    }
+  },
+  {
+    "rank": 74,
+    "id": "card_090",
+    "name": "Unicorn",
+    "name_zh": "独角兽",
+    "color": "Green",
+    "cost": 9,
+    "effect": "if magic > enemy magic, 12 damage, else 8 damage",
+    "net_value": -4.26,
+    "input_pts": -11.0,
+    "output_pts": 6.74,
+    "breakdown": {
+      "damage": 6.5,
+      "high_cost_premium": 0.24
+    }
+  },
+  {
+    "rank": 75,
+    "id": "card_079",
+    "name": "Little Snakes",
+    "name_zh": "小蛇",
+    "color": "Green",
+    "cost": 6,
+    "effect": "4 damage to enemy tower",
+    "net_value": -4.4,
+    "input_pts": -8.0,
+    "output_pts": 3.6,
+    "breakdown": {
+      "tower_damage": 3.6
+    }
+  },
+  {
+    "rank": 76,
+    "id": "card_040",
+    "name": "Lodestone",
+    "name_zh": "磁石",
+    "color": "Blue",
+    "cost": 5,
+    "effect": "+3 tower. this card can't be discarded without playing it",
+    "net_value": -4.45,
+    "input_pts": -7.0,
+    "output_pts": 2.55,
+    "breakdown": {
+      "tower": 2.55
+    }
+  },
+  {
+    "rank": 77,
+    "id": "card_059",
+    "name": "Diamond",
+    "name_zh": "钻石",
+    "color": "Blue",
+    "cost": 16,
+    "effect": "+15 Tower",
+    "net_value": -4.45,
+    "input_pts": -18.0,
+    "output_pts": 13.55,
+    "breakdown": {
+      "tower": 12.75,
+      "high_cost_premium": 0.8
+    }
+  },
+  {
+    "rank": 78,
+    "id": "card_057",
+    "name": "Crystal Shield",
+    "name_zh": "水晶护盾",
+    "color": "Blue",
+    "cost": 12,
+    "effect": "+8 tower +3 wall",
+    "net_value": -4.47,
+    "input_pts": -14.0,
+    "output_pts": 9.53,
+    "breakdown": {
+      "wall": 2.25,
+      "tower": 6.8,
+      "high_cost_premium": 0.48
+    }
+  },
+  {
+    "rank": 79,
+    "id": "card_087",
+    "name": "Spizzer",
+    "name_zh": "毒刺精",
+    "color": "Green",
+    "cost": 8,
+    "effect": "if enemy wall = 0, 10 damage, else 6 damage",
+    "net_value": -4.64,
+    "input_pts": -10.0,
+    "output_pts": 5.36,
+    "breakdown": {
+      "damage": 5.2,
+      "high_cost_premium": 0.16
+    }
+  },
+  {
+    "rank": 80,
+    "id": "card_062",
+    "name": "Dragon's Eye",
+    "name_zh": "龙之眼",
+    "color": "Blue",
+    "cost": 21,
+    "effect": "+20 Tower",
+    "net_value": -4.8,
+    "input_pts": -23.0,
+    "output_pts": 18.2,
+    "breakdown": {
+      "tower": 17.0,
+      "high_cost_premium": 1.2
+    }
+  },
+  {
+    "rank": 81,
+    "id": "card_014",
+    "name": "Secret Room",
+    "name_zh": "密室",
+    "color": "Red",
+    "cost": 8,
+    "effect": "+1 Magic. Play again",
+    "net_value": -4.84,
+    "input_pts": -10.0,
+    "output_pts": 5.16,
+    "breakdown": {
+      "production_own": 3.0,
+      "play_again": 2.0,
+      "high_cost_premium": 0.16
+    }
+  },
+  {
+    "rank": 82,
+    "id": "card_088",
+    "name": "Werewolf",
+    "name_zh": "狼人",
+    "color": "Green",
+    "cost": 9,
+    "effect": "9 damage",
+    "net_value": -4.91,
+    "input_pts": -11.0,
+    "output_pts": 6.09,
+    "breakdown": {
+      "damage": 5.85,
+      "high_cost_premium": 0.24
+    }
+  },
+  {
+    "rank": 83,
+    "id": "card_075",
+    "name": "Goblin Archers",
+    "name_zh": "地精弓箭手",
+    "color": "Green",
+    "cost": 4,
+    "effect": "3 damage to enemy tower you take 1 damage",
+    "net_value": -5.1,
+    "input_pts": -6.0,
+    "output_pts": 0.9,
+    "breakdown": {
+      "tower_damage": 2.7,
+      "tower_damage_self (tower取负)": -1.8
+    }
+  },
+  {
+    "rank": 84,
+    "id": "card_024",
+    "name": "MondoWall",
+    "name_zh": "巨型墙",
+    "color": "Red",
+    "cost": 13,
+    "effect": "+12 Wall",
+    "net_value": -5.44,
+    "input_pts": -15.0,
+    "output_pts": 9.56,
+    "breakdown": {
+      "wall": 9.0,
+      "high_cost_premium": 0.56
+    }
+  },
+  {
+    "rank": 85,
+    "id": "card_023",
+    "name": "Harmonic Ore",
+    "name_zh": "谐振矿石",
+    "color": "Red",
+    "cost": 11,
+    "effect": "+6 Wall. +3 Tower",
+    "net_value": -5.55,
+    "input_pts": -13.0,
+    "output_pts": 7.45,
+    "breakdown": {
+      "wall": 4.5,
+      "tower": 2.55,
+      "high_cost_premium": 0.4
+    }
+  },
+  {
+    "rank": 86,
+    "id": "card_058",
+    "name": "Empathy Gem",
+    "name_zh": "共情宝石",
+    "color": "Blue",
+    "cost": 14,
+    "effect": "+8 tower +1 dungeon",
+    "net_value": -5.56,
+    "input_pts": -16.0,
+    "output_pts": 10.44,
+    "breakdown": {
+      "tower": 6.8,
+      "production_own": 3.0,
+      "high_cost_premium": 0.64
+    }
+  },
+  {
+    "rank": 87,
+    "id": "card_096",
+    "name": "Vampire",
+    "name_zh": "吸血鬼",
+    "color": "Green",
+    "cost": 17,
+    "effect": "10 damage enemy loses 5 recruits -1 enemy dungeon",
+    "net_value": -5.62,
+    "input_pts": -19.0,
+    "output_pts": 13.38,
+    "breakdown": {
+      "damage": 6.5,
+      "resource_enemy_lose": 2.5,
+      "production_enemy_de": 3.5,
+      "high_cost_premium": 0.88
+    }
+  },
+  {
+    "rank": 88,
+    "id": "card_055",
+    "name": "Fire Ruby",
+    "name_zh": "火红宝石",
+    "color": "Blue",
+    "cost": 13,
+    "effect": "+6 tower 4 damage to all enemy towers",
+    "net_value": -5.74,
+    "input_pts": -15.0,
+    "output_pts": 9.26,
+    "breakdown": {
+      "tower": 5.1,
+      "tower_damage": 3.6,
+      "high_cost_premium": 0.56
+    }
+  },
+  {
+    "rank": 89,
+    "id": "card_026",
+    "name": "Great Wall",
+    "name_zh": "长城",
+    "color": "Red",
+    "cost": 16,
+    "effect": "+15 Wall",
+    "net_value": -5.95,
+    "input_pts": -18.0,
+    "output_pts": 12.05,
+    "breakdown": {
+      "wall": 11.25,
+      "high_cost_premium": 0.8
+    }
+  },
+  {
+    "rank": 90,
+    "id": "card_025",
+    "name": "FocusedDesigns",
+    "name_zh": "专注设计",
+    "color": "Red",
+    "cost": 15,
+    "effect": "+8 Wall. +5 Tower",
+    "net_value": -6.03,
+    "input_pts": -17.0,
+    "output_pts": 10.97,
+    "breakdown": {
+      "wall": 6.0,
+      "tower": 4.25,
+      "high_cost_premium": 0.72
+    }
+  },
+  {
+    "rank": 91,
+    "id": "card_031",
+    "name": "Flood Water",
+    "name_zh": "洪水",
+    "color": "Red",
+    "cost": 6,
+    "effect": "player(s) w/lowest wall are -1 dungeon and 2 damage to tower",
+    "net_value": -6.2,
+    "input_pts": -8.0,
+    "output_pts": 1.8,
+    "breakdown": {
+      "tower_damage": 1.8
+    }
+  },
+  {
+    "rank": 92,
+    "id": "card_074",
+    "name": "Goblin Mob",
+    "name_zh": "地精暴徒",
+    "color": "Green",
+    "cost": 3,
+    "effect": "6 damage you take 3 damage",
+    "net_value": -6.5,
+    "input_pts": -5.0,
+    "output_pts": -1.5,
+    "breakdown": {
+      "damage": 3.9,
+      "tower_damage_self (tower取负)": -5.4
+    }
+  },
+  {
+    "rank": 93,
+    "id": "card_095",
+    "name": "Stone Giant",
+    "name_zh": "石巨人",
+    "color": "Green",
+    "cost": 15,
+    "effect": "10 damage +4 wall",
+    "net_value": -6.78,
+    "input_pts": -17.0,
+    "output_pts": 10.22,
+    "breakdown": {
+      "wall": 3.0,
+      "damage": 6.5,
+      "high_cost_premium": 0.72
+    }
+  },
+  {
+    "rank": 94,
+    "id": "card_092",
+    "name": "Succubus",
+    "name_zh": "魅魔",
+    "color": "Green",
+    "cost": 14,
+    "effect": "5 damage to enemy tower enemy loses 8 recruits",
+    "net_value": -6.86,
+    "input_pts": -16.0,
+    "output_pts": 9.14,
+    "breakdown": {
+      "tower_damage": 4.5,
+      "resource_enemy_lose": 4.0,
+      "high_cost_premium": 0.64
+    }
+  },
+  {
+    "rank": 95,
+    "id": "card_089",
+    "name": "Corrosion Cloud",
+    "name_zh": "腐蚀之云",
+    "color": "Green",
+    "cost": 11,
+    "effect": "if enemy wall > 0, 10 damage, else 7 damage",
+    "net_value": -7.07,
+    "input_pts": -13.0,
+    "output_pts": 5.93,
+    "breakdown": {
+      "damage": 5.53,
+      "high_cost_premium": 0.4
+    }
+  },
+  {
+    "rank": 96,
+    "id": "card_027",
+    "name": "Rock Launcher",
+    "name_zh": "投石机",
+    "color": "Red",
+    "cost": 18,
+    "effect": "+6 Wall. 10 damage to enemy",
+    "net_value": -8.04,
+    "input_pts": -20.0,
+    "output_pts": 11.96,
+    "breakdown": {
+      "wall": 4.5,
+      "damage": 6.5,
+      "high_cost_premium": 0.96
+    }
+  },
+  {
+    "rank": 97,
+    "id": "card_102",
+    "name": "Pegasus Lancer",
+    "name_zh": "天马枪骑兵",
+    "color": "Green",
+    "cost": 18,
+    "effect": "12 damage to enemy tower",
+    "net_value": -8.24,
+    "input_pts": -20.0,
+    "output_pts": 11.76,
+    "breakdown": {
+      "tower_damage": 10.8,
+      "high_cost_premium": 0.96
+    }
+  },
+  {
+    "rank": 98,
+    "id": "card_094",
+    "name": "Thief",
+    "name_zh": "盗贼",
+    "color": "Green",
+    "cost": 12,
+    "effect": "enemy loses 10 gems, 5 bricks, you gain 1/2 amt. round up",
+    "net_value": -8.52,
+    "input_pts": -14.0,
+    "output_pts": 5.48,
+    "breakdown": {
+      "resource_enemy_lose": 5.0,
+      "high_cost_premium": 0.48
+    }
+  },
+  {
+    "rank": 99,
+    "id": "card_048",
+    "name": "Parity",
+    "name_zh": "均衡",
+    "color": "Blue",
+    "cost": 7,
+    "effect": "all player's magic equals the highest player's magic",
+    "net_value": -8.92,
+    "input_pts": -9.0,
+    "output_pts": 0.08,
+    "breakdown": {
+      "high_cost_premium": 0.08
+    }
+  },
+  {
+    "rank": 100,
+    "id": "card_034",
+    "name": "Shift",
+    "name_zh": "转换",
+    "color": "Red",
+    "cost": 9,
+    "effect": "switch your wall with enemy wall",
+    "net_value": -10.76,
+    "input_pts": -11.0,
+    "output_pts": 0.24,
+    "breakdown": {
+      "high_cost_premium": 0.24
+    }
+  },
+  {
+    "rank": 101,
+    "id": "card_100",
+    "name": "Berserker",
+    "name_zh": "狂战士",
+    "color": "Green",
+    "cost": 4,
+    "effect": "8 damage tower take 3 damage",
+    "net_value": -11.4,
+    "input_pts": -6.0,
+    "output_pts": -5.4,
+    "breakdown": {
+      "tower_damage_self (tower取负)": -5.4
+    }
+  },
+  {
+    "rank": 102,
+    "id": "card_063",
+    "name": "Crystallize",
+    "name_zh": "结晶化",
+    "color": "Blue",
+    "cost": 18,
+    "effect": "+11 tower -6 wall",
+    "net_value": -14.19,
+    "input_pts": -20.0,
+    "output_pts": 5.81,
+    "breakdown": {
+      "tower": 9.35,
+      "wall": -4.5,
+      "high_cost_premium": 0.96
+    }
+  }
+]

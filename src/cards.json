@@ -1,0 +1,1022 @@
+[
+    {
+        "name": "Brick Shortage",
+        "cost": 0,
+        "color": "Red",
+        "effect": "All players lose 8 bricks",
+        "id": "card_001",
+        "image_prompt": "A square card illustration of Brick Shortage. Background context: All players lose 8 bricks. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "砖块短缺",
+        "effect_zh": "所有玩家失去8个砖块"
+    },
+    {
+        "name": "Lucky Cache",
+        "cost": 0,
+        "color": "Red",
+        "effect": "+2 Bricks. +2 Gems. Play again",
+        "id": "card_002",
+        "image_prompt": "A square card illustration of Lucky Cache. Background context: +2 Bricks. +2 Gems. Play again. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "幸运宝藏",
+        "effect_zh": "+2砖块\n+2宝石\n再来一回合"
+    },
+    {
+        "name": "Friendly Terrain",
+        "cost": 1,
+        "color": "Red",
+        "effect": "+1 Wall. Play again",
+        "id": "card_003",
+        "image_prompt": "A square card illustration of Friendly Terrain. Background context: +1 Wall. Play again. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "友方地形",
+        "effect_zh": "+1高墙\n再来一回合"
+    },
+    {
+        "name": "Miners",
+        "cost": 3,
+        "color": "Red",
+        "effect": "+1 Quarry",
+        "id": "card_004",
+        "image_prompt": "A square card illustration of Miners. Background context: +1 Quarry. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "矿工",
+        "effect_zh": "+1采石场"
+    },
+    {
+        "name": "Mother Lode",
+        "cost": 4,
+        "color": "Red",
+        "effect": "if quarry < enemy quarry, +2 quarry. else, +1 quarry",
+        "id": "card_005",
+        "image_prompt": "A square card illustration of Mother Lode. Background context: if quarry < enemy quarry, +2 quarry. else, +1 quarry. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "主矿脉",
+        "effect_zh": "若你的采石场少于敌人，则+2采石场。否则+1采石场"
+    },
+    {
+        "name": "Dwarven Miners",
+        "cost": 7,
+        "color": "Red",
+        "effect": "+4 Wall. +1 Quarry",
+        "id": "card_006",
+        "image_prompt": "A square card illustration of Dwarven Miners. Background context: +4 Wall. +1 Quarry. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "矮人矿工",
+        "effect_zh": "+4高墙\n+1采石场"
+    },
+    {
+        "name": "Work Overtime",
+        "cost": 2,
+        "color": "Red",
+        "effect": "+5 Wall. You lose 6 gems",
+        "id": "card_007",
+        "image_prompt": "A square card illustration of Work Overtime. Background context: +5 Wall. You lose 6 gems. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "加班",
+        "effect_zh": "+5高墙\n你失去6个宝石"
+    },
+    {
+        "name": "CoppingtheTech",
+        "cost": 5,
+        "color": "Red",
+        "effect": "if quarry < enemy quarry, quarry = enemy quarry",
+        "id": "card_008",
+        "image_prompt": "A square card illustration of CoppingtheTech. Background context: if quarry < enemy quarry, quarry = enemy quarry. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "窃取技术",
+        "effect_zh": "若你的采石场少于敌人，则采石场与敌人齐平"
+    },
+    {
+        "name": "Basic Wall",
+        "cost": 2,
+        "color": "Red",
+        "effect": "+3 Wall",
+        "id": "card_009",
+        "image_prompt": "A square card illustration of Basic Wall. Background context: +3 Wall. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "基础墙",
+        "effect_zh": "+3高墙"
+    },
+    {
+        "name": "Sturdy Wall",
+        "cost": 3,
+        "color": "Red",
+        "effect": "+4 Wall",
+        "id": "card_010",
+        "image_prompt": "A square card illustration of Sturdy Wall. Background context: +4 Wall. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "坚固墙",
+        "effect_zh": "+4高墙"
+    },
+    {
+        "name": "Innovations",
+        "cost": 2,
+        "color": "Red",
+        "effect": "+1 to all player's quarrys, you gain 4 gems",
+        "id": "card_011",
+        "image_prompt": "A square card illustration of Innovations. Background context: +1 to all player's quarrys, you gain 4 gems. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "创新",
+        "effect_zh": "所有玩家的采石场+1，你获得4个宝石"
+    },
+    {
+        "name": "Foundations",
+        "cost": 3,
+        "color": "Red",
+        "effect": "if wall = 0, +6 wall, else +3 wall",
+        "id": "card_012",
+        "image_prompt": "A square card illustration of Foundations. Background context: if wall = 0, +6 wall, else +3 wall. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "地基",
+        "effect_zh": "若高墙=0，则+6高墙，否则+3高墙"
+    },
+    {
+        "name": "Tremors",
+        "cost": 7,
+        "color": "Red",
+        "effect": "all walls take 5 damage. play again",
+        "id": "card_013",
+        "image_prompt": "A square card illustration of Tremors. Background context: all walls take 5 damage. play again. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "震荡",
+        "effect_zh": "所有高墙受到5点伤害。再来一回合"
+    },
+    {
+        "name": "Secret Room",
+        "cost": 8,
+        "color": "Red",
+        "effect": "+1 Magic. Play again",
+        "id": "card_014",
+        "image_prompt": "A square card illustration of Secret Room. Background context: +1 Magic. Play again. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "密室",
+        "effect_zh": "+1魔法\n再来一回合"
+    },
+    {
+        "name": "Earthquake",
+        "cost": 0,
+        "color": "Red",
+        "effect": "-1 to all player's quarrys",
+        "id": "card_015",
+        "image_prompt": "A square card illustration of Earthquake. Background context: -1 to all player's quarrys. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "地震",
+        "effect_zh": "所有玩家的采石场-1"
+    },
+    {
+        "name": "Big Wall",
+        "cost": 5,
+        "color": "Red",
+        "effect": "+6 Wall",
+        "id": "card_016",
+        "image_prompt": "A square card illustration of Big Wall. Background context: +6 Wall. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "大墙",
+        "effect_zh": "+6高墙"
+    },
+    {
+        "name": "Collapse!",
+        "cost": 4,
+        "color": "Red",
+        "effect": "-1 enemy quarry",
+        "id": "card_017",
+        "image_prompt": "A square card illustration of Collapse!. Background context: -1 enemy quarry. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "坍塌！",
+        "effect_zh": "敌人采石场-1"
+    },
+    {
+        "name": "New Equipment",
+        "cost": 6,
+        "color": "Red",
+        "effect": "+2 Quarry",
+        "id": "card_018",
+        "image_prompt": "A square card illustration of New Equipment. Background context: +2 Quarry. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "新设备",
+        "effect_zh": "+2采石场"
+    },
+    {
+        "name": "Strip Mine",
+        "cost": 0,
+        "color": "Red",
+        "effect": "-1 Quarry. +10 Wall. You gain 5 gems",
+        "id": "card_019",
+        "image_prompt": "A square card illustration of Strip Mine. Background context: -1 Quarry. +10 Wall. You gain 5 gems. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "露天开采",
+        "effect_zh": "-1采石场，+10高墙。你获得5个宝石"
+    },
+    {
+        "name": "Reinforced Wall",
+        "cost": 8,
+        "color": "Red",
+        "effect": "+8 Wall",
+        "id": "card_020",
+        "image_prompt": "A square card illustration of Reinforced Wall. Background context: +8 Wall. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "加固墙",
+        "effect_zh": "+8高墙"
+    },
+    {
+        "name": "Porticulus",
+        "cost": 9,
+        "color": "Red",
+        "effect": "+5 Wall. +1 Dungeon",
+        "id": "card_021",
+        "image_prompt": "A square card illustration of Porticulus. Background context: +5 Wall. +1 Dungeon. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "铁闸门",
+        "effect_zh": "+5高墙\n+1地下城"
+    },
+    {
+        "name": "Crystal Rocks",
+        "cost": 9,
+        "color": "Red",
+        "effect": "+7 Wall. Gain 7 gems",
+        "id": "card_022",
+        "image_prompt": "A square card illustration of Crystal Rocks. Background context: +7 Wall. Gain 7 gems. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "水晶岩",
+        "effect_zh": "+7高墙\n获得7个宝石"
+    },
+    {
+        "name": "Harmonic Ore",
+        "cost": 11,
+        "color": "Red",
+        "effect": "+6 Wall. +3 Tower",
+        "id": "card_023",
+        "image_prompt": "A square card illustration of Harmonic Ore. Background context: +6 Wall. +3 Tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "谐振矿石",
+        "effect_zh": "+6高墙\n+3塔"
+    },
+    {
+        "name": "MondoWall",
+        "cost": 13,
+        "color": "Red",
+        "effect": "+12 Wall",
+        "id": "card_024",
+        "image_prompt": "A square card illustration of MondoWall. Background context: +12 Wall. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "巨型墙",
+        "effect_zh": "+12高墙"
+    },
+    {
+        "name": "FocusedDesigns",
+        "cost": 15,
+        "color": "Red",
+        "effect": "+8 Wall. +5 Tower",
+        "id": "card_025",
+        "image_prompt": "A square card illustration of FocusedDesigns. Background context: +8 Wall. +5 Tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "专注设计",
+        "effect_zh": "+8高墙\n+5塔"
+    },
+    {
+        "name": "Great Wall",
+        "cost": 16,
+        "color": "Red",
+        "effect": "+15 Wall",
+        "id": "card_026",
+        "image_prompt": "A square card illustration of Great Wall. Background context: +15 Wall. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "长城",
+        "effect_zh": "+15高墙"
+    },
+    {
+        "name": "Rock Launcher",
+        "cost": 18,
+        "color": "Red",
+        "effect": "+6 Wall. 10 damage to enemy",
+        "id": "card_027",
+        "image_prompt": "A square card illustration of Rock Launcher. Background context: +6 Wall. 10 damage to enemy. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "投石机",
+        "effect_zh": "+6高墙\n对敌人造成10点伤害"
+    },
+    {
+        "name": "Dragon's Heart",
+        "cost": 24,
+        "color": "Red",
+        "effect": "+20 Wall. +8 Tower",
+        "id": "card_028",
+        "image_prompt": "A square card illustration of Dragon's Heart. Background context: +20 Wall. +8 Tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "龙之心",
+        "effect_zh": "+20高墙\n+8塔"
+    },
+    {
+        "name": "Forced Labor",
+        "cost": 7,
+        "color": "Red",
+        "effect": "+9 Wall. Lose 5 recruits",
+        "id": "card_029",
+        "image_prompt": "A square card illustration of Forced Labor. Background context: +9 Wall. Lose 5 recruits. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "强迫劳动",
+        "effect_zh": "+9高墙\n失去5名新兵"
+    },
+    {
+        "name": "Rock Garden",
+        "cost": 1,
+        "color": "Red",
+        "effect": "+1 Wall. +1 Tower. +2 recruits",
+        "id": "card_030",
+        "image_prompt": "A square card illustration of Rock Garden. Background context: +1 Wall. +1 Tower. +2 recruits. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "岩石花园",
+        "effect_zh": "+1高墙\n+1塔\n+2新兵"
+    },
+    {
+        "name": "Flood Water",
+        "cost": 6,
+        "color": "Red",
+        "effect": "player(s) w/lowest wall are -1 dungeon and 2 damage to tower",
+        "id": "card_031",
+        "image_prompt": "A square card illustration of Flood Water. Background context: player(s) w/lowest wall are -1 dungeon and 2 damage to tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "洪水",
+        "effect_zh": "高墙最低的玩家失去1地下城并且塔受2点伤害"
+    },
+    {
+        "name": "Barracks",
+        "cost": 10,
+        "color": "Red",
+        "effect": "+6 recruits, +6 wall if dungeon < enemy dungeon, +1 dungeon",
+        "id": "card_032",
+        "image_prompt": "A square card illustration of Barracks. Background context: +6 recruits, +6 wall if dungeon < enemy dungeon, +1 dungeon. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "兵营",
+        "effect_zh": "+6新兵，若地下城<敌人地下城则+6高墙，+1地下城"
+    },
+    {
+        "name": "Battlements",
+        "cost": 4,
+        "color": "Red",
+        "effect": "+7 Wall. 6 damage to enemy",
+        "id": "card_033",
+        "image_prompt": "A square card illustration of Battlements. Background context: +7 Wall. 6 damage to enemy. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "垛口",
+        "effect_zh": "+7高墙\n对敌人造成6点伤害"
+    },
+    {
+        "name": "Shift",
+        "cost": 9,
+        "color": "Red",
+        "effect": "switch your wall with enemy wall",
+        "id": "card_034",
+        "image_prompt": "A square card illustration of Shift. Background context: switch your wall with enemy wall. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Red color theme. No text.",
+        "name_zh": "转换",
+        "effect_zh": "与敌人交换高墙"
+    },
+    {
+        "name": "Quartz",
+        "cost": 1,
+        "color": "Blue",
+        "effect": "+1 Tower. Play again",
+        "id": "card_035",
+        "image_prompt": "A square card illustration of Quartz. Background context: +1 Tower. Play again. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "石英",
+        "effect_zh": "+1塔，再来一回合"
+    },
+    {
+        "name": "Smoky Quartz",
+        "cost": 2,
+        "color": "Blue",
+        "effect": "1 damage to enemy tower. Play again",
+        "id": "card_036",
+        "image_prompt": "A square card illustration of Smoky Quartz. Background context: 1 damage to enemy tower. Play again. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "烟晶",
+        "effect_zh": "对敌人塔造成1点伤害。再来一回合"
+    },
+    {
+        "name": "Amethyst",
+        "cost": 2,
+        "color": "Blue",
+        "effect": "+3 Tower",
+        "id": "card_037",
+        "image_prompt": "A square card illustration of Amethyst. Background context: +3 Tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "紫水晶",
+        "effect_zh": "+3塔"
+    },
+    {
+        "name": "Spell Weavers",
+        "cost": 3,
+        "color": "Blue",
+        "effect": "+1 Magic",
+        "id": "card_038",
+        "image_prompt": "A square card illustration of Spell Weavers. Background context: +1 Magic. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "编织咒语",
+        "effect_zh": "+1魔法"
+    },
+    {
+        "name": "Prism",
+        "cost": 2,
+        "color": "Blue",
+        "effect": "draw 1 card discard 1 card play again",
+        "id": "card_039",
+        "image_prompt": "A square card illustration of Prism. Background context: draw 1 card discard 1 card play again. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "棱镜",
+        "effect_zh": "抽1张卡 弃1张卡 再来一回合"
+    },
+    {
+        "name": "Lodestone",
+        "cost": 5,
+        "color": "Blue",
+        "effect": "+3 tower. this card can't be discarded without playing it",
+        "id": "card_040",
+        "image_prompt": "A square card illustration of Lodestone. Background context: +3 tower. this card can't be discarded without playing it. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "磁石",
+        "effect_zh": "+3塔。此卡必须打出不能直接弃掉"
+    },
+    {
+        "name": "Solar Flare",
+        "cost": 4,
+        "color": "Blue",
+        "effect": "+2 tower 2 damage to enemy tower",
+        "id": "card_041",
+        "image_prompt": "A square card illustration of Solar Flare. Background context: +2 tower 2 damage to enemy tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "太阳耀斑",
+        "effect_zh": "+2塔 对敌人塔造成2点伤害"
+    },
+    {
+        "name": "Crystal Matrix",
+        "cost": 6,
+        "color": "Blue",
+        "effect": "+1 magic +3 tower +1 enemy tower",
+        "id": "card_042",
+        "image_prompt": "A square card illustration of Crystal Matrix. Background context: +1 magic +3 tower +1 enemy tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "水晶矩阵",
+        "effect_zh": "+1魔法 +3塔 +1敌人塔"
+    },
+    {
+        "name": "Gemstone Flaw",
+        "cost": 2,
+        "color": "Blue",
+        "effect": "3 damage to enemy tower",
+        "id": "card_043",
+        "image_prompt": "A square card illustration of Gemstone Flaw. Background context: 3 damage to enemy tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "宝石瑕疵",
+        "effect_zh": "对敌人塔造成3点伤害"
+    },
+    {
+        "name": "Ruby",
+        "cost": 3,
+        "color": "Blue",
+        "effect": "+5 Tower",
+        "id": "card_044",
+        "image_prompt": "A square card illustration of Ruby. Background context: +5 Tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "红宝石",
+        "effect_zh": "+5塔"
+    },
+    {
+        "name": "Gem Spear",
+        "cost": 4,
+        "color": "Blue",
+        "effect": "5 damage to enemy tower",
+        "id": "card_045",
+        "image_prompt": "A square card illustration of Gem Spear. Background context: 5 damage to enemy tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "宝石长矛",
+        "effect_zh": "对敌人塔造成5点伤害"
+    },
+    {
+        "name": "Power Burn",
+        "cost": 3,
+        "color": "Blue",
+        "effect": "5 damage to your tower +2 magic",
+        "id": "card_046",
+        "image_prompt": "A square card illustration of Power Burn. Background context: 5 damage to your tower +2 magic. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "力量燃烧",
+        "effect_zh": "对你自己的塔造成5点伤害 +2魔法"
+    },
+    {
+        "name": "Harmonic Vibe",
+        "cost": 7,
+        "color": "Blue",
+        "effect": "+1 magic +3 tower +3 wall",
+        "id": "card_047",
+        "image_prompt": "A square card illustration of Harmonic Vibe. Background context: +1 magic +3 tower +3 wall. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "谐振波动",
+        "effect_zh": "+1魔法 +3塔 +3高墙"
+    },
+    {
+        "name": "Parity",
+        "cost": 7,
+        "color": "Blue",
+        "effect": "all player's magic equals the highest player's magic",
+        "id": "card_048",
+        "image_prompt": "A square card illustration of Parity. Background context: all player's magic equals the highest player's magic. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "均衡",
+        "effect_zh": "所有玩家的魔法等于最高玩家的魔法"
+    },
+    {
+        "name": "Emerald",
+        "cost": 6,
+        "color": "Blue",
+        "effect": "+8 Tower",
+        "id": "card_049",
+        "image_prompt": "A square card illustration of Emerald. Background context: +8 Tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "绿宝石",
+        "effect_zh": "+8塔"
+    },
+    {
+        "name": "Pearl of Wisdom",
+        "cost": 9,
+        "color": "Blue",
+        "effect": "+5 tower +1 magic",
+        "id": "card_050",
+        "image_prompt": "A square card illustration of Pearl of Wisdom. Background context: +5 tower +1 magic. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "智慧珍珠",
+        "effect_zh": "+5塔 +1魔法"
+    },
+    {
+        "name": "Shatterer",
+        "cost": 8,
+        "color": "Blue",
+        "effect": "-1 magic. 9 damage to enemy tower",
+        "id": "card_051",
+        "image_prompt": "A square card illustration of Shatterer. Background context: -1 magic. 9 damage to enemy tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "粉碎者",
+        "effect_zh": "-1魔法。对敌人塔造成9点伤害"
+    },
+    {
+        "name": "Crumblestone",
+        "cost": 7,
+        "color": "Blue",
+        "effect": "+5 tower enemy loses 6 bricks",
+        "id": "card_052",
+        "image_prompt": "A square card illustration of Crumblestone. Background context: +5 tower enemy loses 6 bricks. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "碎石",
+        "effect_zh": "+5塔 敌人失去6个砖块"
+    },
+    {
+        "name": "Sapphire",
+        "cost": 10,
+        "color": "Blue",
+        "effect": "+11 Tower",
+        "id": "card_053",
+        "image_prompt": "A square card illustration of Sapphire. Background context: +11 Tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "蓝宝石",
+        "effect_zh": "+11塔"
+    },
+    {
+        "name": "Discord",
+        "cost": 5,
+        "color": "Blue",
+        "effect": "7 damage to all towers, all player's magic -1",
+        "id": "card_054",
+        "image_prompt": "A square card illustration of Discord. Background context: 7 damage to all towers, all player's magic -1. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "不和",
+        "effect_zh": "所有塔受7点伤害，所有玩家魔法-1"
+    },
+    {
+        "name": "Fire Ruby",
+        "cost": 13,
+        "color": "Blue",
+        "effect": "+6 tower 4 damage to all enemy towers",
+        "id": "card_055",
+        "image_prompt": "A square card illustration of Fire Ruby. Background context: +6 tower 4 damage to all enemy towers. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "火红宝石",
+        "effect_zh": "+6塔 对所有敌人塔造成4点伤害"
+    },
+    {
+        "name": "Quarry's Help",
+        "cost": 14,
+        "color": "Blue",
+        "effect": "+7 tower lose 10 bricks",
+        "id": "card_056",
+        "image_prompt": "A square card illustration of Quarry's Help. Background context: +7 tower lose 10 bricks. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "采石场之助",
+        "effect_zh": "+7塔 失去10个砖块"
+    },
+    {
+        "name": "Crystal Shield",
+        "cost": 12,
+        "color": "Blue",
+        "effect": "+8 tower +3 wall",
+        "id": "card_057",
+        "image_prompt": "A square card illustration of Crystal Shield. Background context: +8 tower +3 wall. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "水晶护盾",
+        "effect_zh": "+8塔 +3高墙"
+    },
+    {
+        "name": "Empathy Gem",
+        "cost": 14,
+        "color": "Blue",
+        "effect": "+8 tower +1 dungeon",
+        "id": "card_058",
+        "image_prompt": "A square card illustration of Empathy Gem. Background context: +8 tower +1 dungeon. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "共情宝石",
+        "effect_zh": "+8塔 +1地下城"
+    },
+    {
+        "name": "Diamond",
+        "cost": 16,
+        "color": "Blue",
+        "effect": "+15 Tower",
+        "id": "card_059",
+        "image_prompt": "A square card illustration of Diamond. Background context: +15 Tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "钻石",
+        "effect_zh": "+15塔"
+    },
+    {
+        "name": "Sanctuary",
+        "cost": 15,
+        "color": "Blue",
+        "effect": "+10 tower +5 wall gain 5 recruits",
+        "id": "card_060",
+        "image_prompt": "A square card illustration of Sanctuary. Background context: +10 tower +5 wall gain 5 recruits. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "避难所",
+        "effect_zh": "+10塔 +5高墙 获得5名新兵"
+    },
+    {
+        "name": "Lava Jewel",
+        "cost": 17,
+        "color": "Blue",
+        "effect": "+12 tower 6 damage to enemy",
+        "id": "card_061",
+        "image_prompt": "A square card illustration of Lava Jewel. Background context: +12 tower 6 damage to enemy. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "熔岩宝石",
+        "effect_zh": "+12塔 6点区域伤害"
+    },
+    {
+        "name": "Dragon's Eye",
+        "cost": 21,
+        "color": "Blue",
+        "effect": "+20 Tower",
+        "id": "card_062",
+        "image_prompt": "A square card illustration of Dragon's Eye. Background context: +20 Tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "龙之眼",
+        "effect_zh": "+20塔"
+    },
+    {
+        "name": "Crystallize",
+        "cost": 18,
+        "color": "Blue",
+        "effect": "+11 tower -6 wall",
+        "id": "card_063",
+        "image_prompt": "A square card illustration of Crystallize. Background context: +11 tower -6 wall. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "结晶化",
+        "effect_zh": "+11塔 -6高墙"
+    },
+    {
+        "name": "Bag of Baubles",
+        "cost": 0,
+        "color": "Blue",
+        "effect": "if tower < enemy tower +2 tower, else +1 tower",
+        "id": "card_064",
+        "image_prompt": "A square card illustration of Bag of Baubles. Background context: if tower < enemy tower +2 tower, else +1 tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "饰品袋",
+        "effect_zh": "若塔<敌人塔+2塔，否则+1塔"
+    },
+    {
+        "name": "Rainbow",
+        "cost": 0,
+        "color": "Blue",
+        "effect": "+1 tower to all players. you gain 3 gems",
+        "id": "card_065",
+        "image_prompt": "A square card illustration of Rainbow. Background context: +1 tower to all players. you gain 3 gems. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "彩虹",
+        "effect_zh": "所有玩家+1塔。你获得3个宝石"
+    },
+    {
+        "name": "Apprentice",
+        "cost": 5,
+        "color": "Blue",
+        "effect": "+4 tower, you lose 3 recruits, 2 damage to enemy tower",
+        "id": "card_066",
+        "image_prompt": "A square card illustration of Apprentice. Background context: +4 tower, you lose 3 recruits, 2 damage to enemy tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "学徒",
+        "effect_zh": "+4塔，你失去3名新兵，2点敌人塔伤害"
+    },
+    {
+        "name": "Lightning Shard",
+        "cost": 11,
+        "color": "Blue",
+        "effect": "if tower > enemy wall, 8 damage to enemy tower, else 8 damage",
+        "id": "card_067",
+        "image_prompt": "A square card illustration of Lightning Shard. Background context: if tower > enemy wall, 8 damage to enemy tower, else 8 damage. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "闪电碎片",
+        "effect_zh": "若塔>敌人高墙，对敌方塔造成8伤，否则8点普通伤害"
+    },
+    {
+        "name": "Phase Jewel",
+        "cost": 18,
+        "color": "Blue",
+        "effect": "+13 tower +6 recruits +6 bricks",
+        "id": "card_068",
+        "image_prompt": "A square card illustration of Phase Jewel. Background context: +13 tower +6 recruits +6 bricks. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
+        "name_zh": "相位宝石",
+        "effect_zh": "+13塔 +6新兵 +6砖块"
+    },
+    {
+        "name": "MadCowDisease",
+        "cost": 0,
+        "color": "Green",
+        "effect": "all players lose 6 recruits",
+        "id": "card_069",
+        "image_prompt": "A square card illustration of MadCowDisease. Background context: all players lose 6 recruits. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "疯牛病",
+        "effect_zh": "所有玩家失去6名新兵"
+    },
+    {
+        "name": "Faerie",
+        "cost": 1,
+        "color": "Green",
+        "effect": "2 damage. Play again",
+        "id": "card_070",
+        "image_prompt": "A square card illustration of Faerie. Background context: 2 damage. Play again. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "仙女",
+        "effect_zh": "2点伤害\n再来一回合"
+    },
+    {
+        "name": "Moody Goblins",
+        "cost": 1,
+        "color": "Green",
+        "effect": "4 damage. you lose 3 gems",
+        "id": "card_071",
+        "image_prompt": "A square card illustration of Moody Goblins. Background context: 4 damage. you lose 3 gems. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "喜怒无常的地精",
+        "effect_zh": "4点伤害\n你失去3个宝石"
+    },
+    {
+        "name": "Minotaur",
+        "cost": 3,
+        "color": "Green",
+        "effect": "+1 Dungeon",
+        "id": "card_072",
+        "image_prompt": "A square card illustration of Minotaur. Background context: +1 Dungeon. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "牛头怪",
+        "effect_zh": "+1地下城"
+    },
+    {
+        "name": "Elven Scout",
+        "cost": 2,
+        "color": "Green",
+        "effect": "draw 1 card discard 1 card play again",
+        "id": "card_073",
+        "image_prompt": "A square card illustration of Elven Scout. Background context: draw 1 card discard 1 card play again. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "精灵斥候",
+        "effect_zh": "抽1张卡 弃1张卡 再来一回合"
+    },
+    {
+        "name": "Goblin Mob",
+        "cost": 3,
+        "color": "Green",
+        "effect": "6 damage you take 3 damage",
+        "id": "card_074",
+        "image_prompt": "A square card illustration of Goblin Mob. Background context: 6 damage you take 3 damage. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "地精暴徒",
+        "effect_zh": "6点伤害 你受到3点伤害"
+    },
+    {
+        "name": "Goblin Archers",
+        "cost": 4,
+        "color": "Green",
+        "effect": "3 damage to enemy tower you take 1 damage",
+        "id": "card_075",
+        "image_prompt": "A square card illustration of Goblin Archers. Background context: 3 damage to enemy tower you take 1 damage. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "地精弓箭手",
+        "effect_zh": "对敌人塔造成3点伤害 你受到1点伤害"
+    },
+    {
+        "name": "Shadow Faerie",
+        "cost": 6,
+        "color": "Green",
+        "effect": "2 damage to enemy tower. Play again",
+        "id": "card_076",
+        "image_prompt": "A square card illustration of Shadow Faerie. Background context: 2 damage to enemy tower. Play again. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "暗影仙女",
+        "effect_zh": "对敌人塔造成2点伤害 再来一回合"
+    },
+    {
+        "name": "Orc",
+        "cost": 3,
+        "color": "Green",
+        "effect": "5 damage",
+        "id": "card_077",
+        "image_prompt": "A square card illustration of Orc. Background context: 5 damage. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "兽人",
+        "effect_zh": "5点伤害"
+    },
+    {
+        "name": "Dwarves",
+        "cost": 5,
+        "color": "Green",
+        "effect": "4 damage +3 wall",
+        "id": "card_078",
+        "image_prompt": "A square card illustration of Dwarves. Background context: 4 damage +3 wall. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "矮人",
+        "effect_zh": "4点伤害 +3高墙"
+    },
+    {
+        "name": "Little Snakes",
+        "cost": 6,
+        "color": "Green",
+        "effect": "4 damage to enemy tower",
+        "id": "card_079",
+        "image_prompt": "A square card illustration of Little Snakes. Background context: 4 damage to enemy tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "小蛇",
+        "effect_zh": "对敌人塔造成4点伤害"
+    },
+    {
+        "name": "Troll Trainer",
+        "cost": 7,
+        "color": "Green",
+        "effect": "+2 Dungeon",
+        "id": "card_080",
+        "image_prompt": "A square card illustration of Troll Trainer. Background context: +2 Dungeon. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "巨魔训练师",
+        "effect_zh": "+2地下城"
+    },
+    {
+        "name": "Tower Gremlin",
+        "cost": 8,
+        "color": "Green",
+        "effect": "2 damage +4 wall +2 tower",
+        "id": "card_081",
+        "image_prompt": "A square card illustration of Tower Gremlin. Background context: 2 damage +4 wall +2 tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "塔楼小精灵",
+        "effect_zh": "2点伤害 +4高墙 +2塔"
+    },
+    {
+        "name": "Full Moon",
+        "cost": 0,
+        "color": "Green",
+        "effect": "+1 to all player's dungeon you gain 3 recruits",
+        "id": "card_082",
+        "image_prompt": "A square card illustration of Full Moon. Background context: +1 to all player's dungeon you gain 3 recruits. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "满月",
+        "effect_zh": "所有玩家地下城+1 你获得3名新兵"
+    },
+    {
+        "name": "Slasher",
+        "cost": 5,
+        "color": "Green",
+        "effect": "6 damage",
+        "id": "card_083",
+        "image_prompt": "A square card illustration of Slasher. Background context: 6 damage. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "杀戮者",
+        "effect_zh": "6点伤害"
+    },
+    {
+        "name": "Ogre",
+        "cost": 6,
+        "color": "Green",
+        "effect": "7 damage",
+        "id": "card_084",
+        "image_prompt": "A square card illustration of Ogre. Background context: 7 damage. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "食人魔",
+        "effect_zh": "食人魔"
+    },
+    {
+        "name": "Rabid Sheep",
+        "cost": 6,
+        "color": "Green",
+        "effect": "6 damage enemy loses 3 recruits",
+        "id": "card_085",
+        "image_prompt": "A square card illustration of Rabid Sheep. Background context: 6 damage enemy loses 3 recruits. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "狂犬病绵羊",
+        "effect_zh": "6点伤害 敌人失去3名新兵"
+    },
+    {
+        "name": "Imp",
+        "cost": 5,
+        "color": "Green",
+        "effect": "6 damage. all players lose 5 bricks, gems, and recruits",
+        "id": "card_086",
+        "image_prompt": "A square card illustration of Imp. Background context: 6 damage. all players lose 5 bricks, gems, and recruits. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "小恶魔",
+        "effect_zh": "6点伤害。所有玩家失去5砖块、宝石和新兵"
+    },
+    {
+        "name": "Spizzer",
+        "cost": 8,
+        "color": "Green",
+        "effect": "if enemy wall = 0, 10 damage, else 6 damage",
+        "id": "card_087",
+        "image_prompt": "A square card illustration of Spizzer. Background context: if enemy wall = 0, 10 damage, else 6 damage. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "毒刺精",
+        "effect_zh": "若敌人高墙=0，造成10点伤害，否则6点伤害"
+    },
+    {
+        "name": "Werewolf",
+        "cost": 9,
+        "color": "Green",
+        "effect": "9 damage",
+        "id": "card_088",
+        "image_prompt": "A square card illustration of Werewolf. Background context: 9 damage. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "狼人",
+        "effect_zh": "9点伤害"
+    },
+    {
+        "name": "Corrosion Cloud",
+        "cost": 11,
+        "color": "Green",
+        "effect": "if enemy wall > 0, 10 damage, else 7 damage",
+        "id": "card_089",
+        "image_prompt": "A square card illustration of Corrosion Cloud. Background context: if enemy wall > 0, 10 damage, else 7 damage. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "腐蚀之云",
+        "effect_zh": "若敌人高墙>0，造成10点伤害，否则7点伤害"
+    },
+    {
+        "name": "Unicorn",
+        "cost": 9,
+        "color": "Green",
+        "effect": "if magic > enemy magic, 12 damage, else 8 damage",
+        "id": "card_090",
+        "image_prompt": "A square card illustration of Unicorn. Background context: if magic > enemy magic, 12 damage, else 8 damage. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "独角兽",
+        "effect_zh": "若魔法>敌人魔法，造成12点伤害，否则8点伤害"
+    },
+    {
+        "name": "Elven Archers",
+        "cost": 10,
+        "color": "Green",
+        "effect": "if wall > enemy wall do 6 damage else do 6 damage to tower",
+        "id": "card_091",
+        "image_prompt": "A square card illustration of Elven Archers. Background context: if wall > enemy wall do 6 damage else do 6 damage to tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "精灵弓箭手",
+        "effect_zh": "若高墙>敌人高墙，对敌塔造成6伤害，否则6点普通伤害"
+    },
+    {
+        "name": "Succubus",
+        "cost": 14,
+        "color": "Green",
+        "effect": "5 damage to enemy tower enemy loses 8 recruits",
+        "id": "card_092",
+        "image_prompt": "A square card illustration of Succubus. Background context: 5 damage to enemy tower enemy loses 8 recruits. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "魅魔",
+        "effect_zh": "对敌人塔造成5点伤害，敌人失去8名新兵"
+    },
+    {
+        "name": "Rock Stompers",
+        "cost": 11,
+        "color": "Green",
+        "effect": "8 damage -1 enemy quarry",
+        "id": "card_093",
+        "image_prompt": "A square card illustration of Rock Stompers. Background context: 8 damage -1 enemy quarry. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "碎石践踏者",
+        "effect_zh": "8点伤害 -1敌人采石场"
+    },
+    {
+        "name": "Thief",
+        "cost": 12,
+        "color": "Green",
+        "effect": "enemy loses 10 gems, 5 bricks, you gain 1/2 amt. round up",
+        "id": "card_094",
+        "image_prompt": "A square card illustration of Thief. Background context: enemy loses 10 gems, 5 bricks, you gain 1/2 amt. round up. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "盗贼",
+        "effect_zh": "敌人失去10宝石，5砖块，你获得它们的一半产量"
+    },
+    {
+        "name": "Stone Giant",
+        "cost": 15,
+        "color": "Green",
+        "effect": "10 damage +4 wall",
+        "id": "card_095",
+        "image_prompt": "A square card illustration of Stone Giant. Background context: 10 damage +4 wall. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "石巨人",
+        "effect_zh": "10点伤害 +4高墙"
+    },
+    {
+        "name": "Vampire",
+        "cost": 17,
+        "color": "Green",
+        "effect": "10 damage enemy loses 5 recruits -1 enemy dungeon",
+        "id": "card_096",
+        "image_prompt": "A square card illustration of Vampire. Background context: 10 damage enemy loses 5 recruits -1 enemy dungeon. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "吸血鬼",
+        "effect_zh": "10点伤害 敌人失去5名新兵，-1敌人地下城"
+    },
+    {
+        "name": "Dragon",
+        "cost": 25,
+        "color": "Green",
+        "effect": "20 damage enemy loses 10 gems -1 enemy dungeon",
+        "id": "card_097",
+        "image_prompt": "A square card illustration of Dragon. Background context: 20 damage enemy loses 10 gems -1 enemy dungeon. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "巨龙",
+        "effect_zh": "20点伤害 敌人失去10个宝石，-1敌人地下城"
+    },
+    {
+        "name": "Spearman",
+        "cost": 2,
+        "color": "Green",
+        "effect": "if wall > enemy wall do 3 damage else do 2 damage",
+        "id": "card_098",
+        "image_prompt": "A square card illustration of Spearman. Background context: if wall > enemy wall do 3 damage else do 2 damage. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "长矛兵",
+        "effect_zh": "若高墙>敌人高墙，造成3点伤害，否则2点伤害"
+    },
+    {
+        "name": "Gnome",
+        "cost": 2,
+        "color": "Green",
+        "effect": "3 damage +1 gem",
+        "id": "card_099",
+        "image_prompt": "A square card illustration of Gnome. Background context: 3 damage +1 gem. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "侏儒",
+        "effect_zh": "3点伤害 +1宝石"
+    },
+    {
+        "name": "Berserker",
+        "cost": 4,
+        "color": "Green",
+        "effect": "8 damage tower take 3 damage",
+        "id": "card_100",
+        "image_prompt": "A square card illustration of Berserker. Background context: 8 damage tower take 3 damage. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "狂战士",
+        "effect_zh": "8点伤害 你的塔受到3点伤害"
+    },
+    {
+        "name": "Warlord",
+        "cost": 13,
+        "color": "Green",
+        "effect": "13 damage lose 3 gems",
+        "id": "card_101",
+        "image_prompt": "A square card illustration of Warlord. Background context: 13 damage lose 3 gems. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "督军",
+        "effect_zh": "13点伤害 你失去3个宝石"
+    },
+    {
+        "name": "Pegasus Lancer",
+        "cost": 18,
+        "color": "Green",
+        "effect": "12 damage to enemy tower",
+        "id": "card_102",
+        "image_prompt": "A square card illustration of Pegasus Lancer. Background context: 12 damage to enemy tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
+        "name_zh": "天马枪骑兵",
+        "effect_zh": "对敌人塔造成12点伤害"
+    }
+]

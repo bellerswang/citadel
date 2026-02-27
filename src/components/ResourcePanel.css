@@ -1,0 +1,119 @@
+.resource-panel {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    background: #8b5a2b;
+    border: 4px solid #4a2f1d;
+    border-radius: 16px;
+    padding: 12px;
+    color: white;
+    box-shadow: 0 8px 0 #4a2f1d, 0 12px 20px rgba(0, 0, 0, 0.5);
+}
+
+.panel-title {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.4rem;
+    font-weight: 800;
+    border-bottom: 4px solid #5c3a21;
+    padding-bottom: 8px;
+    color: #ffd700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 3px 0 #4a2f1d;
+}
+
+.resources-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.resource-item {
+    display: flex;
+    align-items: center;
+    background: #a06e3b;
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 3px solid #5c3a21;
+    border-left-width: 8px;
+    box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.resource-icon-container {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+    background: radial-gradient(circle, rgba(60, 40, 20, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%);
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    flex-shrink: 0;
+}
+
+.resource-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 3px solid #fdf2d8;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), inset 0 -3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.dot-red {
+    background: radial-gradient(circle at 30% 30%, #ff6b6b, #e63946);
+}
+
+.dot-blue {
+    background: radial-gradient(circle at 30% 30%, #48cae4, #00b4d8);
+}
+
+.dot-green {
+    background: radial-gradient(circle at 30% 30%, #43aa8b, #2a9d8f);
+}
+
+.color-red {
+    border-left-color: #e63946;
+}
+
+.color-blue {
+    border-left-color: #00b4d8;
+}
+
+.color-green {
+    border-left-color: #2a9d8f;
+}
+
+.producer-box,
+.amount-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+
+.producer-val,
+.amount-val {
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-family: 'Inter', sans-serif;
+    text-shadow: 0 2px 0 #5c3a21;
+}
+
+.producer-lbl,
+.amount-lbl {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #ffe066;
+    letter-spacing: 1px;
+}
+
+.producer-box {
+    border-right: 2px solid #5c3a21;
+}
