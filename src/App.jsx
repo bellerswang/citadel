@@ -24,17 +24,14 @@ function useViewportScale() {
             const portrait = window.innerHeight > window.innerWidth;
             setIsPortrait(portrait);
             if (!portrait) {
-                // Fit-inside: fill the screen while keeping 16:9 aspect ratio.
-                // No upper limit — allows upscaling on iPad/large screens.
+                // Always fit-inside the viewport, cap at 1.0 so desktop never upscales.
+                // Simpler and more predictable than DPR detection across all devices.
                 const s = Math.min(
                     window.innerWidth / DESIGN_WIDTH,
-                    window.innerHeight / DESIGN_HEIGHT
+                    window.innerHeight / DESIGN_HEIGHT,
+                    1.0   // never upscale on desktop
                 );
-                // Desktop monitors (DPR=1, large screen) → don't upscale past 100%
-                // Tablets / HiDPI (DPR≥2) → allow slight upscale to fill screen edges
-                const dpr = window.devicePixelRatio || 1;
-                const maxScale = dpr >= 2 ? 1.15 : 1.0;
-                setScale(Math.min(s, maxScale));
+                setScale(s);
             } else {
                 setScale(1); // CSS responsive layout takes over in portrait
             }
@@ -110,21 +107,28 @@ function App() {
         }
     };
 
-    // Center the board on screen, then scale it down.
-    // Using left/top 50% + translate(-50%,-50%) centers the origin,
-    // then scale() shrinks it from that center point.
+    // Flexbox centering is the most reliable cross-browser approach.
+    // The outer container centers its only child (the game board).
+    // transform: scale() scales the board visually from its center.
+    // flex-shrink: 0 prevents flexbox from compressing the 1280px element.
     const boardStyle = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
         width: DESIGN_WIDTH,
         height: DESIGN_HEIGHT,
-        transform: `translate(-50%, -50%) scale(${scale})`,
+        transform: `scale(${scale})`,
         transformOrigin: 'center center',
-        overflow: 'hidden',  // enforce design height
+        flexShrink: 0,
+        overflow: 'hidden',
     };
     return (
-        <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', background: '#1a0f05' }}>
+        <div style={{
+            position: 'fixed',
+            top: 0, left: 0, right: 0, bottom: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: '#1a0f05',
+            overflow: 'hidden',
+        }}>
             <div className="game-board" style={boardStyle}>
                 <Menu
                     language={language}
