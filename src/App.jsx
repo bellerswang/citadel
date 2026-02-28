@@ -210,6 +210,16 @@ function App() {
         }, 2000);
     }, []);
 
+    const {
+        playerState, enemyState, playerHand, enemyHand,
+        isPlayerTurn, turnCount, winner, log, playCard, discardCard,
+        resetGame,
+        activeCard,
+        isActionPhase,
+        runAutoplay,
+        exportDebugLog
+    } = useGameState();
+
     // Show a turn banner whenever isPlayerTurn changes (skip the very first render)
     useEffect(() => {
         if (isFirstRenderRef.current) {
@@ -221,18 +231,6 @@ function App() {
         const bannerTimer = setTimeout(() => setTurnBanner(null), 1700);
         return () => clearTimeout(bannerTimer);
     }, [isPlayerTurn]);
-
-    const {
-        playerState, enemyState, playerHand, enemyHand,
-        isPlayerTurn, turnCount, winner, log, playCard, discardCard,
-        resetGame,
-        activeCard,
-        isActionPhase,
-        runAutoplay,
-        exportDebugLog
-    } = useGameState();
-
-
 
     const boardStyle = {
         width: DESIGN_WIDTH,
