@@ -1,16 +1,19 @@
 .action-log {
     width: 320px;
-    height: 180px;
+    height: 200px;
     /* Fixed height so it doesn't bounce around */
-    overflow-y: auto;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column-reverse;
     /* New messages at bottom pushing old ones up */
     gap: 8px;
     margin-bottom: 20px;
-    padding-right: 5px;
+    padding-right: 6px;
+    padding-left: 2px;
     pointer-events: auto;
     /* Re-enable clicks just for the log */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 215, 0, 0.5) rgba(42, 26, 20, 0.5);
 }
 
 .active-card-presentation {
@@ -26,6 +29,15 @@
     animation: cardPopIn 0.15s cubic-bezier(0.25, 1.2, 0.4, 1) both;
 }
 
+/* Prevent the card's CSS :hover transform from firing inside the overlay,
+   which would cause layout shifts and a flicker loop. */
+.log-hover-card-overlay .card:hover,
+.log-hover-card-overlay .card {
+    transform: none !important;
+    box-shadow: 0 6px 0 #3a2210, 0 10px 14px rgba(0, 0, 0, 0.5);
+    cursor: default;
+}
+
 @keyframes cardPopIn {
     from {
         opacity: 0;
@@ -38,14 +50,24 @@
     }
 }
 
-/* Hide scrollbar but keep functionality */
+/* Visible scrollbar for webkit browsers */
 .action-log::-webkit-scrollbar {
-    width: 4px;
+    width: 6px;
+}
+
+.action-log::-webkit-scrollbar-track {
+    background: rgba(42, 26, 20, 0.6);
+    border-radius: 10px;
 }
 
 .action-log::-webkit-scrollbar-thumb {
-    background: rgba(255, 215, 0, 0.3);
+    background: rgba(255, 215, 0, 0.55);
     border-radius: 10px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.action-log::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 215, 0, 0.85);
 }
 
 .log-msg {
@@ -90,7 +112,8 @@
 }
 
 .log-card-icon:hover {
-    transform: scale(1.1);
+    transform: scale(1.12);
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 .log-card-icon.icon-color-red {

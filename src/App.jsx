@@ -307,7 +307,12 @@ function App() {
                                 zIndex: 500,
                             }}
                         >
-                            <Card card={hoveredLogCard.card} showFace={true} isEnemy={!hoveredLogCard.isPlayer} language={language} t={t} />
+                            {/* showFace=true ensures enemy cards show their face instead of the hidden back.
+                                The inner div disables CSS :hover on the Card so the scale animation
+                                never triggers and causes a flicker loop. */}
+                            <div style={{ pointerEvents: 'none' }}>
+                                <Card card={hoveredLogCard.card} showFace={true} isEnemy={false} language={language} t={t} />
+                            </div>
                         </div>
                     )}
 
