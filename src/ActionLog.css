@@ -1,13 +1,12 @@
 .action-log {
     width: 320px;
     height: 200px;
-    /* Fixed height so it doesn't bounce around */
-    overflow-y: scroll;
+    /* Enable scrolling for history */
+    overflow-y: auto;
     display: flex;
-    flex-direction: column-reverse;
-    /* New messages at bottom pushing old ones up */
+    flex-direction: column;
+    /* New messages at top, older ones scroll down */
     gap: 8px;
-    margin-bottom: 20px;
     padding-right: 6px;
     padding-left: 2px;
     pointer-events: auto;
