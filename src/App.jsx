@@ -281,13 +281,13 @@ function App() {
                     <div className="center-action-area">
                         <div className="action-log">
                             {log.map((msg, i) => (
-                                <div key={i} className="log-msg mockup-log" style={{ opacity: 1 - i * 0.15 }}>
+                                <div key={msg.id || i} className="log-msg mockup-log" style={{ opacity: 1 - i * 0.15 }}>
                                     <LogMessage logObj={msg} language={language} t={t} setHoveredLogCard={handleSetHoveredCard} />
                                 </div>
                             ))}
                         </div>
-                        {activeCard && !hoveredLogCard && (
-                            <div className="active-card-presentation">
+                        {activeCard && (
+                            <div className="active-card-presentation" style={{ visibility: hoveredLogCard ? 'hidden' : 'visible' }}>
                                 <Card card={activeCard} showFace={true} isEnemy={false} language={language} t={t} />
                             </div>
                         )}
@@ -301,7 +301,7 @@ function App() {
                             style={{
                                 position: 'absolute',
                                 left: '50%',
-                                top: '50%',
+                                top: '40%',
                                 transform: 'translate(-50%, -50%)',
                                 pointerEvents: 'none',
                                 zIndex: 500,

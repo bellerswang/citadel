@@ -18,7 +18,7 @@ export const useGameState = () => {
     const [deck, setDeck] = useState([]);
     const [isPlayerTurn, setIsPlayerTurn] = useState(true);
     const [winner, setWinner] = useState(null);
-    const [log, setLog] = useState([]);
+    const [log, setLog] = useState([{ id: 'start', type: 'start' }]);
     const [activeCard, setActiveCard] = useState(null);
     const [isActionPhase, setIsActionPhase] = useState(false);
     const [turnCount, setTurnCount] = useState(1);
@@ -69,7 +69,7 @@ export const useGameState = () => {
         setEnemyHand(eHand);
         setDeck(tempDeck);
         setWinner(null);
-        setLog([{ type: 'start' }]);
+        setLog([{ id: Date.now() + Math.random().toString(), type: 'start' }]);
         setTurnCount(1);
         setIsPlayerTurn(true);
         setIsActionPhase(false);
@@ -419,12 +419,12 @@ export const useGameState = () => {
     const playCard = (card, isPlayer) => {
         if (winner || isActionPhase) return;
         if (isPlayer && !canAfford(card, playerState)) {
-            setLog(prev => [{ type: 'not_enough', card, isPlayer }, ...prev]);
+            setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'not_enough', card, isPlayer }, ...prev]);
             return;
         }
 
         setIsActionPhase(true);
-        setLog(prev => [{ type: 'played', card, isPlayer }, ...prev]);
+        setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'played', card, isPlayer }, ...prev]);
         setActiveCard(card);
 
         setTimeout(() => {
@@ -465,7 +465,7 @@ export const useGameState = () => {
                     if (!isPlayer) setTurnCount(prev => prev + 1);
                     setIsPlayerTurn(!isPlayer);
                 } else {
-                    setLog(prev => [{ type: 'play_again', isPlayer }, ...prev]);
+                    setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'play_again', isPlayer: autoPlayAgain }, ...prev]);
                     // If it's the enemy's play-again, schedule next AI turn
                     if (!isPlayer) {
                         setTimeout(() => {
@@ -489,7 +489,7 @@ export const useGameState = () => {
         if (winner || isActionPhase) return;
 
         setIsActionPhase(true);
-        setLog(prev => [{ type: 'discarded', card, isPlayer }, ...prev]);
+        setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'discarded', card, isPlayer }, ...prev]);
         setActiveCard(card);
 
         setTimeout(() => {
