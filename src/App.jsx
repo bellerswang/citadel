@@ -372,6 +372,30 @@ function App() {
 
                 {/* ③ BOTTOM HUD: Card Hand (Centered) */}
                 <div className="bottom-hud center-hand">
+
+                    {/* Combat History Log (Bottom Left) */}
+                    <div className="combat-history-sidebar">
+                        <div className="combat-history-header">{language === 'zh' ? '战斗报告' : 'Combat Log'}</div>
+                        <div className="combat-history-scroll">
+                            {log.filter(m => m.type === 'played' || m.type === 'discarded').map(m => {
+                                const isP = m.isPlayer;
+                                const actor = language === 'zh' ? (isP ? '你' : '敌人') : (isP ? 'You' : 'Enemy');
+                                const action = m.type === 'played'
+                                    ? (language === 'zh' ? '打出了' : 'played')
+                                    : (language === 'zh' ? '弃置了' : 'discarded');
+                                const cardName = language === 'zh' ? m.card?.name_zh : m.card?.name;
+                                const effectText = m.type === 'played' ? (language === 'zh' ? m.card?.effect_zh : m.card?.effect) : '';
+
+                                return (
+                                    <div key={m.id} className={`history-entry ${isP ? 'history-player' : 'history-enemy'}`}>
+                                        <div className="history-actor">{actor} {action} <b>[{cardName}]</b></div>
+                                        {effectText && <div className="history-effect">{effectText}</div>}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+
                     <div className="mockup-hand-row">
                         <div className={`player-hand-flat ${!isPlayerTurn ? 'enemy-turn' : ''}`}>
                             {playerHand.map((c, index) => (
