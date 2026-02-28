@@ -1,12 +1,11 @@
 .menu-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 10px;
+    z-index: 50;
+    /* Above cards but not screen-blocking */
 }
 
 .menu-items {

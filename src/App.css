@@ -14,6 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    padding-top: 15px;
     background-image: url('./assets/tavern_bg.png');
     /* Mockup tavern background */
     background-size: cover;
@@ -415,15 +416,15 @@ body {
 /* ── ④ HAND ROW ────────────────────────────────────────────────────────────── */
 .bottom-hud.center-hand {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    position: relative;
     pointer-events: none;
     /* Let clicks pass through empty spaces */
 }
 
 .mockup-hand-row {
-    position: relative;
     z-index: 20;
     display: flex;
     justify-content: center;
@@ -431,6 +432,15 @@ body {
     overflow: visible;
     pointer-events: auto;
     /* Re-enable clicks for the hand */
+}
+
+.bottom-hud-menu-wrapper {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    pointer-events: auto;
+    /* Re-enable clicks for the menu button */
 }
 
 .player-hand-flat {

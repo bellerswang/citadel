@@ -10,7 +10,7 @@ import './App.css';
 
 // ── Responsive scale ────────────────────────────────────────────────────────
 const DESIGN_WIDTH = 1280;
-const DESIGN_HEIGHT = 720;
+const DESIGN_HEIGHT = 800;
 
 function useViewportScale() {
     const [scale, setScale] = useState(1);
@@ -215,15 +215,6 @@ function App() {
                 <CardCollection onClose={() => setIsCollectionOpen(false)} language={language} t={t} />
             )}
 
-            <Menu
-                language={language}
-                setLanguage={setLanguage}
-                t={t}
-                onOpenCollection={() => setIsCollectionOpen(true)}
-                onExportDebug={exportDebugLog}
-                onNewGame={resetGame}
-            />
-
             <div className="game-board" style={boardStyle}>
                 {/* ① TOP BAR */}
                 <div className="top-bar">
@@ -352,6 +343,17 @@ function App() {
                                 </div>
                             ))}
                         </div>
+                    </div>
+
+                    <div className="bottom-hud-menu-wrapper">
+                        <Menu
+                            language={language}
+                            setLanguage={setLanguage}
+                            t={t}
+                            onOpenCollection={() => setIsCollectionOpen(true)}
+                            onExportDebug={exportDebugLog}
+                            onNewGame={resetGame}
+                        />
                     </div>
                 </div>
             </div>
