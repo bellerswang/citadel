@@ -11,7 +11,7 @@ import './App.css';
 // ── Responsive scale ────────────────────────────────────────────────────────
 const DESIGN_WIDTH = 1280;
 const DESIGN_HEIGHT = 800;
-const GAME_VERSION = "v1.0.1";
+const GAME_VERSION = "v1.0.3";
 
 function useViewportScale() {
     const [scale, setScale] = useState(1);
