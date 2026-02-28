@@ -17,10 +17,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('./assets/tavern_bg.png');
-    background-size: 100% 100%;
+    background-image: url('./assets/bg_main.png');
+    background-size: cover;
     background-position: center;
-    background-color: rgba(20, 15, 10, 0.8);
+    background-color: rgba(0, 0, 0, 0.4);
     background-blend-mode: multiply;
     overflow: hidden;
 }
