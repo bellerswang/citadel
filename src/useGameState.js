@@ -475,14 +475,14 @@ export const useGameState = () => {
                             const playable = hand.filter(c => canAfford(c, state));
                             if (playable.length > 0) playCardRef.current(playable[0], false);
                             else if (hand.length > 0) discardCardRef.current(hand[0], false);
-                        }, 1200);
+                        }, 2400);
                     }
                 }
 
                 setIsActionPhase(false);
-            }, 1200);
+            }, 2400);
 
-        }, 1000);
+        }, 2000);
     };
 
     const discardCard = (card, isPlayer) => {
@@ -512,8 +512,8 @@ export const useGameState = () => {
                 if (!isPlayer) setTurnCount(prev => prev + 1);
                 setIsPlayerTurn(!isPlayer);
                 setIsActionPhase(false);
-            }, 600);
-        }, 1000);
+            }, 1200);
+        }, 2000);
     };
 
     // Production and Win Condition
@@ -537,7 +537,7 @@ export const useGameState = () => {
                     const playable = hand.filter(c => canAfford(c, state));
                     if (playable.length > 0) playCardRef.current(playable[0], false);
                     else if (hand.length > 0) discardCardRef.current(hand[0], false);
-                }, 1500);
+                }, 3000);
             }
         }
     }, [isPlayerTurn, winner]);

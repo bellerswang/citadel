@@ -17,7 +17,7 @@ body {
     padding-top: 15px;
     background-image: url('./assets/tavern_bg.png');
     /* Mockup tavern background */
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-color: rgba(20, 15, 10, 0.6);
     background-blend-mode: multiply;

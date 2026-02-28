@@ -301,7 +301,15 @@ function App() {
                             </div>
                             {activeCard && (
                                 <div className="active-card-presentation" style={{ visibility: hoveredLogCard ? 'hidden' : 'visible' }}>
-                                    <Card card={activeCard} showFace={true} isEnemy={false} language={language} t={t} />
+                                    <div className="active-card-effect-log">
+                                        <div className="effect-log-title">{language === 'zh' ? '卡牌效果' : 'Card Effect'}</div>
+                                        <div className="effect-log-content">
+                                            {(language === 'zh' ? activeCard.effect_zh : activeCard.effect).split('\n').map((line, idx) => (
+                                                <div key={idx} className="effect-log-line">{line}</div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <Card card={activeCard} showFace={true} isEnemy={!isPlayerTurn} language={language} t={t} />
                                 </div>
                             )}
                         </div>
