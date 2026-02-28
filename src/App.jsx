@@ -169,6 +169,11 @@ const LogMessage = React.memo(({ logObj, language, t }) => {
 
     switch (logObj.type) {
         case 'start': return language === 'zh' ? '游戏开始！' : 'Game Started!';
+        case 'turn_header': return (
+            <div className="log-turn-header">
+                {language === 'zh' ? `第 ${logObj.turnCount} 回合` : `Turn ${logObj.turnCount}`}
+            </div>
+        );
         case 'not_enough': return language === 'zh' ? <>资源不足，无法打出 {cardDisplay}!</> : <>Not enough resources for {cardDisplay}!</>;
         case 'played': return <>{actor} {language === 'zh' ? '打出' : 'played'} {cardDisplay}.</>;
         case 'discarded': return <>{actor} {language === 'zh' ? '弃牌' : 'discarded'} {cardDisplay}.</>;
@@ -188,6 +193,8 @@ function App() {
 
     const actionLogRef = useRef(null);
     const scrollTimeoutRef = useRef(null);
+    const [turnBanner, setTurnBanner] = useState(null);
+    const isFirstRenderRef = useRef(true);
 
     const handleLogScroll = useCallback(() => {
         if (actionLogRef.current) {
@@ -202,6 +209,18 @@ function App() {
             }
         }, 2000);
     }, []);
+
+    // Show a turn banner whenever isPlayerTurn changes (skip the very first render)
+    useEffect(() => {
+        if (isFirstRenderRef.current) {
+            isFirstRenderRef.current = false;
+            return;
+        }
+        const key = Date.now();
+        setTurnBanner({ key, isPlayer: isPlayerTurn });
+        const t = setTimeout(() => setTurnBanner(null), 1700);
+        return () => clearTimeout(t);
+    }, [isPlayerTurn]);
 
     const {
         playerState, enemyState, playerHand, enemyHand,
@@ -225,13 +244,19 @@ function App() {
     };
 
     return (
-        <div style={{
-            position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: '#0d0d0d', overflow: 'hidden',
-        }}>
+        <div className="game-outer-wrapper">
             {isCollectionOpen && (
                 <CardCollection onClose={() => setIsCollectionOpen(false)} language={language} t={t} />
+            )}
+
+            {turnBanner && (
+                <div className="turn-banner" key={turnBanner.key}>
+                    <div className={`turn-banner-text ${turnBanner.isPlayer ? 'player-color' : 'enemy-color'}`}>
+                        {turnBanner.isPlayer
+                            ? (language === 'zh' ? '你的回合' : 'YOUR TURN')
+                            : (language === 'zh' ? '敌人回合' : 'ENEMY TURN')}
+                    </div>
+                </div>
             )}
 
             <div className="game-board" style={boardStyle}>
@@ -350,7 +375,7 @@ function App() {
                 {/* ③ BOTTOM HUD: Card Hand (Centered) */}
                 <div className="bottom-hud center-hand">
                     <div className="mockup-hand-row">
-                        <div className="player-hand-flat">
+                        <div className={`player-hand-flat ${!isPlayerTurn ? 'enemy-turn' : ''}`}>
                             {playerHand.map((c, index) => (
                                 <div key={c.uid}
                                     className={`hand-card-wrapper ${!canAfford(c, playerState) ? 'unaffordable' : ''}`}

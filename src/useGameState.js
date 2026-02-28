@@ -69,7 +69,10 @@ export const useGameState = () => {
         setEnemyHand(eHand);
         setDeck(tempDeck);
         setWinner(null);
-        setLog([{ id: Date.now() + Math.random().toString(), type: 'start' }]);
+        setLog([
+            { id: Date.now() + Math.random().toString(), type: 'turn_header', turnCount: 1, isPlayer: true },
+            { id: Date.now() + Math.random().toString() + '1', type: 'start' },
+        ]);
         setTurnCount(1);
         setIsPlayerTurn(true);
         setIsActionPhase(false);
@@ -526,10 +529,14 @@ export const useGameState = () => {
         if (!winner) {
             if (isPlayerTurn) {
                 setPlayerState(s => ({ ...s, bricks: s.bricks + s.quarries, gems: s.gems + s.magic, beasts: s.beasts + s.dungeon }));
+                // Add a turn header entry each time it becomes the player's turn (skip very first turn, handled in resetGame)
+                if (turnCount > 1) {
+                    setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'turn_header', turnCount, isPlayer: true }, ...prev]);
+                }
             } else {
                 setEnemyState(s => ({ ...s, bricks: s.bricks + s.quarries, gems: s.gems + s.magic, beasts: s.beasts + s.dungeon }));
-                // AI turn — reads from refs so it always sees the latest hand/state
-                // even after multiple React renders have occurred during the delay.
+                setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'turn_header', turnCount, isPlayer: false }, ...prev]);
+                // AI turn
                 setTimeout(() => {
                     if (isPlayerTurnRef.current || isActionPhaseRef.current || winnerRef.current) return;
                     const hand = enemyHandRef.current;

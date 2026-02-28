@@ -8,6 +8,23 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+.game-outer-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('./assets/tavern_bg.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-color: rgba(20, 15, 10, 0.8);
+    background-blend-mode: multiply;
+    overflow: hidden;
+}
+
 .game-board {
     width: 100%;
     height: 100%;
@@ -15,12 +32,7 @@ body {
     flex-direction: column;
     box-sizing: border-box;
     padding-top: 15px;
-    background-image: url('./assets/tavern_bg.png');
-    /* Mockup tavern background */
-    background-size: 100% 100%;
-    background-position: center;
-    background-color: rgba(20, 15, 10, 0.6);
-    background-blend-mode: multiply;
+    background: transparent;
 }
 
 /* ── ① TOP BAR ─────────────────────────────────────────────────────────────── */
@@ -767,4 +779,95 @@ body {
         transform: translate(-50%, -350%) scale(1);
         opacity: 0;
     }
+}
+
+/* ── TURN BANNER ANNOUNCEMENT ──────────────────────────────────────────────── */
+.turn-banner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 999;
+    text-align: center;
+    animation: turnBannerAnim 1.6s ease-in-out forwards;
+}
+
+.turn-banner-text {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-shadow: 0 0 30px currentColor, 0 4px 8px rgba(0, 0, 0, 0.9);
+    padding: 12px 40px;
+    border-radius: 8px;
+    border: 2px solid currentColor;
+    backdrop-filter: blur(4px);
+}
+
+.turn-banner-text.player-color {
+    color: #ffd700;
+    background: rgba(20, 10, 0, 0.75);
+    border-color: #ffd700;
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+}
+
+.turn-banner-text.enemy-color {
+    color: #ff4444;
+    background: rgba(20, 0, 0, 0.75);
+    border-color: #ff4444;
+    box-shadow: 0 0 40px rgba(255, 68, 68, 0.5);
+}
+
+@keyframes turnBannerAnim {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.7);
+    }
+
+    15% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    75% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+}
+
+/* ── TURN HEADER IN LOG ─────────────────────────────────────────────────────── */
+.log-turn-header {
+    font-family: 'Cinzel', serif;
+    color: #ffd700;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.1em;
+    padding: 4px 0 2px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.25);
+    opacity: 0.9;
+    margin-bottom: 2px;
+}
+
+/* ── ENEMY TURN CARD GRAYING ────────────────────────────────────────────────── */
+.player-hand-flat.enemy-turn .hand-card-wrapper {
+    filter: grayscale(0.75) brightness(0.55);
+    transition: filter 0.4s ease;
+    cursor: not-allowed;
+}
+
+.player-hand-flat.enemy-turn .hand-card-wrapper:hover {
+    filter: grayscale(0.3) brightness(0.8);
+    transition: filter 0.2s ease;
 }
