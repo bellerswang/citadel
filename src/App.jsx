@@ -218,8 +218,8 @@ function App() {
         }
         const key = Date.now();
         setTurnBanner({ key, isPlayer: isPlayerTurn });
-        const t = setTimeout(() => setTurnBanner(null), 1700);
-        return () => clearTimeout(t);
+        const bannerTimer = setTimeout(() => setTurnBanner(null), 1700);
+        return () => clearTimeout(bannerTimer);
     }, [isPlayerTurn]);
 
     const {
