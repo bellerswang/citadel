@@ -184,6 +184,24 @@ function App() {
     const [logCardPos, setLogCardPos] = useState({ x: 0, y: 0 });
     const scale = useViewportScale();
     const t = translations[language];
+
+    const actionLogRef = useRef(null);
+    const scrollTimeoutRef = useRef(null);
+
+    const handleLogScroll = useCallback(() => {
+        if (actionLogRef.current) {
+            actionLogRef.current.classList.add('is-scrolling');
+        }
+        if (scrollTimeoutRef.current) {
+            clearTimeout(scrollTimeoutRef.current);
+        }
+        scrollTimeoutRef.current = setTimeout(() => {
+            if (actionLogRef.current) {
+                actionLogRef.current.classList.remove('is-scrolling');
+            }
+        }, 2000);
+    }, []);
+
     const {
         playerState, enemyState, playerHand, enemyHand,
         isPlayerTurn, turnCount, winner, log, playCard, discardCard,
@@ -253,13 +271,13 @@ function App() {
                         <CastleColumn state={playerState} isEnemy={false} t={t} />
 
                         <div className="center-action-area">
-                            <div className="action-log">
+                            <div className="action-log" ref={actionLogRef} onScroll={handleLogScroll}>
                                 {log.map((msg, i) => (
                                     <div
                                         key={msg.id || i}
                                         className={`log-msg mockup-log ${msg.card ? 'interactive-log' : ''}`}
                                         style={{
-                                            opacity: 1 - i * 0.15,
+                                            '--base-opacity': Math.max(0, 1 - i * 0.15),
                                             cursor: msg.card ? 'pointer' : 'default',
                                             WebkitTapHighlightColor: 'transparent'
                                         }}
