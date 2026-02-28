@@ -9,8 +9,8 @@ import './ActionLog.css';
 import './App.css';
 
 // ── Responsive scale ────────────────────────────────────────────────────────
-const DESIGN_WIDTH = 1100;
-const DESIGN_HEIGHT = 620;
+const DESIGN_WIDTH = 1280;
+const DESIGN_HEIGHT = 720;
 
 function useViewportScale() {
     const [scale, setScale] = useState(1);
@@ -142,13 +142,13 @@ const TopBarSide = ({ isEnemy, name }) => (
     <div className={`top-bar-side ${!isEnemy ? 'side-left' : 'side-right'}`}>
         {!isEnemy ? (
             <>
-                <div className="avatar-placeholder player-avatar" />
                 <span className={`side-name player-name`}>{name}</span>
+                <div className="avatar-placeholder player-avatar" />
             </>
         ) : (
             <>
-                <span className={`side-name enemy-name`}>{name}</span>
                 <div className="avatar-placeholder enemy-avatar" />
+                <span className={`side-name enemy-name`}>{name}</span>
             </>
         )}
     </div>
@@ -237,8 +237,8 @@ function App() {
                             {language === 'zh' ? `第 ${turnCount} 回合` : `Turn ${turnCount}`}
                         </div>
                         <div className="top-controls">
-                            <div className="settings-toggle" onClick={() => setLanguage(language === 'en' ? 'zh' : 'en')}>
-                                🌐 {language === 'en' ? '中文' : 'ENG'}
+                            <div className="settings-toggle" onClick={() => setLanguage(language === 'en' ? 'zh' : 'en')} title={language === 'zh' ? 'Switch to English' : '切换中文'}>
+                                🌐
                             </div>
                         </div>
                         {winner ? (
@@ -317,31 +317,34 @@ function App() {
                     <CastleColumn state={enemyState} isEnemy={true} t={t} />
                 </div>
 
-                {/* ③ RESOURCE BARS */}
-                <HorizResourceBar state={playerState} isEnemy={false} t={t} />
-                <HorizResourceBar state={enemyState} isEnemy={true} t={t} />
+                {/* ③ BOTTOM HUD: Resources Left, Hand Right */}
+                <div className="bottom-hud">
+                    <div className="resources-column">
+                        <HorizResourceBar state={playerState} isEnemy={false} t={t} />
+                        <HorizResourceBar state={enemyState} isEnemy={true} t={t} />
+                    </div>
 
-                {/* ④ HAND ROW */}
-                <div className="mockup-hand-row">
-                    <div className="player-hand-flat">
-                        {playerHand.map((c, index) => (
-                            <div key={c.uid}
-                                className={`hand-card-wrapper ${!canAfford(c, playerState) ? 'unaffordable' : ''}`}
-                                style={{ zIndex: index }}
-                            >
-                                <div className="hand-card-inner">
-                                    <Card
-                                        card={c}
-                                        isEnemy={false}
-                                        language={language}
-                                        t={t}
-                                        playerState={playerState}
-                                        onPlay={(card) => playCard(card, true)}
-                                        onDiscard={(card) => discardCard(card, true)}
-                                    />
+                    <div className="mockup-hand-row">
+                        <div className="player-hand-flat">
+                            {playerHand.map((c, index) => (
+                                <div key={c.uid}
+                                    className={`hand-card-wrapper ${!canAfford(c, playerState) ? 'unaffordable' : ''}`}
+                                    style={{ zIndex: index }}
+                                >
+                                    <div className="hand-card-inner">
+                                        <Card
+                                            card={c}
+                                            isEnemy={false}
+                                            language={language}
+                                            t={t}
+                                            playerState={playerState}
+                                            onPlay={(card) => playCard(card, true)}
+                                            onDiscard={(card) => discardCard(card, true)}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

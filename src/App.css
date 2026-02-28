@@ -239,31 +239,45 @@ body {
 
 /* Action log styles defined in ActionLog.css */
 
-/* ── ③ RESOURCE BARS ───────────────────────────────────────────────────────── */
+/* ── ③ BOTTOM HUD (Side-by-Side) ───────────────────────────────────────────── */
+.bottom-hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    padding: 0 20px 10px 20px;
+    box-sizing: border-box;
+}
+
+.resources-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 12px;
+    width: 520px;
+}
+
 .horiz-resource-bar {
     height: 38px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    padding: 0 20px;
-    border-bottom: 2px solid #000;
+    padding: 0 15px;
+    border-radius: 6px;
+    border: 2px solid #000;
 }
 
 .enemy-bar {
     background: #331515;
 }
 
-/* Dark red */
 .player-bar {
     background: #0f1a2e;
-    border-bottom: 3px solid #b38800;
-    border-top: 1px solid #ffd700;
+    border-color: #ffd700;
 }
 
-/* Dark blue with gold border */
-
 .bar-side-label {
-    width: 100px;
+    width: 75px;
     font-family: 'Cinzel', serif;
     font-size: 0.9rem;
     font-weight: 700;
@@ -287,9 +301,10 @@ body {
 .horiz-res-item {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     font-size: 0.85rem;
     color: #d1d1d1;
+    white-space: nowrap;
 }
 
 .res-separator {
@@ -303,6 +318,11 @@ body {
     font-family: 'Cinzel', serif;
     font-size: 1.1rem;
     padding: 0 2px;
+}
+
+.res-arrow {
+    padding: 0 4px;
+    color: #888;
 }
 
 .horiz-dot {
@@ -342,23 +362,19 @@ body {
 
 /* ── ④ HAND ROW ────────────────────────────────────────────────────────────── */
 .mockup-hand-row {
-    height: 200px;
-    background: #0a0603;
-    /* Darker bottom */
     position: relative;
+    z-index: 20;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 0px;
+    justify-content: flex-end;
+    align-items: flex-end;
     overflow: visible;
-    /* Allow cards to pop up out of the row on hover */
 }
 
 .player-hand-flat {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 12px;
+    gap: 6px;
 }
 
 .hand-card-wrapper {
@@ -384,7 +400,8 @@ body {
 
 /* Adjust standard Card inside the hand */
 .hand-card-inner .card {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8), 0 0 5px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
 }
 
 .menu-container {
