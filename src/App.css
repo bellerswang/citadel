@@ -138,10 +138,19 @@ body {
     flex-grow: 1;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 0 50px;
+    align-items: flex-end;
+    padding: 20px 40px 10px 40px;
     position: relative;
     border-bottom: 2px solid #110905;
+}
+
+.battlefield-center {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 40px;
+    height: 100%;
+    flex: 1;
 }
 
 .castle-column {
@@ -249,80 +258,123 @@ body {
     box-sizing: border-box;
 }
 
-.resources-column {
+.battlefield-sidebar {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    gap: 12px;
-    width: 520px;
+    justify-content: center;
+    width: 130px;
 }
 
-.horiz-resource-bar {
-    height: 38px;
-    flex-shrink: 0;
+.vert-resource-sidebar {
     display: flex;
-    align-items: center;
-    padding: 0 15px;
-    border-radius: 6px;
-    border: 2px solid #000;
+    flex-direction: column;
+    background: rgba(10, 6, 3, 0.85);
+    border: 3px solid #000;
+    border-radius: 12px;
+    padding: 15px 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(0, 0, 0, 0.6);
 }
 
-.enemy-bar {
-    background: #331515;
-}
-
-.player-bar {
-    background: #0f1a2e;
+.player-sidebar {
     border-color: #ffd700;
+    margin-right: -20px;
 }
 
-.bar-side-label {
-    width: 75px;
-    font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
-    font-weight: 700;
+.enemy-sidebar {
+    border-color: #f25c54;
+    margin-left: -20px;
 }
 
-.enemy-bar .bar-side-label {
-    color: #f25c54;
-}
-
-.player-bar .bar-side-label {
-    color: #ffd700;
-}
-
-.horiz-res-items {
+.vert-res-items {
     display: flex;
-    flex: 1;
-    justify-content: space-around;
-    align-items: center;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.horiz-res-item {
+.vert-res-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 4px;
-    font-size: 0.85rem;
-    color: #d1d1d1;
-    white-space: nowrap;
+    gap: 6px;
 }
 
-.res-separator {
-    color: #666;
-    font-size: 1rem;
+.vert-res-icon-ring {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8), inset 0 2px 5px rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.6);
 }
 
-.res-bracket {
-    color: #bbb;
-    font-weight: bold;
+/* Color Rings for Resource Circle */
+.vert-res-icon-ring.ring-red {
+    border-color: #cc0000;
+    box-shadow: 0 0 15px rgba(204, 0, 0, 0.5), inset 0 0 10px rgba(204, 0, 0, 0.3);
+}
+
+.vert-res-icon-ring.ring-blue {
+    border-color: #0077b6;
+    box-shadow: 0 0 15px rgba(0, 119, 182, 0.5), inset 0 0 10px rgba(0, 119, 182, 0.3);
+}
+
+.vert-res-icon-ring.ring-green {
+    border-color: #008000;
+    box-shadow: 0 0 15px rgba(0, 128, 0, 0.5), inset 0 0 10px rgba(0, 128, 0, 0.3);
+}
+
+/* The small visual dot inside the ring (behind the number) */
+.vert-dot {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.vert-res-amount {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 2.2rem;
+    color: white;
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 0 4px 6px rgba(0, 0, 0, 0.9);
+    z-index: 2;
+}
+
+.vert-res-prod-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    padding: 4px 8px;
+    width: 80%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.vert-res-prod-val {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #4ade80;
+    /* bright green for production */
+    text-shadow: 0 1px 2px #000;
+}
+
+.vert-res-prod-label {
     font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
-    padding: 0 2px;
-}
-
-.res-arrow {
-    padding: 0 4px;
-    color: #888;
+    font-size: 0.75rem;
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: -2px;
 }
 
 .horiz-dot {
@@ -361,13 +413,24 @@ body {
 }
 
 /* ── ④ HAND ROW ────────────────────────────────────────────────────────────── */
+.bottom-hud.center-hand {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    pointer-events: none;
+    /* Let clicks pass through empty spaces */
+}
+
 .mockup-hand-row {
     position: relative;
     z-index: 20;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: flex-end;
     overflow: visible;
+    pointer-events: auto;
+    /* Re-enable clicks for the hand */
 }
 
 .player-hand-flat {

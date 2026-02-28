@@ -104,8 +104,8 @@ const CastleColumn = ({ state, isEnemy, t }) => {
     );
 };
 
-// ── Horizontal Resource Bar Components ──────────────────────────────────────────────────
-const HorizResItem = ({ producer, amount, producerLabel, amountLabel, color }) => {
+// ── Vertical Resource Sidebar Components ────────────────────────────────────────────────
+const VertResItem = ({ producer, amount, producerLabel, amountLabel, color }) => {
     const amountEffect = useValueChangeEffect(amount);
     const producerEffect = useValueChangeEffect(producer);
 
@@ -114,25 +114,25 @@ const HorizResItem = ({ producer, amount, producerLabel, amountLabel, color }) =
     const prodClass = producerEffect ? `vfx-res-${producerEffect.type}` : '';
 
     return (
-        <div className={`horiz-res-item ${wrapClass}`}>
-            <span className="res-bracket">[</span>
-            <div className={`horiz-dot dot-${color} ${prodClass}`} />
-            <span className="res-separator">|</span>
-            <span className="res-text">
-                <span className={prodClass}>{producerLabel}: {producer}</span> <span className="res-arrow">→</span> <span className={wrapClass}>{amountLabel}: {amount}</span>
-            </span>
-            <span className="res-bracket">]</span>
+        <div className={`vert-res-item ${wrapClass}`}>
+            <div className={`vert-res-icon-ring ring-${color}`}>
+                <div className={`vert-dot dot-${color} ${prodClass}`} />
+                <div className="vert-res-amount">{amount}</div>
+            </div>
+            <div className="vert-res-prod-box">
+                <span className={`vert-res-prod-val ${prodClass}`}>+{producer}</span>
+                <span className="vert-res-prod-label">{producerLabel}</span>
+            </div>
         </div>
     );
 };
 
-const HorizResourceBar = ({ state, isEnemy, t }) => (
-    <div className={`horiz-resource-bar ${isEnemy ? 'enemy-bar' : 'player-bar'}`}>
-        <span className="bar-side-label">{isEnemy ? 'ENEMY' : '[PLAYER]'}</span>
-        <div className="horiz-res-items">
-            <HorizResItem color="red" producer={state.quarries} amount={state.bricks} producerLabel={t.quarries} amountLabel={t.bricks} />
-            <HorizResItem color="blue" producer={state.magic} amount={state.gems} producerLabel={t.magic} amountLabel={t.gems} />
-            <HorizResItem color="green" producer={state.dungeon} amount={state.beasts} producerLabel={t.dungeon} amountLabel={t.recruits} />
+const VertResourceBar = ({ state, isEnemy, t }) => (
+    <div className={`vert-resource-sidebar ${isEnemy ? 'enemy-sidebar' : 'player-sidebar'}`}>
+        <div className="vert-res-items">
+            <VertResItem color="red" producer={state.quarries} amount={state.bricks} producerLabel={t.quarries} amountLabel={t.bricks} />
+            <VertResItem color="blue" producer={state.magic} amount={state.gems} producerLabel={t.magic} amountLabel={t.gems} />
+            <VertResItem color="green" producer={state.dungeon} amount={state.beasts} producerLabel={t.dungeon} amountLabel={t.recruits} />
         </div>
     </div>
 );
@@ -253,77 +253,84 @@ function App() {
 
                 {/* ② BATTLEFIELD */}
                 <div className="battlefield">
-                    <CastleColumn state={playerState} isEnemy={false} t={t} />
-
-                    <div className="center-action-area">
-                        <div className="action-log">
-                            {log.map((msg, i) => (
-                                <div
-                                    key={msg.id || i}
-                                    className={`log-msg mockup-log ${msg.card ? 'interactive-log' : ''}`}
-                                    style={{
-                                        opacity: 1 - i * 0.15,
-                                        cursor: msg.card ? 'pointer' : 'default',
-                                        WebkitTapHighlightColor: 'transparent'
-                                    }}
-                                    onPointerEnter={() => {
-                                        if (msg.card) setHoveredLogCard({ card: msg.card, isPlayer: msg.isPlayer });
-                                    }}
-                                    onPointerLeave={() => {
-                                        if (msg.card) setHoveredLogCard(null);
-                                    }}
-                                    onClick={() => {
-                                        if (msg.card) {
-                                            setHoveredLogCard(prev =>
-                                                prev?.card?.id === msg.card?.id ? null : { card: msg.card, isPlayer: msg.isPlayer }
-                                            );
-                                        }
-                                    }}
-                                >
-                                    <LogMessage logObj={msg} language={language} t={t} />
-                                </div>
-                            ))}
-                        </div>
-                        {activeCard && (
-                            <div className="active-card-presentation" style={{ visibility: hoveredLogCard ? 'hidden' : 'visible' }}>
-                                <Card card={activeCard} showFace={true} isEnemy={false} language={language} t={t} />
-                            </div>
-                        )}
+                    {/* LEFT SIDEBAR: Player Resources */}
+                    <div className="battlefield-sidebar">
+                        <VertResourceBar state={playerState} isEnemy={false} t={t} />
                     </div>
 
-                    {/* Log-hover card preview — rendered as overlay, pointer-events:none so it
+                    <div className="battlefield-center">
+                        <CastleColumn state={playerState} isEnemy={false} t={t} />
+
+                        <div className="center-action-area">
+                            <div className="action-log">
+                                {log.map((msg, i) => (
+                                    <div
+                                        key={msg.id || i}
+                                        className={`log-msg mockup-log ${msg.card ? 'interactive-log' : ''}`}
+                                        style={{
+                                            opacity: 1 - i * 0.15,
+                                            cursor: msg.card ? 'pointer' : 'default',
+                                            WebkitTapHighlightColor: 'transparent'
+                                        }}
+                                        onPointerEnter={() => {
+                                            if (msg.card) setHoveredLogCard({ card: msg.card, isPlayer: msg.isPlayer });
+                                        }}
+                                        onPointerLeave={() => {
+                                            if (msg.card) setHoveredLogCard(null);
+                                        }}
+                                        onClick={() => {
+                                            if (msg.card) {
+                                                setHoveredLogCard(prev =>
+                                                    prev?.card?.id === msg.card?.id ? null : { card: msg.card, isPlayer: msg.isPlayer }
+                                                );
+                                            }
+                                        }}
+                                    >
+                                        <LogMessage logObj={msg} language={language} t={t} />
+                                    </div>
+                                ))}
+                            </div>
+                            {activeCard && (
+                                <div className="active-card-presentation" style={{ visibility: hoveredLogCard ? 'hidden' : 'visible' }}>
+                                    <Card card={activeCard} showFace={true} isEnemy={false} language={language} t={t} />
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Log-hover card preview — rendered as overlay, pointer-events:none so it
                         never intercepts the cursor and causes a hover-loop flicker */}
-                    {hoveredLogCard && (
-                        <div
-                            className="log-hover-card-overlay"
-                            style={{
-                                position: 'absolute',
-                                left: '50%',
-                                top: '40%',
-                                transform: 'translate(-50%, -50%)',
-                                pointerEvents: 'none',
-                                zIndex: 500,
-                            }}
-                        >
-                            {/* showFace=true ensures enemy cards show their face instead of the hidden back.
+                        {hoveredLogCard && (
+                            <div
+                                className="log-hover-card-overlay"
+                                style={{
+                                    position: 'absolute',
+                                    left: '50%',
+                                    top: '40%',
+                                    transform: 'translate(-50%, -50%)',
+                                    pointerEvents: 'none',
+                                    zIndex: 500,
+                                }}
+                            >
+                                {/* showFace=true ensures enemy cards show their face instead of the hidden back.
                                 The inner div disables CSS :hover on the Card so the scale animation
                                 never triggers and causes a flicker loop. */}
-                            <div style={{ pointerEvents: 'none' }}>
-                                <Card card={hoveredLogCard.card} showFace={true} isEnemy={false} language={language} t={t} />
+                                <div style={{ pointerEvents: 'none' }}>
+                                    <Card card={hoveredLogCard.card} showFace={true} isEnemy={false} language={language} t={t} />
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        )}
 
-                    <CastleColumn state={enemyState} isEnemy={true} t={t} />
-                </div>
-
-                {/* ③ BOTTOM HUD: Resources Left, Hand Right */}
-                <div className="bottom-hud">
-                    <div className="resources-column">
-                        <HorizResourceBar state={playerState} isEnemy={false} t={t} />
-                        <HorizResourceBar state={enemyState} isEnemy={true} t={t} />
+                        <CastleColumn state={enemyState} isEnemy={true} t={t} />
                     </div>
 
+                    {/* RIGHT SIDEBAR: Enemy Resources */}
+                    <div className="battlefield-sidebar">
+                        <VertResourceBar state={enemyState} isEnemy={true} t={t} />
+                    </div>
+                </div>
+
+                {/* ③ BOTTOM HUD: Card Hand (Centered) */}
+                <div className="bottom-hud center-hand">
                     <div className="mockup-hand-row">
                         <div className="player-hand-flat">
                             {playerHand.map((c, index) => (
