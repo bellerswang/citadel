@@ -11,6 +11,7 @@ import './App.css';
 // ── Responsive scale ────────────────────────────────────────────────────────
 const DESIGN_WIDTH = 1280;
 const DESIGN_HEIGHT = 800;
+const GAME_VERSION = "v1.0.1";
 
 function useViewportScale() {
     const [scale, setScale] = useState(1);
@@ -240,7 +241,7 @@ function App() {
 
                     <div className="top-bar-center">
                         <h1 className="citadel-title-main">
-                            {t.gameName}
+                            {t.gameName} <span style={{ fontSize: '0.4em', color: 'rgba(255, 215, 0, 0.6)', verticalAlign: 'middle', marginLeft: '8px' }}>{GAME_VERSION}</span>
                         </h1>
                         <div className="turn-counter">
                             {language === 'zh' ? `第 ${turnCount} 回合` : `Turn ${turnCount}`}
