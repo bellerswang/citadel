@@ -155,34 +155,13 @@ const TopBarSide = ({ isEnemy, name }) => (
 );
 
 // ── Action Log Message ───────────────────────────────────────────────────────
-const LogMessage = React.memo(({ logObj, language, t, setHoveredLogCard }) => {
+const LogMessage = React.memo(({ logObj, language, t }) => {
     if (!logObj || typeof logObj === 'string') return logObj;
     const actor = logObj.isPlayer ? t.player : t.enemy;
     const cName = logObj.card ? (language === 'zh' ? logObj.card.name_zh : logObj.card.name) : '';
 
-    const handleHover = useCallback(() => {
-        setHoveredLogCard({ card: logObj.card, isPlayer: logObj.isPlayer });
-    }, [logObj.card, logObj.isPlayer, setHoveredLogCard]);
-
-    const handleLeave = useCallback(() => {
-        setHoveredLogCard(null);
-    }, [setHoveredLogCard]);
-
-    // Also support toggling via touch/click
-    const handleToggle = useCallback(() => {
-        setHoveredLogCard(prev =>
-            prev?.card?.id === logObj.card?.id ? null : { card: logObj.card, isPlayer: logObj.isPlayer }
-        );
-    }, [logObj.card, logObj.isPlayer, setHoveredLogCard]);
-
     const cardDisplay = logObj.card ? (
-        <span
-            className={`log-card-icon icon-color-${logObj.card.color.toLowerCase()}`}
-            onPointerEnter={handleHover}
-            onPointerLeave={handleLeave}
-            onClick={handleToggle}
-            style={{ WebkitTapHighlightColor: 'transparent' }}
-        >
+        <span className={`log-card-icon icon-color-${logObj.card.color.toLowerCase()}`}>
             {cName}
         </span>
     ) : null;
@@ -215,9 +194,7 @@ function App() {
         exportDebugLog
     } = useGameState();
 
-    const handleSetHoveredCard = useCallback((cardState) => {
-        setHoveredLogCard(cardState);
-    }, []);
+
 
     const boardStyle = {
         width: DESIGN_WIDTH,
@@ -281,8 +258,29 @@ function App() {
                     <div className="center-action-area">
                         <div className="action-log">
                             {log.map((msg, i) => (
-                                <div key={msg.id || i} className="log-msg mockup-log" style={{ opacity: 1 - i * 0.15 }}>
-                                    <LogMessage logObj={msg} language={language} t={t} setHoveredLogCard={handleSetHoveredCard} />
+                                <div
+                                    key={msg.id || i}
+                                    className={`log-msg mockup-log ${msg.card ? 'interactive-log' : ''}`}
+                                    style={{
+                                        opacity: 1 - i * 0.15,
+                                        cursor: msg.card ? 'pointer' : 'default',
+                                        WebkitTapHighlightColor: 'transparent'
+                                    }}
+                                    onPointerEnter={() => {
+                                        if (msg.card) setHoveredLogCard({ card: msg.card, isPlayer: msg.isPlayer });
+                                    }}
+                                    onPointerLeave={() => {
+                                        if (msg.card) setHoveredLogCard(null);
+                                    }}
+                                    onClick={() => {
+                                        if (msg.card) {
+                                            setHoveredLogCard(prev =>
+                                                prev?.card?.id === msg.card?.id ? null : { card: msg.card, isPlayer: msg.isPlayer }
+                                            );
+                                        }
+                                    }}
+                                >
+                                    <LogMessage logObj={msg} language={language} t={t} />
                                 </div>
                             ))}
                         </div>

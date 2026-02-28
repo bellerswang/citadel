@@ -52,18 +52,19 @@
 
 /* Visible scrollbar for webkit browsers */
 .action-log::-webkit-scrollbar {
-    width: 6px;
+    width: 12px;
 }
 
 .action-log::-webkit-scrollbar-track {
-    background: rgba(42, 26, 20, 0.6);
-    border-radius: 10px;
+    background: rgba(20, 10, 5, 0.8);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 .action-log::-webkit-scrollbar-thumb {
-    background: rgba(255, 215, 0, 0.55);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    background: linear-gradient(180deg, #bfa040 0%, #876127 100%);
+    border-radius: 6px;
+    border: 2px solid rgba(20, 10, 5, 0.8);
 }
 
 .action-log::-webkit-scrollbar-thumb:hover {
@@ -83,6 +84,12 @@
     animation: logFadeIn 0.3s ease-out;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     flex-shrink: 0;
+    transition: background-color 0.15s ease-out, border-color 0.15s ease-out;
+}
+
+.log-msg.interactive-log:hover {
+    background-color: rgba(60, 40, 30, 0.95);
+    border-color: #ffd700;
 }
 
 @keyframes logFadeIn {
