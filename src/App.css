@@ -418,8 +418,8 @@ body {
 .resource-popup-val {
     position: absolute;
     top: 50%;
+    /* Default Pop out to the right (Player side) */
     left: 120%;
-    /* Pop out to the side for better visibility */
     transform: translateY(-50%);
     pointer-events: none;
     z-index: 2000;
@@ -428,6 +428,12 @@ body {
     white-space: nowrap;
     display: flex;
     align-items: center;
+}
+
+/* Enemy Side: Pop out to the left */
+.enemy-sidebar .resource-popup-val {
+    left: auto;
+    right: 120%;
 }
 
 .res-popup-green {
