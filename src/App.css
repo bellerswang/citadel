@@ -85,12 +85,11 @@ body {
 /* ── AVATAR SYSTEM ── */
 .battle-avatar-wrapper {
     position: absolute;
-    top: -130px;
-    /* Brought down slightly to clear the header */
+    top: 30px;
+    /* Positions it clearly below the top bar and above the towers */
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
-    /* Higher than top-bar (50) to ensure visibility */
 }
 
 .avatar-frame {
