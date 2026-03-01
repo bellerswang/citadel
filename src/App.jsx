@@ -254,6 +254,15 @@ function App() {
         exportDebugLog
     } = useGameState();
 
+    // Fix: Move all hook calls to top level and avoid short-circuiting logic in JSX
+    const playerTowerEff = useValueChangeEffect(playerState.tower);
+    const playerWallEff = useValueChangeEffect(playerState.wall);
+    const playerCombinedEff = playerTowerEff || playerWallEff;
+
+    const enemyTowerEff = useValueChangeEffect(enemyState.tower);
+    const enemyWallEff = useValueChangeEffect(enemyState.wall);
+    const enemyCombinedEff = enemyTowerEff || enemyWallEff;
+
     // Show a turn banner whenever isPlayerTurn changes (skip the very first render)
     useEffect(() => {
         if (isFirstRenderRef.current) {
@@ -343,7 +352,7 @@ function App() {
                         isEnemy={false}
                         name={t.player}
                         tower={playerState.tower}
-                        effect={useValueChangeEffect(playerState.tower) || useValueChangeEffect(playerState.wall)}
+                        effect={playerCombinedEff}
                     />
 
                     <div className="header-flex-wrapper">
@@ -372,7 +381,7 @@ function App() {
                         isEnemy={true}
                         name={t.enemy}
                         tower={enemyState.tower}
-                        effect={useValueChangeEffect(enemyState.tower) || useValueChangeEffect(enemyState.wall)}
+                        effect={enemyCombinedEff}
                     />
                 </div>
 
