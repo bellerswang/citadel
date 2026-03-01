@@ -1,7 +1,13 @@
 # Citadel UI/UX To-Do List
 
-- [x] **Card Translations:** All 102 cards have been fully translated to Chinese and synced to the engine.
-- [ ] **Generate Card Art:** Run the image generator to create 102 unique card illustrations based on the `image_prompt` defined in `cards.json` once the API quota is reset (~16:07Z).
-- [x] **Generate Final Citadel Art:** Replaced SVG placeholders with majestic stone tower and fortress wall vertically aligned assets.
-- [x] **Branding Update:** Changed all UI and card back titles to "Citadel" ("堡垒").
-- [ ] **Generate Card Art:** Final remaining task - generate 102 unique illustrations for the cards.
+- [ ] **Regenerate Card Art:** Regenerate images for the following cards once the API quota is reset (~72 hours):
+    - [ ] 专注设计 (FocusedDesigns)
+    - [ ] 太阳耀斑 (Solar Flare)
+    - [ ] 宝石长矛 (Gem Spear)
+    - [ ] 智慧珍珠 (Pearl of Wisdom)
+    - [ ] 相位宝石 (Phase Jewel)
+    - [ ] 食人魔 (Ogre)
+    - [ ] 塔楼小精灵 (Tower Gremlin)
+    - [ ] 盗贼 (Thief)
+    - [ ] 碎石践踏者 (Rock Stompers)
+    - [ ] 岩石花园 (Rock Garden)

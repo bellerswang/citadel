@@ -14,9 +14,9 @@
 }
 
 .collection-modal {
-    width: 90%;
-    max-width: 1200px;
-    height: 90vh;
+    width: 95%;
+    max-width: 1300px;
+    height: 92vh;
     background: #2a1a0f;
     border: 6px solid #8b5a2b;
     border-radius: 16px;
@@ -136,7 +136,7 @@
     flex-grow: 1;
     overflow-y: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 30px;
     padding: 30px 10px 10px 10px;
     background: rgba(0, 0, 0, 0.5);
@@ -144,7 +144,6 @@
     border: 3px solid #4a2f1d;
 }
 
-/* Custom Scrollbar for the grid */
 .collection-grid::-webkit-scrollbar {
     width: 12px;
 }
@@ -166,11 +165,8 @@
     transition: transform 0.2s;
 }
 
-/* Override default card hover so it doesn't overlap weirdly in the grid */
 .grid-card-wrapper .card:hover {
     transform: translateY(-5px) scale(1.05);
-    /* Smaller scale for grid */
-    box-shadow: 0 10px 0 #3a2210, 0 15px 20px rgba(0, 0, 0, 0.7), 0 0 15px rgba(255, 215, 0, 0.3);
     z-index: 10;
 }
 
@@ -183,44 +179,94 @@
     color: #8b5a2b;
 }
 
-/* Focused Card View */
+/* ── Focused Card View ── */
 .focused-card-backdrop {
-    position: absolute;
-    /* Relative to overlay */
+    position: fixed;
+    /* Use fixed for maximum stability */
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: rgba(0, 0, 0, 0.9);
-    z-index: 3000;
+    z-index: 4000;
+    /* Higher than modal */
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: fadeIn 0.15s ease-out;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    animation: fadeIn 0.2s ease-out;
     cursor: pointer;
 }
 
 .focused-card-container {
     cursor: default;
-    /* Enlarge the card significantly */
-    transform: scale(2.5);
-    transform-origin: center center;
-    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 460px;
+    /* Use physical pixels instead of purely scaling */
+    height: 655px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: zoomOutPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-.focused-card-container .card:hover {
-    /* Disable the hover float effect while focused */
-    transform: none;
+.focused-card-container .card {
+    width: 100% !important;
+    /* Force the card to fill the container */
+    height: 100% !important;
+    padding: 15px !important;
+    /* Scale up padding too */
+    border-radius: 20px !important;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 215, 0, 0.2) !important;
+    transform: none !important;
+    transition: none !important;
+    cursor: default !important;
 }
 
-@keyframes popIn {
+/* Adjust child elements of card for large size */
+.focused-card-container .card-name {
+    font-size: 1.8rem !important;
+}
+
+.focused-card-container .card-effect {
+    font-size: 1.4rem !important;
+    line-height: 1.4 !important;
+}
+
+.focused-card-container .card-cost {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 2.2rem !important;
+    top: -15px !important;
+    right: -15px !important;
+    border-width: 6px !important;
+}
+
+.focused-card-container .card-resource-strip {
+    padding: 12px 20px !important;
+}
+
+.focused-card-container .resource-strip-label {
+    font-size: 1.2rem !important;
+}
+
+.focused-card-container .resource-strip-owned {
+    font-size: 1.6rem !important;
+}
+
+.focused-card-container .resource-strip-cost {
+    font-size: 1.4rem !important;
+}
+
+@keyframes zoomOutPop {
     from {
         opacity: 0;
-        transform: scale(0.5);
+        transform: scale(0.6);
     }
 
     to {
         opacity: 1;
-        transform: scale(2.5);
+        transform: scale(1);
     }
 }

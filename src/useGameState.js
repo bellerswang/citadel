@@ -331,6 +331,39 @@ export const useGameState = () => {
             }
         }
 
+        // ─── DRAW / DISCARD EFFECTS ──────────────────────────────────────────
+        // Note: 'draw 1 card discard 1 card' is handled by checking these separately.
+        if (e.includes('draw 1 card')) {
+            const { card: nextC, newDeck } = drawCard(deckRef.current);
+            if (isPlayer) {
+                setPlayerHand(prev => [...prev, nextC]);
+            } else {
+                setEnemyHand(prev => [...prev, nextC]);
+            }
+            setDeck(newDeck);
+            deckRef.current = newDeck;
+        }
+
+        if (e.includes('discard 1 card')) {
+            if (isPlayer) {
+                setPlayerHand(prev => {
+                    if (prev.length === 0) return prev;
+                    const index = Math.floor(Math.random() * prev.length);
+                    const discarded = prev[index];
+                    setLog(l => [{ id: Date.now() + Math.random().toString(), type: 'discarded', card: discarded, isPlayer: true, isEffect: true }, ...l]);
+                    return prev.filter((_, i) => i !== index);
+                });
+            } else {
+                setEnemyHand(prev => {
+                    if (prev.length === 0) return prev;
+                    const index = Math.floor(Math.random() * prev.length);
+                    const discarded = prev[index];
+                    setLog(l => [{ id: Date.now() + Math.random().toString(), type: 'discarded', card: discarded, isPlayer: false, isEffect: true }, ...l]);
+                    return prev.filter((_, i) => i !== index);
+                });
+            }
+        }
+
         // ─── CONDITIONAL EFFECTS ─────────────────────────────────────────────
 
         // Mother Lode: "if quarry < enemy quarry, +2 quarry. else, +1 quarry"
@@ -451,6 +484,7 @@ export const useGameState = () => {
     };
 
 
+
     const playCard = (card, isPlayer) => {
         if (winner || isActionPhase) return;
         if (isPlayer && !canAfford(card, playerState)) {
@@ -522,6 +556,9 @@ export const useGameState = () => {
     const discardCard = (card, isPlayer) => {
         if (winner || isActionPhase) return;
 
+        // Lodestone Protection: Cannot discard if the card says so
+        if (card.effect.toLowerCase().includes("can't be discarded without playing it")) return;
+
         setIsActionPhase(true);
         setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'discarded', card, isPlayer }, ...prev]);
         setActiveCard(card);
@@ -577,7 +614,12 @@ export const useGameState = () => {
                     const state = enemyStateRef.current;
                     const playable = hand.filter(c => canAfford(c, state));
                     if (playable.length > 0) playCardRef.current(playable[0], false);
-                    else if (hand.length > 0) discardCardRef.current(hand[0], false);
+                    else {
+                        const discardable = hand.filter(c => !c.effect.toLowerCase().includes("can't be discarded without playing it"));
+                        if (discardable.length > 0) discardCardRef.current(discardable[0], false);
+                        // If no card is discardable (all are Lodestones), the AI passes or tries to discard anyway to avoid deadlock
+                        else if (hand.length > 0) discardCardRef.current(hand[0], false);
+                    }
                 }, 800);
             }
         }

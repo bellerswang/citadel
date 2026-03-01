@@ -203,7 +203,12 @@ const LogMessage = React.memo(({ logObj, language, t }) => {
         );
         case 'not_enough': return language === 'zh' ? <>资源不足，无法打出 {cardDisplay}!</> : <>Not enough resources for {cardDisplay}!</>;
         case 'played': return <>{actor} {language === 'zh' ? '打出' : 'played'} {cardDisplay}.</>;
-        case 'discarded': return <>{actor} {language === 'zh' ? '弃牌' : 'discarded'} {cardDisplay}.</>;
+        case 'discarded': {
+            const action = language === 'zh'
+                ? (logObj.isEffect ? '效果弃牌' : '弃牌')
+                : (logObj.isEffect ? 'effect discarded' : 'discarded');
+            return <>{actor} {action} {cardDisplay}.</>;
+        }
         case 'play_again': return `${actor} ${language === 'zh' ? '获得额外回合!' : 'gets to play again!'}`;
         default: return '';
     }
@@ -531,13 +536,14 @@ function App() {
                                                     </button>
                                                     <button
                                                         className="action-menu-btn btn-discard"
+                                                        disabled={c.effect.toLowerCase().includes("can't be discarded without playing it")}
                                                         onClick={(e) => {
                                                             e.stopPropagation();
                                                             discardCard(c, true);
                                                             setFocusedCardUid(null);
                                                         }}
                                                     >
-                                                        {language === 'zh' ? '弃置' : 'Discard'}
+                                                        {language === 'zh' ? '弃牌' : 'Discard'}
                                                     </button>
                                                 </div>
                                             )}
