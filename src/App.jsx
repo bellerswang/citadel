@@ -64,9 +64,11 @@ const BattlefieldAvatar = ({ isEnemy, tower, effect }) => {
     const side = isEnemy ? 'enemy' : 'player';
     const avatarUrl = new URL(`./avatars/${side}_${state}.png`, import.meta.url).href;
 
+    const effectClass = effect ? `avatar-vfx-${effect.type}-${effect.intensity}` : '';
+
     return (
         <div className={`battle-avatar-wrapper ${isEnemy ? 'enemy-avatar-pos' : 'player-avatar-pos'}`}>
-            <div className={`avatar-frame ${isEnemy ? 'enemy-frame' : 'player-frame'}`}>
+            <div className={`avatar-frame ${isEnemy ? 'enemy-frame' : 'player-frame'} ${effectClass}`}>
                 <img src={avatarUrl} alt="Avatar" className="avatar-img" />
                 <div className="avatar-glow" />
             </div>
