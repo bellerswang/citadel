@@ -82,40 +82,59 @@ body {
 
 /* Goldish for Player */
 
-.avatar-placeholder {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: #110905;
-    border: 2px solid #5c3a21;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8), 0 2px 5px rgba(0, 0, 0, 0.5);
-    flex-shrink: 0;
-    transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.2s;
+/* ── AVATAR SYSTEM ── */
+.avatar-frame {
+    width: 58px;
+    height: 58px;
     position: relative;
-    cursor: pointer;
+    border-radius: 8px;
+    /* Square with micro-radius as per prompts */
+    border: 3px solid #5c3a21;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.9), inset 0 0 10px black;
+    background: #000;
+    flex-shrink: 0;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: help;
 }
 
-.avatar-placeholder:hover {
-    transform: scale(3) translateY(10px);
+.avatar-frame:hover {
+    transform: scale(3) translateY(35px);
     z-index: 1000;
+    border-width: 1.5px;
+    /* Thinner border when giant to see art better */
 }
 
-.enemy-avatar {
-    border-color: #f25c54;
-    background: radial-gradient(circle, #3d1515, #110905);
+.player-frame {
+    border-color: #ffd700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 1);
 }
 
-.enemy-avatar:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 1), 0 0 20px rgba(242, 92, 84, 0.6);
+.enemy-frame {
+    border-color: #ff4444;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.3), 0 4px 12px rgba(0, 0, 0, 1);
 }
 
-.player-avatar {
-    border-color: #ffca3a;
-    background: radial-gradient(circle, #3a2e10, #110905);
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-.player-avatar:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 1), 0 0 20px rgba(255, 202, 58, 0.6);
+.avatar-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.6);
+}
+
+.player-frame .avatar-glow {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%);
+}
+
+.enemy-frame .avatar-glow {
+    background: linear-gradient(135deg, rgba(255, 68, 68, 0.1) 0%, transparent 100%);
 }
 
 /* Top Vitals removed */
@@ -379,15 +398,95 @@ body {
     background: rgba(0, 0, 0, 0.6);
 }
 
-/* Color Rings for Resource Circle */
+/* ── POWERFUL RESOURCE POPUP (Yield Numbers) ── */
+.vert-res-item {
+    position: relative;
+    /* Ensure child popups aren't clipped */
+}
+
+.resource-popup-val {
+    position: absolute;
+    top: 50%;
+    left: 120%;
+    /* Pop out to the side for better visibility */
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 2000;
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.res-popup-green {
+    color: #00ff88;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 2px 4px black;
+}
+
+.res-popup-blue {
+    color: #00ccff;
+    text-shadow: 0 0 10px rgba(0, 204, 255, 0.8), 0 2px 4px black;
+}
+
+.res-popup-red {
+    color: #ff4444;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.8), 0 2px 4px black;
+}
+
+.res-yield-low {
+    font-size: 1.6rem;
+    animation: resFlowLow 1.5s ease-out forwards;
+}
+
+.res-yield-high {
+    font-size: 3.2rem;
+    animation: resFlowHigh 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    filter: brightness(1.2);
+}
+
+@keyframes resFlowLow {
+    0% {
+        transform: translate(0, 0) scale(0.5);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(10px, -20px) scale(1);
+    }
+
+    100% {
+        transform: translate(20px, -60px) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes resFlowHigh {
+    0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 0;
+    }
+
+    15% {
+        transform: translate(15px, -40px) scale(1.6);
+        opacity: 1;
+    }
+
+    30% {
+        transform: translate(15px, -35px) scale(1.3);
+    }
+
+    100% {
+        transform: translate(25px, -100px) scale(1.1);
+        opacity: 0;
+    }
+}
+
+
 .vert-res-icon-ring.ring-red {
     border-color: #cc0000;
     box-shadow: 0 0 15px rgba(204, 0, 0, 0.5), inset 0 0 10px rgba(204, 0, 0, 0.3);
-}
-
-.vert-res-icon-ring.ring-blue {
-    border-color: #0077b6;
-    box-shadow: 0 0 15px rgba(0, 119, 182, 0.5), inset 0 0 10px rgba(0, 119, 182, 0.3);
 }
 
 .vert-res-icon-ring.ring-green {
@@ -527,14 +626,17 @@ body {
     position: relative;
 }
 
-/* Hovering pops the card up massively and brings it to front */
-.hand-card-wrapper:hover {
-    z-index: 1000 !important;
+/* Consistent Scaling and Layering for both Hover and Focus */
+.hand-card-wrapper:hover,
+.hand-card-wrapper.is-focused {
+    z-index: 2000 !important;
+    /* Force to front of the stack */
 }
 
-.hand-card-wrapper:hover .hand-card-inner {
+.hand-card-wrapper:hover .hand-card-inner,
+.hand-card-wrapper.is-focused .hand-card-inner {
     transform: translateY(-90px) scale(1.5);
-    transition: transform 0.15s cubic-bezier(0.25, 1.2, 0.4, 1);
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* Adjust standard Card inside the hand */
@@ -1010,61 +1112,62 @@ body {
 }
 
 /* ── MOBILE CARD ACTIONS ── */
-/* ── MOBILE CARD ACTIONS (Floating above corners) ── */
+/* ── MOBILE CARD ACTIONS (Premium Redesign) ── */
 .card-action-overlay {
     position: absolute;
-    top: -24px;
-    /* Float above the top edge */
+    top: -30px;
+    /* Adjusted for larger buttons */
     left: 50%;
     transform: translateX(-50%);
-    width: 140%;
-    /* Spread to corners */
-    height: 50px;
+    width: 155%;
+    /* Wider spread for large buttons */
+    height: 60px;
     background: none;
-    backdrop-filter: none;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     z-index: 2000;
     pointer-events: none;
-    /* Let clicks through container */
-    animation: actionFlyUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: actionFlyUp 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 @keyframes actionFlyUp {
     from {
         opacity: 0;
-        transform: translate(-50%, 20px) scale(0.8);
+        transform: translate(-50%, 10px);
     }
 
     to {
         opacity: 1;
-        transform: translate(-50%, 0) scale(1);
+        transform: translate(-50%, 0);
     }
 }
 
 .action-menu-btn {
     pointer-events: auto;
-    /* Enable clicks on buttons */
-    width: 85px;
-    height: 42px;
-    border-radius: 12px;
-    border: 2.5px solid #000;
+    width: 80px;
+    /* 75% bigger than previous 44px */
+    height: 48px;
+    /* 75% taller than previous 22px */
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     font-family: 'Cinzel', serif;
-    font-weight: 800;
-    font-size: 0.95rem;
+    font-weight: 900;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     justify-content: center;
     align-items: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Play Button: Golden/Metallic */
 .btn-play {
-    background: #ffd700;
-    color: #1a1000;
     border-color: #ffd700;
     box-shadow: 0 4px 0 #8a6d00, 0 6px 12px rgba(0, 0, 0, 0.5);
 }
@@ -1108,6 +1211,113 @@ body {
     box-shadow: 0 2px 0 #4a0000, 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
+/* ── GAME OVER OVERLAY ── */
+.game-over-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+    animation: fadeInFast 0.5s ease-out;
+}
+
+.game-over-card {
+    background: #1a1005;
+    border: 3px solid #5c3a21;
+    padding: 40px 60px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 1), inset 0 0 30px rgba(255, 215, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+    transform: scale(1);
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.game-over-title {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    margin-bottom: 30px;
+    letter-spacing: 0.1em;
+}
+
+.game-over-title.win {
+    color: #ffd700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+.game-over-title.lose {
+    color: #ff4444;
+    text-shadow: 0 0 20px rgba(255, 68, 68, 0.6);
+}
+
+.game-over-stats {
+    margin: 20px 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    border-bottom: 1px solid rgba(92, 58, 33, 0.5);
+    padding-bottom: 8px;
+}
+
+.stat-label {
+    color: #8a6d4d;
+    font-weight: 400;
+}
+
+.stat-value {
+    color: #e6ccb2;
+    font-weight: 700;
+    font-family: 'Cinzel', serif;
+}
+
+.restart-btn {
+    background: linear-gradient(135deg, #5c3a21, #3d2616);
+    color: #ffd700;
+    border: 2px solid #ffd700;
+    padding: 15px 40px;
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.1em;
+}
+
+.restart-btn:hover {
+    background: linear-gradient(135deg, #7a4d2c, #4d301c);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2);
+}
+
+.restart-btn:active {
+    transform: translateY(1px);
+}
+
 /* Force expanded state via class for selection */
 .hand-card-wrapper.is-focused {
     z-index: 1500 !important;
@@ -1115,7 +1325,90 @@ body {
 
 .hand-card-wrapper.is-focused .hand-card-inner {
     transform: translateY(-90px) scale(1.5);
-    transition: transform 0.2s cubic-bezier(0.25, 1.2, 0.4, 1);
+}
+
+/* ── POWER TOWER DYNAMIC STATES ── */
+
+/* Stable state energy flow effect */
+.tower-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 100%);
+    animation: energyFlow 2s linear infinite;
+}
+
+@keyframes energyFlow {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+/* Victory Near (40+) */
+.tower-victory-near {
+    background: linear-gradient(to top, #44ccff, #ffffff) !important;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+    animation: victoryPulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes victoryPulse {
+    from {
+        filter: brightness(1) saturate(1);
+        box-shadow: 0 0 10px gold;
+    }
+
+    to {
+        filter: brightness(1.4) saturate(1.5);
+        box-shadow: 0 0 30px gold;
+    }
+}
+
+/* Danger Zone (1-10) */
+.tower-danger {
+    background: linear-gradient(to top, #8b0000, #ff4444) !important;
+    animation: lowHealthShudder 0.15s infinite, dangerFlicker 0.8s infinite;
+}
+
+@keyframes lowHealthShudder {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-1.5px);
+    }
+
+    75% {
+        transform: translateX(1.5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes dangerFlicker {
+
+    0%,
+    100% {
+        opacity: 1;
+        filter: contrast(1.2);
+    }
+
+    50% {
+        opacity: 0.7;
+        filter: contrast(1.5);
+    }
 }
 
 .history-effect {

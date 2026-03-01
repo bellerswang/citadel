@@ -14,7 +14,8 @@
 }
 
 .card:hover {
-    transform: translateY(-8px) scale(1.45);
+    /* Remove scale(1.45) here! It's causing double scaling 
+       because the wrapper already scales to 1.5. */
     box-shadow: 0 10px 0 #3a2210, 0 28px 38px rgba(0, 0, 0, 0.8), 0 0 28px rgba(255, 215, 0, 0.5);
     z-index: 100;
 }

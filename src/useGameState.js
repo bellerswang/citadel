@@ -17,7 +17,8 @@ export const useGameState = () => {
     const [enemyHand, setEnemyHand] = useState([]);
     const [deck, setDeck] = useState([]);
     const [isPlayerTurn, setIsPlayerTurn] = useState(true);
-    const [winner, setWinner] = useState(null);
+    const [winner, setWinner] = useState(null); // 'PLAYER' or 'ENEMY'
+    const [winReason, setWinReason] = useState(null); // 'tower' or 'destruction'
     const [log, setLog] = useState([{ id: 'start', type: 'start' }]);
     const [activeCard, setActiveCard] = useState(null);
     const [isActionPhase, setIsActionPhase] = useState(false);
@@ -69,6 +70,7 @@ export const useGameState = () => {
         setEnemyHand(eHand);
         setDeck(tempDeck);
         setWinner(null);
+        setWinReason(null);
         setLog([
             { id: Date.now() + Math.random().toString(), type: 'turn_header', turnCount: 1, isPlayer: true },
             { id: Date.now() + Math.random().toString() + '1', type: 'start' },
@@ -130,20 +132,20 @@ export const useGameState = () => {
         }
 
         // Generic "N damage" or "N damage to enemy" (wall-first)
-        if (!towerDmgMatch && !selfTowerDmgMatch) {
+        // Skip generic damage if the card is conditional (handled specifically below)
+        if (!towerDmgMatch && !selfTowerDmgMatch && !e.includes('if')) {
             const genericDmgMatch = e.match(/(\d+) damage/);
             if (genericDmgMatch) {
                 dealDamageToOpp(parseInt(genericDmgMatch[1]));
             }
-        } else if (!towerDmgMatch && selfTowerDmgMatch) {
-            // if there's ALSO a generic damage component (e.g. "6 Damage ...You take N damage")
-            // handled separately below under "you take"
-        } else {
-            // towerDmgMatch found – check if there's ALSO a generic wall-first damage
+        } else if (towerDmgMatch || selfTowerDmgMatch) {
+            // If tower damage was matched, check if there's ALSO a generic wall-first damage component
             const allDmg = [...e.matchAll(/(\d+) damage/g)].map(m => parseInt(m[1]));
-            // towerDmgMatch value is already applied; apply wall-first for any OTHER damage values
-            const towerVal = parseInt(towerDmgMatch[1]);
-            allDmg.forEach(v => { if (v !== towerVal) dealDamageToOpp(v); });
+            const towerVal = towerDmgMatch ? parseInt(towerDmgMatch[1]) : 0;
+            const selfVal = selfTowerDmgMatch ? parseInt(selfTowerDmgMatch[1]) : 0;
+            allDmg.forEach(v => {
+                if (v !== towerVal && v !== selfVal) dealDamageToOpp(v);
+            });
         }
 
         // ─── DAMAGE TO ALL TOWERS ─────────────────────────────────────────────
@@ -165,13 +167,25 @@ export const useGameState = () => {
         gainMatches.forEach(m => {
             const val = parseInt(m[1]);
             const stat = m[2];
+
+            // BUG FIX: Prevent double-applying for specific conditional cards.
+            // If the stat gain is inside an 'if' block handled below, skip it here.
+            if (e.includes('if') && e.includes(stat)) {
+                if (stat === 'quarry' && e.includes('mother lode')) return;
+                if (stat === 'wall' && (e.includes('foundations') || e.includes('barracks'))) return;
+                if (stat === 'tower' && e.includes('bag of baubles')) return;
+            }
+            // Skip Innovations etc. that are handled in their own blocks
+            if (stat === 'quarry' && e.includes("all player's quarry")) return;
+            if (stat === 'dungeon' && e.includes("all player's dungeon")) return;
+
             if (stat === 'tower') setSelf(s => ({ ...s, tower: s.tower + val }));
             if (stat === 'wall') setSelf(s => ({ ...s, wall: s.wall + val }));
             if (stat === 'quarry') setSelf(s => ({ ...s, quarries: s.quarries + val }));
             if (stat === 'magic') setSelf(s => ({ ...s, magic: s.magic + val }));
             if (stat === 'dungeon') setSelf(s => ({ ...s, dungeon: s.dungeon + val }));
-            if (stat === 'recruits' || stat === 'beasts') setSelf(s => ({ ...s, beasts: s.beasts + val }));
-            if (stat === 'bricks') setSelf(s => ({ ...s, bricks: s.bricks + val }));
+            if (stat === 'recruits' || stat === 'beasts' || stat === 'recruit') setSelf(s => ({ ...s, beasts: s.beasts + val }));
+            if (stat === 'bricks' || stat === 'brick') setSelf(s => ({ ...s, bricks: s.bricks + val }));
             if (stat === 'gems' || stat === 'gem') setSelf(s => ({ ...s, gems: s.gems + val }));
         });
 
@@ -415,6 +429,24 @@ export const useGameState = () => {
             setOpp(s => ({ ...s, magic: Math.max(1, s.magic - 1) }));
         }
 
+        // Barracks: "+6 recruits, +6 wall if dungeon < enemy dungeon, +1 dungeon"
+        if (e.includes('barracks')) {
+            if (selfSnap.dungeon < oppSnap.dungeon) {
+                setSelf(s => ({ ...s, wall: s.wall + 6 }));
+            }
+        }
+
+        // Flood Water: "player(s) w/lowest wall are -1 dungeon and 2 damage to tower"
+        if (e.includes('flood water')) {
+            const minWall = Math.min(playerState.wall, enemyState.wall);
+            if (playerState.wall === minWall) {
+                setPlayerState(s => ({ ...s, dungeon: Math.max(1, s.dungeon - 1), tower: Math.max(0, s.tower - 2) }));
+            }
+            if (enemyState.wall === minWall) {
+                setEnemyState(s => ({ ...s, dungeon: Math.max(1, s.dungeon - 1), tower: Math.max(0, s.tower - 2) }));
+            }
+        }
+
         return playAgain;
     };
 
@@ -461,15 +493,14 @@ export const useGameState = () => {
                 setDeck(newDeck);
             }
 
-            // VFX Timing Delay: Wait 1200ms to let damage slashes, shakes, and
-            // screen flashes complete before allowing the next turn.
+            // VFX Timing Delay: Reduced from 2400ms to 500ms for faster gameplay
             setTimeout(() => {
                 if (!autoPlayAgain) {
                     if (!isPlayer) setTurnCount(prev => prev + 1);
                     setIsPlayerTurn(!isPlayer);
                 } else {
                     setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'play_again', isPlayer: autoPlayAgain }, ...prev]);
-                    // If it's the enemy's play-again, schedule next AI turn
+                    // If it's the enemy's play-again, schedule next AI turn (faster response)
                     if (!isPlayer) {
                         setTimeout(() => {
                             if (isPlayerTurnRef.current || isActionPhaseRef.current || winnerRef.current) return;
@@ -478,14 +509,14 @@ export const useGameState = () => {
                             const playable = hand.filter(c => canAfford(c, state));
                             if (playable.length > 0) playCardRef.current(playable[0], false);
                             else if (hand.length > 0) discardCardRef.current(hand[0], false);
-                        }, 2400);
+                        }, 500);
                     }
                 }
 
                 setIsActionPhase(false);
-            }, 2400);
+            }, 500);
 
-        }, 2000);
+        }, 800);
     };
 
     const discardCard = (card, isPlayer) => {
@@ -515,14 +546,17 @@ export const useGameState = () => {
                 if (!isPlayer) setTurnCount(prev => prev + 1);
                 setIsPlayerTurn(!isPlayer);
                 setIsActionPhase(false);
-            }, 1200);
-        }, 2000);
+            }, 400);
+        }, 500);
     };
 
     // Production and Win Condition
     useEffect(() => {
-        if (playerState.tower >= 50 || enemyState.tower <= 0) setWinner('PLAYER');
-        if (enemyState.tower >= 50 || playerState.tower <= 0) setWinner('ENEMY');
+        if (playerState.tower >= 50) { setWinner('PLAYER'); setWinReason('tower'); }
+        else if (enemyState.tower <= 0) { setWinner('PLAYER'); setWinReason('destruction'); }
+
+        if (enemyState.tower >= 50) { setWinner('ENEMY'); setWinReason('tower'); }
+        else if (playerState.tower <= 0) { setWinner('ENEMY'); setWinReason('destruction'); }
     }, [playerState, enemyState]);
 
     useEffect(() => {
@@ -536,7 +570,7 @@ export const useGameState = () => {
             } else {
                 setEnemyState(s => ({ ...s, bricks: s.bricks + s.quarries, gems: s.gems + s.magic, beasts: s.beasts + s.dungeon }));
                 setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'turn_header', turnCount, isPlayer: false }, ...prev]);
-                // AI turn
+                // AI turn (Reduced delay to 0.8s for faster turn transition)
                 setTimeout(() => {
                     if (isPlayerTurnRef.current || isActionPhaseRef.current || winnerRef.current) return;
                     const hand = enemyHandRef.current;
@@ -544,7 +578,7 @@ export const useGameState = () => {
                     const playable = hand.filter(c => canAfford(c, state));
                     if (playable.length > 0) playCardRef.current(playable[0], false);
                     else if (hand.length > 0) discardCardRef.current(hand[0], false);
-                }, 3000);
+                }, 800);
             }
         }
     }, [isPlayerTurn, winner]);
@@ -651,5 +685,5 @@ export const useGameState = () => {
         document.body.removeChild(a);
     };
 
-    return { playerState, enemyState, playerHand, enemyHand, isPlayerTurn, turnCount, winner, log, playCard, discardCard, resetGame, activeCard, exportDebugLog, isActionPhase, runAutoplay };
+    return { playerState, enemyState, playerHand, enemyHand, isPlayerTurn, turnCount, winner, winReason, log, playCard, discardCard, resetGame, activeCard, exportDebugLog, isActionPhase, runAutoplay };
 };

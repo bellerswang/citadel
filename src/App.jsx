@@ -68,6 +68,8 @@ const CastleColumn = ({ state, isEnemy, t }) => {
     const towerClass = towerEffect ? `vfx-${towerEffect.type}-${towerEffect.intensity}` : '';
     const wallClass = wallEffect ? `vfx-${wallEffect.type}-${wallEffect.intensity}` : '';
 
+    const towerStateClass = state.tower >= 40 ? 'tower-victory-near' : (state.tower <= 10 ? 'tower-danger' : '');
+
     const towerElement = (
         <div className="structure-container" key="tower">
             <span className="structure-label">{t.tower}</span>
@@ -75,7 +77,7 @@ const CastleColumn = ({ state, isEnemy, t }) => {
                 <div className="slash-overlay" />
                 <FloatingNumbers value={state.tower} />
                 <div className="fill-bar-container large-bar tower-container">
-                    <div className="fill-bar tower-fill" style={{ height: `${towerPct}%` }}><div className="bar-cap" /></div>
+                    <div className={`fill-bar tower-fill ${towerStateClass}`} style={{ height: `${towerPct}%` }}><div className="bar-cap" /></div>
                     <span className="structure-value">{state.tower}</span>
                 </div>
             </div>
@@ -115,8 +117,19 @@ const VertResItem = ({ producer, amount, producerLabel, amountLabel, color }) =>
     const wrapClass = amountEffect ? `vfx-res-${amountEffect.type}` : '';
     const prodClass = producerEffect ? `vfx-res-${producerEffect.type}` : '';
 
+    // Determine yield intensity for the +N popup
+    const yieldIntensity = producer >= 8 ? 'high' : 'low';
+    const colorClass = color === 'red' ? 'green' : (color === 'blue' ? 'blue' : 'red'); // Match icon colors to resource logic
+
     return (
         <div className={`vert-res-item ${wrapClass}`}>
+            {/* POWERFUL POPUP INDICATOR */}
+            <div className="resource-popup-container" key={`${amount}-${producer}`}>
+                <div className={`resource-popup-val res-popup-${colorClass} res-yield-${yieldIntensity}`}>
+                    +{producer}
+                </div>
+            </div>
+
             <div className={`vert-res-icon-ring ring-${color}`}>
                 <div className={`vert-dot dot-${color} ${prodClass}`} />
                 <div className="vert-res-amount">{amount}</div>
@@ -140,21 +153,39 @@ const VertResourceBar = ({ state, isEnemy, t }) => (
 );
 
 // ── Top Bar Components ───────────────────────────────────────────────────────
-const TopBarSide = ({ isEnemy, name }) => (
-    <div className={`top-bar-side ${!isEnemy ? 'side-left' : 'side-right'}`}>
-        {!isEnemy ? (
-            <>
-                <span className={`side-name player-name`}>{name}</span>
-                <div className="avatar-placeholder player-avatar" />
-            </>
-        ) : (
-            <>
-                <div className="avatar-placeholder enemy-avatar" />
-                <span className={`side-name enemy-name`}>{name}</span>
-            </>
-        )}
-    </div>
-);
+// ── Top Bar Components (Dynamic Avatars) ──────────────────────────────────
+const TopBarSide = ({ isEnemy, name, tower, effect }) => {
+    // Current avatar state logic
+    let state = 'normal';
+    if (tower >= 40) state = 'win';
+    if (effect && effect.type === 'loss') state = 'hurt';
+
+    const side = isEnemy ? 'enemy' : 'player';
+    // Dynamically resolve image path
+    const avatarUrl = new URL(`./avatars/${side}_${state}.png`, import.meta.url).href;
+
+    return (
+        <div className={`top-bar-side ${!isEnemy ? 'side-left' : 'side-right'}`}>
+            {!isEnemy ? (
+                <>
+                    <span className={`side-name player-name`}>{name}</span>
+                    <div className="avatar-frame player-frame">
+                        <img src={avatarUrl} alt="Player Avatar" className="avatar-img" />
+                        <div className="avatar-glow" />
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div className="avatar-frame enemy-frame">
+                        <img src={avatarUrl} alt="Enemy Avatar" className="avatar-img" />
+                        <div className="avatar-glow" />
+                    </div>
+                    <span className={`side-name enemy-name`}>{name}</span>
+                </>
+            )}
+        </div>
+    );
+};
 
 // ── Action Log Message ───────────────────────────────────────────────────────
 const LogMessage = React.memo(({ logObj, language, t }) => {
@@ -215,7 +246,7 @@ function App() {
 
     const {
         playerState, enemyState, playerHand, enemyHand,
-        isPlayerTurn, turnCount, winner, log, playCard, discardCard,
+        isPlayerTurn, turnCount, winner, winReason, log, playCard, discardCard,
         resetGame,
         activeCard,
         isActionPhase,
@@ -229,11 +260,14 @@ function App() {
             isFirstRenderRef.current = false;
             return;
         }
+        // BUG FIX: Don't show turn banner if game is over
+        if (winner) return;
+
         const key = Date.now();
         setTurnBanner({ key, isPlayer: isPlayerTurn });
         const bannerTimer = setTimeout(() => setTurnBanner(null), 1700);
         return () => clearTimeout(bannerTimer);
-    }, [isPlayerTurn]);
+    }, [isPlayerTurn, winner]);
 
     const boardStyle = {
         width: DESIGN_WIDTH,
@@ -262,6 +296,37 @@ function App() {
                 </div>
             )}
 
+            {winner && (
+                <div className="game-over-overlay">
+                    <div className="game-over-card">
+                        <h2 className={`game-over-title ${winner === 'PLAYER' ? 'win' : 'lose'}`}>
+                            {winner === 'PLAYER'
+                                ? (language === 'zh' ? '丰碑永存' : 'VICTORY')
+                                : (language === 'zh' ? '城门失守' : 'DEFEAT')}
+                        </h2>
+
+                        <div className="game-over-stats">
+                            <div className="stat-row">
+                                <span className="stat-label">{language === 'zh' ? '耗时' : 'Time'}:</span>
+                                <span className="stat-value">{turnCount} {language === 'zh' ? '回合' : 'Turns'}</span>
+                            </div>
+                            <div className="stat-row">
+                                <span className="stat-label">{language === 'zh' ? '胜利方式' : 'Reason'}:</span>
+                                <span className="stat-value">
+                                    {winReason === 'tower'
+                                        ? (language === 'zh' ? '高塔建成 (50)' : 'Tower Goal Reached (50)')
+                                        : (language === 'zh' ? '敌方高塔崩塌 (0)' : 'Enemy Tower Destroyed (0)')}
+                                </span>
+                            </div>
+                        </div>
+
+                        <button className="restart-btn" onClick={resetGame}>
+                            {language === 'zh' ? '重整旗鼓' : 'RESTART GAME'}
+                        </button>
+                    </div>
+                </div>
+            )}
+
             <div className="game-board" style={boardStyle}>
                 {/* GUIDE OVERLAY (inside board to share scaled coordinate system) */}
                 {isGuideOpen && (
@@ -274,7 +339,12 @@ function App() {
 
                 {/* ① TOP BAR */}
                 <div className="top-bar">
-                    <TopBarSide isEnemy={false} name="PLAYER" />
+                    <TopBarSide
+                        isEnemy={false}
+                        name={t.player}
+                        tower={playerState.tower}
+                        effect={useValueChangeEffect(playerState.tower) || useValueChangeEffect(playerState.wall)}
+                    />
 
                     <div className="header-flex-wrapper">
                         <h1 className="citadel-title-main">
@@ -298,7 +368,12 @@ function App() {
                         </div>
                     ) : null}
 
-                    <TopBarSide isEnemy={true} name="ENEMY" />
+                    <TopBarSide
+                        isEnemy={true}
+                        name={t.enemy}
+                        tower={enemyState.tower}
+                        effect={useValueChangeEffect(enemyState.tower) || useValueChangeEffect(enemyState.wall)}
+                    />
                 </div>
 
                 {/* ② BATTLEFIELD */}
