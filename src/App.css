@@ -83,15 +83,24 @@ body {
 /* Goldish for Player */
 
 /* ── AVATAR SYSTEM ── */
+.battle-avatar-wrapper {
+    position: absolute;
+    top: -160px;
+    /* Positions in the red box area from your screenshot */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
 .avatar-frame {
-    width: 58px;
-    height: 58px;
+    width: 110px;
+    /* Larger as requested */
+    height: 110px;
     position: relative;
-    border-radius: 8px;
-    /* Square with micro-radius as per prompts */
-    border: 3px solid #5c3a21;
+    border-radius: 12px;
+    border: 4px solid #5c3a21;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.9), inset 0 0 10px black;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9), inset 0 0 15px black;
     background: #000;
     flex-shrink: 0;
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -99,20 +108,19 @@ body {
 }
 
 .avatar-frame:hover {
-    transform: scale(3) translateY(35px);
+    transform: scale(1.1);
+    /* Subtle scale now that it's already large */
     z-index: 1000;
-    border-width: 1.5px;
-    /* Thinner border when giant to see art better */
 }
 
 .player-frame {
     border-color: #ffd700;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 1);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.25), 0 8px 16px rgba(0, 0, 0, 1);
 }
 
 .enemy-frame {
     border-color: #ff4444;
-    box-shadow: 0 0 15px rgba(255, 68, 68, 0.3), 0 4px 12px rgba(0, 0, 0, 1);
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.25), 0 8px 16px rgba(0, 0, 0, 1);
 }
 
 .avatar-img {
@@ -126,15 +134,16 @@ body {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7);
+    z-index: 2;
 }
 
 .player-frame .avatar-glow {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, transparent 100%);
 }
 
 .enemy-frame .avatar-glow {
-    background: linear-gradient(135deg, rgba(255, 68, 68, 0.1) 0%, transparent 100%);
+    background: linear-gradient(135deg, rgba(255, 68, 68, 0.15) 0%, transparent 100%);
 }
 
 /* Top Vitals removed */
@@ -246,6 +255,8 @@ body {
     align-items: flex-end;
     gap: 30px;
     height: 100%;
+    position: relative;
+    /* Added relative positioning for BattlefieldAvatar */
 }
 
 .structure-container {

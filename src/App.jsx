@@ -55,9 +55,27 @@ const useValueChangeEffect = (value) => {
     return effect;
 };
 
+const BattlefieldAvatar = ({ isEnemy, tower, effect }) => {
+    let state = 'normal';
+    // Expression priorities: Win > Hurt > Normal
+    if (tower >= 40) state = 'win';
+    if (effect && effect.type === 'loss') state = 'hurt';
+
+    const side = isEnemy ? 'enemy' : 'player';
+    const avatarUrl = new URL(`./avatars/${side}_${state}.png`, import.meta.url).href;
+
+    return (
+        <div className={`battle-avatar-wrapper ${isEnemy ? 'enemy-avatar-pos' : 'player-avatar-pos'}`}>
+            <div className={`avatar-frame ${isEnemy ? 'enemy-frame' : 'player-frame'}`}>
+                <img src={avatarUrl} alt="Avatar" className="avatar-img" />
+                <div className="avatar-glow" />
+            </div>
+        </div>
+    );
+};
+
 // ── Castle Structure Visual (Tower + Wall side-by-side) ─────────────────────
-// Redesign to side-by-side: Wall in front of Tower (closer to center).
-const CastleColumn = ({ state, isEnemy, t }) => {
+const CastleColumn = ({ state, isEnemy, t, avatarEffect }) => {
     // Math.min for visual percentage (cap at 100%)
     const towerPct = Math.min((state.tower / 50) * 100, 100);
     const wallPct = Math.min((state.wall / 50) * 100, 100);
@@ -98,11 +116,9 @@ const CastleColumn = ({ state, isEnemy, t }) => {
         </div>
     );
 
-    // Wall conceptually "in front" of the Tower relative to the battlefield center.
-    // For Player (now Left side), Wall is on the right of the Tower. -> [towerElement, wallElement]
-    // For Enemy (now Right side), Wall is on the left of the Tower. -> [wallElement, towerElement]
     return (
         <div className={`castle-column ${isEnemy ? 'enemy-side' : 'player-side'}`}>
+            <BattlefieldAvatar isEnemy={isEnemy} tower={state.tower} effect={avatarEffect} />
             {isEnemy ? [wallElement, towerElement] : [towerElement, wallElement]}
         </div>
     );
@@ -154,38 +170,15 @@ const VertResourceBar = ({ state, isEnemy, t }) => (
 
 // ── Top Bar Components ───────────────────────────────────────────────────────
 // ── Top Bar Components (Dynamic Avatars) ──────────────────────────────────
-const TopBarSide = ({ isEnemy, name, tower, effect }) => {
-    // Current avatar state logic
-    let state = 'normal';
-    if (tower >= 40) state = 'win';
-    if (effect && effect.type === 'loss') state = 'hurt';
-
-    const side = isEnemy ? 'enemy' : 'player';
-    // Dynamically resolve image path
-    const avatarUrl = new URL(`./avatars/${side}_${state}.png`, import.meta.url).href;
-
+const TopBarSide = ({ isEnemy, name }) => {
     return (
         <div className={`top-bar-side ${!isEnemy ? 'side-left' : 'side-right'}`}>
-            {!isEnemy ? (
-                <>
-                    <span className={`side-name player-name`}>{name}</span>
-                    <div className="avatar-frame player-frame">
-                        <img src={avatarUrl} alt="Player Avatar" className="avatar-img" />
-                        <div className="avatar-glow" />
-                    </div>
-                </>
-            ) : (
-                <>
-                    <div className="avatar-frame enemy-frame">
-                        <img src={avatarUrl} alt="Enemy Avatar" className="avatar-img" />
-                        <div className="avatar-glow" />
-                    </div>
-                    <span className={`side-name enemy-name`}>{name}</span>
-                </>
-            )}
+            <span className={`side-name ${isEnemy ? 'enemy-name' : 'player-name'}`}>{name}</span>
         </div>
     );
 };
+
+// ── Action Log Message ───────────────────────────────────────────────────────
 
 // ── Action Log Message ───────────────────────────────────────────────────────
 const LogMessage = React.memo(({ logObj, language, t }) => {
@@ -351,8 +344,6 @@ function App() {
                     <TopBarSide
                         isEnemy={false}
                         name={t.player}
-                        tower={playerState.tower}
-                        effect={playerCombinedEff}
                     />
 
                     <div className="header-flex-wrapper">
@@ -380,8 +371,6 @@ function App() {
                     <TopBarSide
                         isEnemy={true}
                         name={t.enemy}
-                        tower={enemyState.tower}
-                        effect={enemyCombinedEff}
                     />
                 </div>
 
@@ -393,7 +382,7 @@ function App() {
                     </div>
 
                     <div className="battlefield-center">
-                        <CastleColumn state={playerState} isEnemy={false} t={t} />
+                        <CastleColumn state={playerState} isEnemy={false} t={t} avatarEffect={playerCombinedEff} />
 
                         <div className="center-action-area">
                             <div className="action-log" ref={actionLogRef} onScroll={handleLogScroll}>
@@ -462,7 +451,7 @@ function App() {
                             </div>
                         )}
 
-                        <CastleColumn state={enemyState} isEnemy={true} t={t} />
+                        <CastleColumn state={enemyState} isEnemy={true} t={t} avatarEffect={enemyCombinedEff} />
                     </div>
 
                     {/* RIGHT SIDEBAR: Enemy Resources */}
