@@ -321,7 +321,7 @@
     },
     {
         "name": "Battlements",
-        "cost": 4,
+        "cost": 14,
         "color": "Red",
         "effect": "+7 Wall. 6 damage to enemy",
         "id": "card_033",
@@ -331,7 +331,7 @@
     },
     {
         "name": "Shift",
-        "cost": 9,
+        "cost": 17,
         "color": "Red",
         "effect": "switch your wall with enemy wall",
         "id": "card_034",
@@ -551,7 +551,7 @@
     },
     {
         "name": "Quarry's Help",
-        "cost": 14,
+        "cost": 4,
         "color": "Blue",
         "effect": "+7 tower lose 10 bricks",
         "id": "card_056",
@@ -603,11 +603,11 @@
         "name": "Lava Jewel",
         "cost": 17,
         "color": "Blue",
-        "effect": "+12 tower 6 damage to enemy",
+        "effect": "+12 tower 6 damage to all enemies",
         "id": "card_061",
         "image_prompt": "A square card illustration of Lava Jewel. Background context: +12 tower 6 damage to enemy. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Blue color theme. No text.",
         "name_zh": "熔岩宝石",
-        "effect_zh": "+12塔 6点区域伤害"
+        "effect_zh": "+12塔 对所有敌人造成6点伤害"
     },
     {
         "name": "Dragon's Eye",
@@ -621,7 +621,7 @@
     },
     {
         "name": "Crystallize",
-        "cost": 18,
+        "cost": 8,
         "color": "Blue",
         "effect": "+11 tower -6 wall",
         "id": "card_063",
@@ -903,7 +903,7 @@
         "name": "Elven Archers",
         "cost": 10,
         "color": "Green",
-        "effect": "if wall > enemy wall do 6 damage else do 6 damage to tower",
+        "effect": "if wall > enemy wall do 6 damage to enemy tower else do 6 damage",
         "id": "card_091",
         "image_prompt": "A square card illustration of Elven Archers. Background context: if wall > enemy wall do 6 damage else do 6 damage to tower. Cel-shaded fantasy cartoon style, clean thick outlines, vibrant colors. Green color theme. No text.",
         "name_zh": "精灵弓箭手",
