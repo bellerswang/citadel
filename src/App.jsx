@@ -3,6 +3,7 @@ import { FloatingNumbers } from './components/FloatingNumbers';
 import Card from './components/Card';
 import Menu from './components/Menu';
 import CardCollection from './components/CardCollection';
+import GameGuideOverlay from './components/GameGuideOverlay';
 import { useGameState, canAfford } from './useGameState';
 import { translations } from './i18n';
 import './ActionLog.css';
@@ -186,6 +187,8 @@ const LogMessage = React.memo(({ logObj, language, t }) => {
 function App() {
     const [language, setLanguage] = useState('zh');
     const [isCollectionOpen, setIsCollectionOpen] = useState(false);
+    const [isGuideOpen, setIsGuideOpen] = useState(false);
+    const [focusedCardUid, setFocusedCardUid] = useState(null);
     const [hoveredLogCard, setHoveredLogCard] = useState(null);
     const [logCardPos, setLogCardPos] = useState({ x: 0, y: 0 });
     const scale = useViewportScale();
@@ -242,10 +245,12 @@ function App() {
     };
 
     return (
-        <div className="game-outer-wrapper">
+        <div className="game-outer-wrapper" onClick={() => setFocusedCardUid(null)}>
             {isCollectionOpen && (
                 <CardCollection onClose={() => setIsCollectionOpen(false)} language={language} t={t} />
             )}
+
+
 
             {turnBanner && (
                 <div className="turn-banner" key={turnBanner.key}>
@@ -258,28 +263,40 @@ function App() {
             )}
 
             <div className="game-board" style={boardStyle}>
+                {/* GUIDE OVERLAY (inside board to share scaled coordinate system) */}
+                {isGuideOpen && (
+                    <GameGuideOverlay
+                        onClose={() => setIsGuideOpen(false)}
+                        language={language}
+                        t={t}
+                    />
+                )}
+
                 {/* ① TOP BAR */}
                 <div className="top-bar">
                     <TopBarSide isEnemy={false} name="PLAYER" />
 
-                    <div className="top-bar-center">
+                    <div className="header-flex-wrapper">
                         <h1 className="citadel-title-main">
-                            {t.gameName} <span style={{ fontSize: '0.4em', color: 'rgba(255, 215, 0, 0.6)', verticalAlign: 'middle', marginLeft: '8px' }}>{GAME_VERSION}</span>
+                            {t.gameName}
+                            <span style={{ fontSize: '0.4em', color: 'rgba(255, 215, 0, 0.6)', verticalAlign: 'middle', marginLeft: '8px' }}>{GAME_VERSION}</span>
+                            <button
+                                className="guide-btn"
+                                onClick={(e) => { e.stopPropagation(); setIsGuideOpen(true); }}
+                                title={language === 'zh' ? '游戏指南' : 'Game Guide'}
+                            >?</button>
                         </h1>
-                        <div className="turn-counter">
-                            {language === 'zh' ? `第 ${turnCount} 回合` : `Turn ${turnCount}`}
-                        </div>
                         <div className="top-controls">
                             <div className="settings-toggle" onClick={() => setLanguage(language === 'en' ? 'zh' : 'en')} title={language === 'zh' ? 'Switch to English' : '切换中文'}>
                                 🌐
                             </div>
                         </div>
-                        {winner ? (
-                            <div className="winner-msg" onClick={resetGame}>
-                                {winner === 'DRAW' ? 'DRAW!' : (winner === 'PLAYER' ? t.playerWins : t.enemyWins)} - {t.playAgain}
-                            </div>
-                        ) : null}
                     </div>
+                    {winner ? (
+                        <div className="winner-msg" onClick={resetGame}>
+                            {winner === 'DRAW' ? 'DRAW!' : (winner === 'PLAYER' ? t.playerWins : t.enemyWins)} - {t.playAgain}
+                        </div>
+                    ) : null}
 
                     <TopBarSide isEnemy={true} name="ENEMY" />
                 </div>
@@ -398,24 +415,61 @@ function App() {
 
                     <div className="mockup-hand-row">
                         <div className={`player-hand-flat ${!isPlayerTurn ? 'enemy-turn' : ''}`}>
-                            {playerHand.map((c, index) => (
-                                <div key={c.uid}
-                                    className={`hand-card-wrapper ${!canAfford(c, playerState) ? 'unaffordable' : ''}`}
-                                    style={{ zIndex: index }}
-                                >
-                                    <div className="hand-card-inner">
-                                        <Card
-                                            card={c}
-                                            isEnemy={false}
-                                            language={language}
-                                            t={t}
-                                            playerState={playerState}
-                                            onPlay={(card) => playCard(card, true)}
-                                            onDiscard={(card) => discardCard(card, true)}
-                                        />
+                            {playerHand.map((c, index) => {
+                                const isFocused = focusedCardUid === c.uid;
+                                const affordable = canAfford(c, playerState);
+
+                                return (
+                                    <div key={c.uid}
+                                        className={`hand-card-wrapper ${!affordable ? 'unaffordable' : ''} ${isFocused ? 'is-focused' : ''}`}
+                                        style={{ zIndex: index }}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            if (!isPlayerTurn) return;
+                                            setFocusedCardUid(isFocused ? null : c.uid);
+                                        }}
+                                    >
+                                        <div className="hand-card-inner">
+                                            <Card
+                                                card={c}
+                                                isEnemy={false}
+                                                language={language}
+                                                t={t}
+                                                playerState={playerState}
+                                                // Disable direct clicks since we use the overlay menu
+                                                onPlay={null}
+                                                onDiscard={null}
+                                            />
+
+                                            {isFocused && isPlayerTurn && (
+                                                <div className="card-action-overlay" onClick={e => e.stopPropagation()}>
+                                                    <button
+                                                        className="action-menu-btn btn-play"
+                                                        disabled={!affordable}
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            playCard(c, true);
+                                                            setFocusedCardUid(null);
+                                                        }}
+                                                    >
+                                                        {language === 'zh' ? '打出' : 'Play'}
+                                                    </button>
+                                                    <button
+                                                        className="action-menu-btn btn-discard"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            discardCard(c, true);
+                                                            setFocusedCardUid(null);
+                                                        }}
+                                                    >
+                                                        {language === 'zh' ? '弃置' : 'Discard'}
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
 

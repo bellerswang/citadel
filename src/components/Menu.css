@@ -43,6 +43,8 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    white-space: nowrap;
+    /* Horizontal text */
 }
 
 .menu-btn:hover,
