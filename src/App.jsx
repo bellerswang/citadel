@@ -46,7 +46,7 @@ const useValueChangeEffect = (value) => {
                 const intensity = magnitude >= 10 ? 'heavy' : (magnitude >= 4 ? 'medium' : 'light');
                 const type = diff > 0 ? 'gain' : 'loss';
                 setEffect({ type, intensity, diff, id: Date.now() });
-                setTimeout(() => setEffect(null), 1000);
+                setTimeout(() => setEffect(null), 2000);
             }
             prevValue.current = value;
         }

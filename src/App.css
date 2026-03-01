@@ -453,12 +453,12 @@ body {
 
 .res-yield-low {
     font-size: 1.6rem;
-    animation: resFlowLow 1.5s ease-out forwards;
+    animation: resFlowLow 2s ease-out forwards;
 }
 
 .res-yield-high {
     font-size: 3.2rem;
-    animation: resFlowHigh 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: resFlowHigh 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     filter: brightness(1.2);
 }
 
