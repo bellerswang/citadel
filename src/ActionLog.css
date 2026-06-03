@@ -189,3 +189,11 @@
     background: linear-gradient(135deg, #33aa55, #116633);
     color: #ccffcc;
 }
+
+.active-card-presentation.action-playing .card {
+    box-shadow: 0 0 28px rgba(255, 215, 0, 0.45), 0 12px 30px rgba(0, 0, 0, 0.75);
+}
+
+.active-card-presentation.action-discarding {
+    filter: grayscale(0.35) sepia(0.25);
+}

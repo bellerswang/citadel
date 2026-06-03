@@ -2,6 +2,71 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import cardsData from './cards.json';
 
 const INITIAL_STATE = { tower: 30, wall: 10, quarries: 2, bricks: 5, magic: 2, gems: 5, dungeon: 2, beasts: 5 };
+const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const makeId = () => `${Date.now()}-${Math.random()}`;
+
+const resourceForCard = (card) => {
+    if (card.color === 'Red') return { field: 'bricks', label: 'Bricks' };
+    if (card.color === 'Blue') return { field: 'gems', label: 'Gems' };
+    if (card.color === 'Green') return { field: 'beasts', label: 'Recruits' };
+    return { field: null, label: '' };
+};
+
+const themeForCard = (card) => {
+    if (card?.color === 'Red') return 'stone';
+    if (card?.color === 'Blue') return 'arcane';
+    if (card?.color === 'Green') return 'war';
+    return 'neutral';
+};
+
+const intensityForText = (text = '') => {
+    const values = [...text.matchAll(/\d+/g)].map(match => Number(match[0]));
+    const maxValue = values.length ? Math.max(...values) : 0;
+    if (maxValue >= 10) return 'heavy';
+    if (maxValue >= 4) return 'medium';
+    return 'light';
+};
+
+const outcomeForCard = (card, isPlayer) => {
+    const text = card.effect.toLowerCase();
+    const actor = isPlayer ? 'player' : 'enemy';
+    const enemy = isPlayer ? 'enemy' : 'player';
+    const intensity = intensityForText(text);
+
+    if (text.includes('damage')) {
+        return {
+            type: 'impact',
+            target: { side: text.includes('you take') || text.includes('your tower') ? actor : enemy, part: text.includes('tower') ? 'tower' : 'wall' },
+            intensity,
+            text: text.includes('tower') ? 'Tower hit' : 'Wall hit'
+        };
+    }
+
+    if (text.includes('+') && (text.includes('tower') || text.includes('wall'))) {
+        return {
+            type: 'build',
+            target: { side: actor, part: text.includes('tower') ? 'tower' : 'wall' },
+            intensity,
+            text: text.includes('tower') ? 'Tower rises' : 'Wall rises'
+        };
+    }
+
+    if (text.includes('lose') || text.includes('gain')) {
+        return {
+            type: 'resource_pull',
+            target: { side: text.includes('enemy loses') ? enemy : actor, part: 'resource' },
+            intensity,
+            text: 'Resources shift'
+        };
+    }
+
+    return {
+        type: 'impact',
+        target: { side: enemy, part: 'field' },
+        intensity,
+        text: 'Effect lands'
+    };
+};
 
 export const canAfford = (card, state) => {
     if (card.color === 'Red') return state.bricks >= card.cost;
@@ -23,6 +88,10 @@ export const useGameState = () => {
     const [activeCard, setActiveCard] = useState(null);
     const [isActionPhase, setIsActionPhase] = useState(false);
     const [turnCount, setTurnCount] = useState(1);
+    const [phase, setPhase] = useState('idle');
+    const [selectedActor, setSelectedActor] = useState('player');
+    const [animationEvent, setAnimationEvent] = useState(null);
+    const [lastResourceError, setLastResourceError] = useState(null);
 
     // ─── Refs for always-fresh values inside setTimeout callbacks ─────────────
     // React state inside a closure (e.g. setTimeout) becomes stale after re-renders.
@@ -78,6 +147,11 @@ export const useGameState = () => {
         setTurnCount(1);
         setIsPlayerTurn(true);
         setIsActionPhase(false);
+        setPhase('idle');
+        setSelectedActor('player');
+        setActiveCard(null);
+        setAnimationEvent({ id: makeId(), type: 'reset' });
+        setLastResourceError(null);
     };
 
     useEffect(() => { resetGame(); }, []);
@@ -485,106 +559,176 @@ export const useGameState = () => {
 
 
 
-    const playCard = (card, isPlayer) => {
+    const emitAnimation = (type, payload = {}) => {
+        const card = payload.card;
+        const actor = payload.actor || (payload.isPlayer === true ? 'player' : payload.isPlayer === false ? 'enemy' : selectedActor);
+        setAnimationEvent({
+            id: makeId(),
+            type,
+            actor,
+            card,
+            theme: payload.theme || themeForCard(card),
+            target: payload.target || null,
+            intensity: payload.intensity || intensityForText(card?.effect || ''),
+            text: payload.text || '',
+            ...payload
+        });
+    };
+
+    const replaceCard = (card, isPlayer) => {
+        const { card: nextC, newDeck } = drawCard(deckRef.current);
+        const updateHand = (hand) => [...hand.filter(c => c.uid !== card.uid), nextC];
+
+        if (isPlayer) setPlayerHand(updateHand);
+        else setEnemyHand(updateHand);
+        setDeck(newDeck);
+        deckRef.current = newDeck;
+        emitAnimation('draw_card', { isPlayer, card: nextC, text: 'Draw' });
+    };
+
+    const spendCardCost = (card, isPlayer) => {
+        const { field } = resourceForCard(card);
+        const setter = isPlayer ? setPlayerState : setEnemyState;
+        if (!field) return;
+        setter(s => ({ ...s, [field]: Math.max(0, s[field] - card.cost) }));
+        emitAnimation('resource_spend', {
+            isPlayer,
+            card,
+            resource: field,
+            amount: card.cost,
+            target: { side: isPlayer ? 'player' : 'enemy', part: 'resource' },
+            text: `-${card.cost}`
+        });
+    };
+
+    const runAiTurn = async () => {
+        if (isPlayerTurnRef.current || isActionPhaseRef.current || winnerRef.current) return;
+        setPhase('ai-thinking');
+        setSelectedActor('enemy');
+        emitAnimation('ai_thinking');
+        await wait(650);
+        if (isPlayerTurnRef.current || isActionPhaseRef.current || winnerRef.current) return;
+
+        const hand = enemyHandRef.current;
+        const state = enemyStateRef.current;
+        const playable = hand.filter(c => canAfford(c, state));
+        if (playable.length > 0) {
+            emitAnimation('ai_select', { card: playable[0], actor: 'enemy', text: 'Enemy chooses' });
+            await wait(250);
+            playCardRef.current(playable[0], false);
+        } else {
+            const discardable = hand.filter(c => !c.effect.toLowerCase().includes("can't be discarded without playing it"));
+            const card = discardable[0] || hand[0];
+            if (card) {
+                emitAnimation('ai_select', { card, actor: 'enemy', text: 'Enemy cycles' });
+                await wait(250);
+                discardCardRef.current(card, false);
+            }
+        }
+    };
+
+    const endActionSequence = async (isPlayer, playAgain) => {
+        if (playAgain) {
+            setLog(prev => [{ id: makeId(), type: 'play_again', isPlayer }, ...prev]);
+            emitAnimation('play_again', { isPlayer, actor: isPlayer ? 'player' : 'enemy', text: 'Play again' });
+            await wait(isPlayer ? 300 : 450);
+            setIsActionPhase(false);
+            setPhase('idle');
+            if (!isPlayer) runAiTurn();
+            return;
+        }
+
+        emitAnimation('end_turn', { isPlayer, actor: isPlayer ? 'player' : 'enemy', text: 'End turn' });
+        await wait(250);
+        if (!isPlayer) setTurnCount(prev => prev + 1);
+        setIsPlayerTurn(!isPlayer);
+        setIsActionPhase(false);
+        setPhase('idle');
+    };
+
+    const playCard = async (card, isPlayer) => {
         if (winner || isActionPhase) return;
-        if (isPlayer && !canAfford(card, playerState)) {
-            setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'not_enough', card, isPlayer }, ...prev]);
+        const actorState = isPlayer ? playerState : enemyStateRef.current;
+        const { field, label } = resourceForCard(card);
+
+        if (!canAfford(card, actorState)) {
+            const missing = field ? Math.max(0, card.cost - actorState[field]) : 0;
+            const error = { id: makeId(), cardUid: card.uid, isPlayer, resource: field, label, missing };
+            setLastResourceError(error);
+            emitAnimation('resource_error', { ...error, card, target: { side: isPlayer ? 'player' : 'enemy', part: 'resource' }, text: `Need +${missing}` });
+            await wait(700);
+            setLastResourceError(null);
             return;
         }
 
         setIsActionPhase(true);
-        setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'played', card, isPlayer }, ...prev]);
+        setPhase('playing');
+        setSelectedActor(isPlayer ? 'player' : 'enemy');
+        setLastResourceError(null);
+        emitAnimation('card_select', { card, isPlayer, text: card.name });
+        await wait(80);
+
         setActiveCard(card);
+        setLog(prev => [{ id: makeId(), type: 'played', card, isPlayer }, ...prev]);
+        emitAnimation('stage_enter', { card, isPlayer, action: 'play', text: card.name });
+        await wait(isPlayer ? 310 : 260);
 
-        setTimeout(() => {
-            setActiveCard(null);
-            const autoPlayAgain = applyEffect(card, isPlayer);
+        if (!isPlayer) {
+            emitAnimation('ai_reveal', { card, isPlayer, action: 'play', text: card.name });
+            await wait(260);
+        }
 
-            const cost = card.cost;
-            if (isPlayer) {
-                setPlayerState(s => {
-                    const next = { ...s };
-                    if (card.color === 'Red') next.bricks -= cost;
-                    if (card.color === 'Blue') next.gems -= cost;
-                    if (card.color === 'Green') next.beasts -= cost;
-                    return next;
-                });
-                setPlayerHand(h => h.filter(c => c.uid !== card.uid));
-                const { card: nextC, newDeck } = drawCard(deck);
-                setPlayerHand(prev => [...prev, nextC]);
-                setDeck(newDeck);
-            } else {
-                setEnemyState(s => {
-                    const next = { ...s };
-                    if (card.color === 'Red') next.bricks -= cost;
-                    if (card.color === 'Blue') next.gems -= cost;
-                    if (card.color === 'Green') next.beasts -= cost;
-                    return next;
-                });
-                setEnemyHand(h => h.filter(c => c.uid !== card.uid));
-                const { card: nextC, newDeck } = drawCard(deck);
-                setEnemyHand(prev => [...prev, nextC]);
-                setDeck(newDeck);
-            }
+        emitAnimation('stage_reveal', { card, isPlayer, action: 'play', text: card.effect });
+        await wait(340);
 
-            // VFX Timing Delay: Reduced from 2400ms to 500ms for faster gameplay
-            setTimeout(() => {
-                if (!autoPlayAgain) {
-                    if (!isPlayer) setTurnCount(prev => prev + 1);
-                    setIsPlayerTurn(!isPlayer);
-                } else {
-                    setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'play_again', isPlayer: autoPlayAgain }, ...prev]);
-                    // If it's the enemy's play-again, schedule next AI turn (faster response)
-                    if (!isPlayer) {
-                        setTimeout(() => {
-                            if (isPlayerTurnRef.current || isActionPhaseRef.current || winnerRef.current) return;
-                            const hand = enemyHandRef.current;
-                            const state = enemyStateRef.current;
-                            const playable = hand.filter(c => canAfford(c, state));
-                            if (playable.length > 0) playCardRef.current(playable[0], false);
-                            else if (hand.length > 0) discardCardRef.current(hand[0], false);
-                        }, 500);
-                    }
-                }
+        spendCardCost(card, isPlayer);
+        await wait(210);
 
-                setIsActionPhase(false);
-            }, 500);
+        const outcome = outcomeForCard(card, isPlayer);
+        emitAnimation('effect_release', { card, isPlayer, action: 'play', target: outcome.target, intensity: outcome.intensity, text: outcome.text });
+        await wait(320);
 
-        }, 800);
+        const autoPlayAgain = applyEffect(card, isPlayer);
+        emitAnimation(outcome.type, { card, isPlayer, action: 'play', target: outcome.target, intensity: outcome.intensity, text: outcome.text });
+        await wait(340);
+
+        replaceCard(card, isPlayer);
+        await wait(250);
+
+        setActiveCard(null);
+        await endActionSequence(isPlayer, autoPlayAgain);
     };
 
-    const discardCard = (card, isPlayer) => {
+    const discardCard = async (card, isPlayer) => {
         if (winner || isActionPhase) return;
 
-        // Lodestone Protection: Cannot discard if the card says so
-        if (card.effect.toLowerCase().includes("can't be discarded without playing it")) return;
+        if (card.effect.toLowerCase().includes("can't be discarded without playing it")) {
+            const error = { id: makeId(), cardUid: card.uid, isPlayer, reason: 'locked' };
+            setLastResourceError(error);
+            emitAnimation('discard_denied', { ...error, card, target: { side: isPlayer ? 'player' : 'enemy', part: 'hand' }, text: 'Cannot discard' });
+            await wait(700);
+            setLastResourceError(null);
+            return;
+        }
 
         setIsActionPhase(true);
-        setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'discarded', card, isPlayer }, ...prev]);
+        setPhase('discarding');
+        setSelectedActor(isPlayer ? 'player' : 'enemy');
+        emitAnimation('card_select', { card, isPlayer, text: card.name });
+        await wait(80);
+
         setActiveCard(card);
+        setLog(prev => [{ id: makeId(), type: 'discarded', card, isPlayer }, ...prev]);
+        emitAnimation('stage_enter', { card, isPlayer, action: 'discard', text: card.name });
+        await wait(250);
 
-        setTimeout(() => {
-            setActiveCard(null);
+        emitAnimation('card_return', { card, isPlayer, action: 'discard', text: 'Discard' });
+        await wait(300);
+        replaceCard(card, isPlayer);
+        await wait(250);
 
-            if (isPlayer) {
-                setPlayerHand(h => h.filter(c => c.uid !== card.uid));
-                const { card: nextC, newDeck } = drawCard(deck);
-                setPlayerHand(prev => [...prev, nextC]);
-                setDeck(newDeck);
-            } else {
-                setEnemyHand(h => h.filter(c => c.uid !== card.uid));
-                const { card: nextC, newDeck } = drawCard(deck);
-                setEnemyHand(prev => [...prev, nextC]);
-                setDeck(newDeck);
-            }
-
-            // Discard doesn't trigger complex VFX, but we add a small delay anyway for flow
-            setTimeout(() => {
-                if (!isPlayer) setTurnCount(prev => prev + 1);
-                setIsPlayerTurn(!isPlayer);
-                setIsActionPhase(false);
-            }, 400);
-        }, 500);
+        setActiveCard(null);
+        await endActionSequence(isPlayer, false);
     };
 
     // Production and Win Condition
@@ -607,20 +751,7 @@ export const useGameState = () => {
             } else {
                 setEnemyState(s => ({ ...s, bricks: s.bricks + s.quarries, gems: s.gems + s.magic, beasts: s.beasts + s.dungeon }));
                 setLog(prev => [{ id: Date.now() + Math.random().toString(), type: 'turn_header', turnCount, isPlayer: false }, ...prev]);
-                // AI turn (Reduced delay to 0.8s for faster turn transition)
-                setTimeout(() => {
-                    if (isPlayerTurnRef.current || isActionPhaseRef.current || winnerRef.current) return;
-                    const hand = enemyHandRef.current;
-                    const state = enemyStateRef.current;
-                    const playable = hand.filter(c => canAfford(c, state));
-                    if (playable.length > 0) playCardRef.current(playable[0], false);
-                    else {
-                        const discardable = hand.filter(c => !c.effect.toLowerCase().includes("can't be discarded without playing it"));
-                        if (discardable.length > 0) discardCardRef.current(discardable[0], false);
-                        // If no card is discardable (all are Lodestones), the AI passes or tries to discard anyway to avoid deadlock
-                        else if (hand.length > 0) discardCardRef.current(hand[0], false);
-                    }
-                }, 800);
+                runAiTurn();
             }
         }
     }, [isPlayerTurn, winner]);
@@ -727,5 +858,11 @@ export const useGameState = () => {
         document.body.removeChild(a);
     };
 
-    return { playerState, enemyState, playerHand, enemyHand, isPlayerTurn, turnCount, winner, winReason, log, playCard, discardCard, resetGame, activeCard, exportDebugLog, isActionPhase, runAutoplay };
+    return {
+        playerState, enemyState, playerHand, enemyHand,
+        isPlayerTurn, turnCount, winner, winReason, log,
+        playCard, discardCard, resetGame, activeCard, exportDebugLog,
+        isActionPhase, runAutoplay, phase, selectedActor,
+        animationEvent, lastResourceError
+    };
 };
