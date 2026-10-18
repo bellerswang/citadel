@@ -1,0 +1,4120 @@
+[
+ {
+  "id": "card_001",
+  "name": "Brick Shortage",
+  "why": "base: both players lose 8 bricks",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 4,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 7,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_001",
+  "name": "Brick Shortage (floor)",
+  "why": "floor: bricks cannot go below 0",
+  "player": {
+   "bricks": 5
+  },
+  "enemy": {
+   "bricks": 3
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 0,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 0,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_002",
+  "name": "Lucky Cache",
+  "why": "base: +2 bricks, +2 gems, play again",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 14,
+   "magic": 3,
+   "gems": 14,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": true,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_003",
+  "name": "Friendly Terrain",
+  "why": "base: +1 wall, play again",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 9,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": true,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_004",
+  "name": "Miners",
+  "why": "base: +1 quarry",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 4,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_005",
+  "name": "Mother Lode",
+  "why": "base: quarry 3 < enemy quarry 4, so +2 quarry",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 5,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_005",
+  "name": "Mother Lode (else)",
+  "why": "else branch: quarry not less than enemy quarry, so +1 quarry",
+  "player": {
+   "quarries": 4
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 5,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_006",
+  "name": "Dwarven Miners",
+  "why": "base: +4 wall, +1 quarry",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 12,
+   "quarries": 4,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_007",
+  "name": "Work Overtime",
+  "why": "base: +5 wall, lose 6 gems",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 13,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 6,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_007",
+  "name": "Work Overtime (floor)",
+  "why": "floor: gems cannot go below 0",
+  "player": {
+   "gems": 4
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 13,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 0,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_008",
+  "name": "CoppingtheTech",
+  "why": "base: quarry 3 < enemy quarry 4, set quarry to 4",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 4,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_008",
+  "name": "CoppingtheTech (else)",
+  "why": "else branch: quarry not less than enemy quarry, no change",
+  "player": {
+   "quarries": 5
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 5,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_009",
+  "name": "Basic Wall",
+  "why": "base: +3 wall",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 11,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_010",
+  "name": "Sturdy Wall",
+  "why": "base: +4 wall",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 12,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_011",
+  "name": "Innovations",
+  "why": "base: all quarries +1, self gains 4 gems",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 4,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 16,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 5,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_012",
+  "name": "Foundations",
+  "why": "base: wall is not 0, so +3 wall",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 11,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_012",
+  "name": "Foundations (zero wall)",
+  "why": "other branch: wall is 0, so +6 wall",
+  "player": {
+   "wall": 0
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 6,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_013",
+  "name": "Tremors",
+  "why": "base: all walls take 5 damage, play again",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 3,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": true,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_013",
+  "name": "Tremors (floor)",
+  "why": "floor: walls cannot go below 0",
+  "player": {
+   "wall": 1
+  },
+  "enemy": {
+   "wall": 2
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 0,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": true,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_014",
+  "name": "Secret Room",
+  "why": "base: +1 magic, play again",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 4,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": true,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_015",
+  "name": "Earthquake",
+  "why": "base: all quarries -1",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 2,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 3,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_015",
+  "name": "Earthquake (floor)",
+  "why": "floor: quarries cannot go below 1",
+  "player": {
+   "quarries": 1
+  },
+  "enemy": {
+   "quarries": 1
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 1,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 1,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_016",
+  "name": "Big Wall",
+  "why": "base: +6 wall",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 14,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_017",
+  "name": "Collapse!",
+  "why": "base: enemy quarry -1",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 3,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_017",
+  "name": "Collapse! (floor)",
+  "why": "floor: enemy quarry cannot go below 1",
+  "enemy": {
+   "quarries": 1
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 1,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_018",
+  "name": "New Equipment",
+  "why": "base: +2 quarry",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 5,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_019",
+  "name": "Strip Mine",
+  "why": "base: -1 quarry, +10 wall, gain 5 gems",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 18,
+   "quarries": 2,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 17,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_019",
+  "name": "Strip Mine (floor)",
+  "why": "floor: quarry cannot go below 1",
+  "player": {
+   "quarries": 1
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 18,
+   "quarries": 1,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 17,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_020",
+  "name": "Reinforced Wall",
+  "why": "base: +8 wall",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 16,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_021",
+  "name": "Porticulus",
+  "why": "base: +5 wall, +1 dungeon",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 13,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 4,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_022",
+  "name": "Crystal Rocks",
+  "why": "base: +7 wall, gain 7 gems",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 15,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 19,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_023",
+  "name": "Harmonic Ore",
+  "why": "base: +6 wall, +3 tower",
+  "expectPlayer": {
+   "tower": 23,
+   "wall": 14,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_024",
+  "name": "MondoWall",
+  "why": "base: +12 wall",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 20,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_025",
+  "name": "FocusedDesigns",
+  "why": "base: +8 wall, +5 tower",
+  "expectPlayer": {
+   "tower": 25,
+   "wall": 16,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_026",
+  "name": "Great Wall",
+  "why": "base: +15 wall",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 23,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_027",
+  "name": "Rock Launcher",
+  "why": "base: +6 wall, 10 normal damage to enemy",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 14,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 20,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_027",
+  "name": "Rock Launcher (floor)",
+  "why": "floor: enemy tower cannot go below 0",
+  "enemy": {
+   "tower": 1,
+   "wall": 0
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 14,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 0,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_028",
+  "name": "Dragon's Heart",
+  "why": "base: +20 wall, +8 tower",
+  "expectPlayer": {
+   "tower": 28,
+   "wall": 28,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_029",
+  "name": "Forced Labor",
+  "why": "base: +9 wall, lose 5 beasts",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 17,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 7
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_029",
+  "name": "Forced Labor (floor)",
+  "why": "floor: beasts cannot go below 0",
+  "player": {
+   "beasts": 3
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 17,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 0
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_030",
+  "name": "Rock Garden",
+  "why": "base: +1 wall, +1 tower, +2 beasts",
+  "expectPlayer": {
+   "tower": 21,
+   "wall": 9,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 14
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_031",
+  "name": "Flood Water",
+  "why": "base: enemy has lowest wall, so enemy loses 1 dungeon and 2 tower",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 23,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 3,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_031",
+  "name": "Flood Water (self lowest)",
+  "why": "other branch: self has lowest wall, so self loses 1 dungeon and 2 tower",
+  "player": {
+   "wall": 2
+  },
+  "expectPlayer": {
+   "tower": 18,
+   "wall": 2,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 2,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_031",
+  "name": "Flood Water (floor)",
+  "why": "floor: dungeon cannot go below 1, tower cannot go below 0",
+  "enemy": {
+   "tower": 1,
+   "wall": 1,
+   "dungeon": 1
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 0,
+   "wall": 1,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 1,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_032",
+  "name": "Barracks",
+  "why": "base: +6 beasts, +6 wall, dungeon < enemy dungeon so +1 dungeon",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 14,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 4,
+   "beasts": 18
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_032",
+  "name": "Barracks (else)",
+  "why": "else branch: dungeon not less than enemy dungeon, so no +1 dungeon",
+  "player": {
+   "dungeon": 5
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 14,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 5,
+   "beasts": 18
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_033",
+  "name": "Battlements",
+  "why": "base: +7 wall, 6 normal damage to enemy",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 15,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 24,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_033",
+  "name": "Battlements (floor)",
+  "why": "floor: enemy tower cannot go below 0",
+  "enemy": {
+   "tower": 1,
+   "wall": 0
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 15,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 0,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_034",
+  "name": "Shift",
+  "why": "base: switch walls",
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 5,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 8,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_035",
+  "name": "Quartz",
+  "why": "+1 tower and play again",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 21,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": true,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_036",
+  "name": "Smoky Quartz",
+  "why": "1 direct damage to enemy tower and play again",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 24,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": true,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_037",
+  "name": "Amethyst",
+  "why": "+3 tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 23,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_038",
+  "name": "Spell Weavers",
+  "why": "+1 magic",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 4,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_039",
+  "name": "Prism",
+  "why": "draw 1 discard 1 and play again",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": true,
+  "drawDiscard": 1
+ },
+ {
+  "id": "card_040",
+  "name": "Lodestone",
+  "why": "+3 tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 23,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_041",
+  "name": "Solar Flare",
+  "why": "+2 own tower and 2 direct damage to enemy tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 22,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 23,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_042",
+  "name": "Crystal Matrix",
+  "why": "+1 magic, +3 own tower, +1 enemy tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 23,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 4,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 26,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_043",
+  "name": "Gemstone Flaw",
+  "why": "3 direct damage to enemy tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 22,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_044",
+  "name": "Ruby",
+  "why": "+5 tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 25,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_045",
+  "name": "Gem Spear",
+  "why": "5 direct damage to enemy tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 20,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_046",
+  "name": "Power Burn",
+  "why": "5 direct damage to own tower and +2 magic",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 15,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 5,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_046",
+  "name": "Power Burn floor",
+  "why": "direct self tower damage cannot reduce tower below 0",
+  "player": {
+   "tower": 3
+  },
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 0,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 5,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_047",
+  "name": "Harmonic Vibe",
+  "why": "+1 magic, +3 tower, +3 wall",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 23,
+   "wall": 11,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 4,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_048",
+  "name": "Parity",
+  "why": "all players' magic becomes the highest magic value",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 3,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_049",
+  "name": "Emerald",
+  "why": "+8 tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 28,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_050",
+  "name": "Pearl of Wisdom",
+  "why": "+5 tower and +1 magic",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 25,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 4,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_051",
+  "name": "Shatterer",
+  "why": "-1 magic and 9 direct damage to enemy tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 2,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 16,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_051",
+  "name": "Shatterer floor",
+  "why": "magic cannot go below 1",
+  "player": {
+   "magic": 1
+  },
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 1,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 16,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_052",
+  "name": "Crumblestone",
+  "why": "+5 tower and enemy loses 6 bricks",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 25,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 9,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_052",
+  "name": "Crumblestone floor",
+  "why": "enemy bricks cannot go below 0",
+  "player": {},
+  "enemy": {
+   "bricks": 2
+  },
+  "expectPlayer": {
+   "tower": 25,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 0,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_053",
+  "name": "Sapphire",
+  "why": "+11 tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 31,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_054",
+  "name": "Discord",
+  "why": "both towers take 7 direct damage and both players' magic -1",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 13,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 2,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 18,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 1,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_054",
+  "name": "Discord floor",
+  "why": "towers cannot go below 0 and magic cannot go below 1",
+  "player": {
+   "tower": 5,
+   "magic": 1
+  },
+  "enemy": {
+   "tower": 5,
+   "magic": 1
+  },
+  "expectPlayer": {
+   "tower": 0,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 1,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 0,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 1,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_055",
+  "name": "Fire Ruby",
+  "why": "+6 tower and 4 direct damage to enemy tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 26,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 21,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_056",
+  "name": "Quarry's Help",
+  "why": "+7 tower and lose 10 bricks",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 27,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 2,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_056",
+  "name": "Quarry's Help floor",
+  "why": "bricks cannot go below 0",
+  "player": {
+   "bricks": 5
+  },
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 27,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 0,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_057",
+  "name": "Crystal Shield",
+  "why": "+8 tower and +3 wall",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 28,
+   "wall": 11,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_058",
+  "name": "Empathy Gem",
+  "why": "+8 tower and +1 dungeon",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 28,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 4,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_059",
+  "name": "Diamond",
+  "why": "+15 tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 35,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_060",
+  "name": "Sanctuary",
+  "why": "+10 tower, +5 wall, and +5 recruits",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 30,
+   "wall": 13,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 17
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_061",
+  "name": "Lava Jewel",
+  "why": "+12 tower and 6 normal damage to enemy; wall absorbs first",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 32,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 24,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_062",
+  "name": "Dragon's Eye",
+  "why": "+20 tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 40,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_063",
+  "name": "Crystallize",
+  "why": "+11 tower and -6 wall",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 31,
+   "wall": 2,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_063",
+  "name": "Crystallize floor",
+  "why": "wall cannot go below 0",
+  "player": {
+   "wall": 3
+  },
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 31,
+   "wall": 0,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_064",
+  "name": "Bag of Baubles",
+  "why": "own tower is less than enemy tower, so +2 tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 22,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_064",
+  "name": "Bag of Baubles else",
+  "why": "own tower not less than enemy tower, so +1 tower",
+  "player": {
+   "tower": 25
+  },
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 26,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_065",
+  "name": "Rainbow",
+  "why": "+1 tower to both players and +3 gems to self",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 21,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 15,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 26,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_066",
+  "name": "Apprentice",
+  "why": "+4 tower, lose 3 recruits, and 2 direct damage to enemy tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 24,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 9
+  },
+  "expectEnemy": {
+   "tower": 23,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_066",
+  "name": "Apprentice floor",
+  "why": "recruits cannot go below 0",
+  "player": {
+   "beasts": 2
+  },
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 24,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 0
+  },
+  "expectEnemy": {
+   "tower": 23,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_067",
+  "name": "Lightning Shard",
+  "why": "own tower > enemy wall, so 8 direct damage to enemy tower",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 17,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_067",
+  "name": "Lightning Shard else",
+  "why": "own tower not greater than enemy wall, so 8 normal damage; enemy wall absorbs it",
+  "player": {},
+  "enemy": {
+   "wall": 20
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 12,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_068",
+  "name": "Phase Jewel",
+  "why": "+13 tower, +6 recruits, and +6 bricks",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 33,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 18,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 18
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_069",
+  "name": "MadCowDisease",
+  "why": "Both players lose 6 recruits; base no underflow.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 6
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 9
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_069",
+  "name": "MadCowDisease",
+  "why": "Recruit loss floors at 0 for both players.",
+  "player": {
+   "beasts": 2
+  },
+  "enemy": {
+   "beasts": 4
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 0
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 0
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_070",
+  "name": "Faerie",
+  "why": "2 normal damage to enemy wall then play again.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 3,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": true,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_071",
+  "name": "Moody Goblins",
+  "why": "4 normal damage and self loses 3 gems.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 9,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 1,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_071",
+  "name": "Moody Goblins",
+  "why": "Gem loss floors at 0.",
+  "player": {
+   "gems": 2
+  },
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 0,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 1,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_072",
+  "name": "Minotaur",
+  "why": "Self dungeon increases by 1.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 4,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_073",
+  "name": "Elven Scout",
+  "why": "Draw/discard only; play again.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": true,
+  "drawDiscard": 1
+ },
+ {
+  "id": "card_074",
+  "name": "Goblin Mob",
+  "why": "6 normal damage to enemy and 3 normal damage to self.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 5,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 24,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_075",
+  "name": "Goblin Archers",
+  "why": "Direct enemy tower damage and self normal damage.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 7,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 22,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_076",
+  "name": "Shadow Faerie",
+  "why": "Direct enemy tower damage and play again.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 23,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": true,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_077",
+  "name": "Orc",
+  "why": "5 normal damage is fully absorbed by enemy wall.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_078",
+  "name": "Dwarves",
+  "why": "4 normal damage and self wall +3.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 11,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 1,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_079",
+  "name": "Little Snakes",
+  "why": "Direct enemy tower damage.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 21,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_080",
+  "name": "Troll Trainer",
+  "why": "Self dungeon increases by 2.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 5,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_081",
+  "name": "Tower Gremlin",
+  "why": "2 normal damage, self wall +4, self tower +2.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 22,
+   "wall": 12,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 3,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_082",
+  "name": "Full Moon",
+  "why": "Both dungeons +1 and self gains 3 recruits.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 5,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_083",
+  "name": "Slasher",
+  "why": "6 normal damage overflows enemy wall by 1.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 24,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_084",
+  "name": "Ogre",
+  "why": "7 normal damage overflows enemy wall by 2.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 23,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_085",
+  "name": "Rabid Sheep",
+  "why": "6 normal damage and enemy loses 3 recruits.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 24,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 12
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_085",
+  "name": "Rabid Sheep",
+  "why": "Enemy recruit loss floors at 0.",
+  "player": {},
+  "enemy": {
+   "beasts": 2
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 24,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 0
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_086",
+  "name": "Imp",
+  "why": "6 normal damage and both players lose 5 bricks, gems, recruits.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 7,
+   "magic": 3,
+   "gems": 7,
+   "dungeon": 3,
+   "beasts": 7
+  },
+  "expectEnemy": {
+   "tower": 24,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 10,
+   "magic": 2,
+   "gems": 10,
+   "dungeon": 4,
+   "beasts": 10
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_086",
+  "name": "Imp",
+  "why": "Brick, gem, and recruit losses floor at 0 for both.",
+  "player": {
+   "bricks": 2,
+   "gems": 1,
+   "beasts": 3
+  },
+  "enemy": {
+   "bricks": 4,
+   "gems": 2,
+   "beasts": 1
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 0,
+   "magic": 3,
+   "gems": 0,
+   "dungeon": 3,
+   "beasts": 0
+  },
+  "expectEnemy": {
+   "tower": 24,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 0,
+   "magic": 2,
+   "gems": 0,
+   "dungeon": 4,
+   "beasts": 0
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_087",
+  "name": "Spizzer",
+  "why": "Base enemy wall is not 0, so 6 normal damage.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 24,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_087",
+  "name": "Spizzer",
+  "why": "Enemy wall 0 triggers 10 normal damage.",
+  "player": {},
+  "enemy": {
+   "wall": 0
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 15,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_088",
+  "name": "Werewolf",
+  "why": "9 normal damage overflows enemy wall by 4.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 21,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_089",
+  "name": "Corrosion Cloud",
+  "why": "Enemy wall > 0 triggers 10 normal damage.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 20,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_089",
+  "name": "Corrosion Cloud",
+  "why": "Enemy wall 0 triggers 7 normal damage.",
+  "player": {},
+  "enemy": {
+   "wall": 0
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 18,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_090",
+  "name": "Unicorn",
+  "why": "Self magic > enemy magic triggers 12 normal damage.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 18,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_090",
+  "name": "Unicorn",
+  "why": "Magic not greater triggers 8 normal damage.",
+  "player": {
+   "magic": 2
+  },
+  "enemy": {
+   "magic": 2
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 2,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 22,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_091",
+  "name": "Elven Archers",
+  "why": "Self wall > enemy wall triggers direct enemy tower damage.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 19,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_091",
+  "name": "Elven Archers",
+  "why": "Self wall not greater triggers 6 normal damage.",
+  "player": {
+   "wall": 4
+  },
+  "enemy": {
+   "wall": 5
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 4,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 24,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_092",
+  "name": "Succubus",
+  "why": "Direct enemy tower damage and enemy loses 8 recruits.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 20,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 7
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_092",
+  "name": "Succubus",
+  "why": "Enemy recruit loss floors at 0.",
+  "player": {},
+  "enemy": {
+   "beasts": 5
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 20,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 0
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_093",
+  "name": "Rock Stompers",
+  "why": "8 normal damage and enemy quarry -1.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 22,
+   "wall": 0,
+   "quarries": 3,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_093",
+  "name": "Rock Stompers",
+  "why": "Enemy quarry floor stays at 1.",
+  "player": {},
+  "enemy": {
+   "quarries": 1
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 22,
+   "wall": 0,
+   "quarries": 1,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_094",
+  "name": "Thief",
+  "why": "Enemy loses capped 10 gems and 5 bricks; self gains ceil halves.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 15,
+   "magic": 3,
+   "gems": 17,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 10,
+   "magic": 2,
+   "gems": 5,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_094",
+  "name": "Thief",
+  "why": "Actual enemy losses are smaller; self gains ceil halves and enemy floors at 0.",
+  "player": {},
+  "enemy": {
+   "gems": 3,
+   "bricks": 2
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 13,
+   "magic": 3,
+   "gems": 14,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 0,
+   "magic": 2,
+   "gems": 0,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_095",
+  "name": "Stone Giant",
+  "why": "10 normal damage and self wall +4.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 12,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 20,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_096",
+  "name": "Vampire",
+  "why": "10 normal damage, enemy loses 5 recruits and dungeon -1.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 20,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 3,
+   "beasts": 10
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_096",
+  "name": "Vampire",
+  "why": "Enemy recruit loss floors at 0 and dungeon floors at 1.",
+  "player": {},
+  "enemy": {
+   "dungeon": 1,
+   "beasts": 2
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 20,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 1,
+   "beasts": 0
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_097",
+  "name": "Dragon",
+  "why": "20 normal damage, enemy loses 10 gems and dungeon -1.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 10,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 5,
+   "dungeon": 3,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_097",
+  "name": "Dragon",
+  "why": "Enemy gem loss floors at 0 and dungeon floors at 1.",
+  "player": {},
+  "enemy": {
+   "gems": 4,
+   "dungeon": 1
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 10,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 0,
+   "dungeon": 1,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_098",
+  "name": "Spearman",
+  "why": "Self wall > enemy wall triggers 3 normal damage.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 2,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_098",
+  "name": "Spearman",
+  "why": "Self wall not greater triggers 2 normal damage.",
+  "player": {
+   "wall": 4
+  },
+  "enemy": {
+   "wall": 5
+  },
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 4,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 3,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_099",
+  "name": "Gnome",
+  "why": "3 normal damage and self gem +1.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 13,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 25,
+   "wall": 2,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_100",
+  "name": "Berserker",
+  "why": "8 normal damage and direct 3 damage to own tower.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 17,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 22,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_101",
+  "name": "Warlord",
+  "why": "13 normal damage and self loses 3 gems.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 9,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 17,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_101",
+  "name": "Warlord",
+  "why": "Gem loss floors at 0.",
+  "player": {
+   "gems": 2
+  },
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 0,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 17,
+   "wall": 0,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ },
+ {
+  "id": "card_102",
+  "name": "Pegasus Lancer",
+  "why": "Direct enemy tower damage.",
+  "player": {},
+  "enemy": {},
+  "expectPlayer": {
+   "tower": 20,
+   "wall": 8,
+   "quarries": 3,
+   "bricks": 12,
+   "magic": 3,
+   "gems": 12,
+   "dungeon": 3,
+   "beasts": 12
+  },
+  "expectEnemy": {
+   "tower": 13,
+   "wall": 5,
+   "quarries": 4,
+   "bricks": 15,
+   "magic": 2,
+   "gems": 15,
+   "dungeon": 4,
+   "beasts": 15
+  },
+  "playAgain": false,
+  "drawDiscard": 0
+ }
+]
